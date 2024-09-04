@@ -31,7 +31,7 @@ body{
 @media (min-width: 900px) {
     /* Styles for devices with a viewport wider than 768px */
     body {
-      max-width: 480px; /* Or any width you want for mobile display */
+      max-width: 700px; /* Or any width you want for mobile display */
       margin: 0 auto;
       overflow-x: hidden; /* Prevent horizontal scrolling */
     }
@@ -58,7 +58,7 @@ header{
 .logo{
     font-size: 12px;
     font-weight: bold;
-    color: white;
+    color:rgb(255, 196, 77);
     background-color: transparent;
     display: flex;
     margin-top: 1rem;
@@ -78,7 +78,7 @@ header{
   height: 15px;
   background: rgba(87, 2, 183, 0.8); /* Your primary color with transparency */
   border-radius: 50%;
-  border: 5px solid rgb(172, 115, 0); /* Primary color for gear teeth */
+  border: 5px solid rgb(255, 196, 77); /* Primary color for gear teeth */
   box-shadow: 0 0 20px rgba(13, 3, 24, 0.5); /* Glowing effect */
   animation: rotateLargeGear 8s linear infinite;
   display: flex;
@@ -91,7 +91,7 @@ header{
   position: absolute;
   width: 10px;
   height: 10px;
-  background: rgb(172, 115, 0); /* Slightly lighter primary color */
+  background: rgb(255, 196, 77); /* Slightly lighter primary color */
   border-radius: 50%;
   border: 8px solid rgba(87, 2, 183, 1); /* Primary color for small gear teeth */
   box-shadow: 0 0 10px rgba(87, 2, 183, 0.4); /* Glowing effect */
@@ -525,23 +525,18 @@ section {
     }
   }
 
-  .beaming-circle{
-    height: 5rem;
-    background-color: white;
-    width: 5rem;
-    height: 5rem;
-    border-radius: 10rem;
-  }
+
 
   .beaming-circle {
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
     background-color: #f39c12;
     border-radius: 50%;
-    box-shadow: 0 0 20px rgba(243, 156, 18, 0.7);
-    position: relative;
+    box-shadow: 0 0 10px rgba(243, 156, 18, 0.7);
+    /* position: relative; */
     animation: beam 3s ease-in-out infinite;
-    margin-left: 2rem;
+    /* margin-left: 2rem; */
+    margin-top: 1rem;
    
   }
   
@@ -670,31 +665,44 @@ section {
 
   /* Crypto Features Section */
 .crypto-features {
-    padding: 80px 20px;
+   display: flex;
+   flex-direction: column;
+   
     text-align: center;
     background-color: rgba(87, 2, 183, 0.389); /* Match your background color */
+   
   }
   
   .crypto-features h2 {
-    font-size: 2.5em;
+    font-size: 10px;
     color: #fff;
-    margin-bottom: 50px;
+    margin-bottom: 30px;
     text-transform: uppercase;
     letter-spacing: 2px;
+    font-size: 10px;
+  }
+
+  .flexforfeatures{
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+
   }
   
   .features-container {
-    display: flex;
-    flex-wrap: wrap;
+    /* display: flex;
+    flex-wrap: wrap; */
     justify-content: space-around;
   }
   
   .feature-card {
     background: rgba(255, 255, 255, 0.1);
-    border-radius: 15px;
-    padding: 20px;
-    width: 250px;
-    margin: 20px;
+    border-radius: 5px;
+    font-size: 5px;
+    padding: 0.5rem;
+    margin-bottom: 5px;
+   
+    
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     text-align: center;
     color: #fff;
@@ -707,29 +715,31 @@ section {
   }
   
   .feature-card img {
-    width: 60px;
-    margin-bottom: 20px;
+    width: 20px;
+    margin-bottom: 6px;
   }
   
   .feature-card h3 {
-    font-size: 1.5em;
-    margin-bottom: 15px;
+    font-size: 10px;
+    margin-bottom: 4px;
   }
   
   .feature-card p {
-    font-size: 1em;
+    font-size: 5px;
     line-height: 1.6;
   }
   
   /* Responsive Design */
   @media (max-width: 768px) {
     .features-container {
-      flex-direction: column;
+      /* flex-direction: column; */
       align-items: center;
     }
   
     .feature-card {
-      width: 90%;
+      width: 60px;
+      margin-bottom: 5px;
+      font-size: 10px;
     }
   }
 
@@ -964,3 +974,6 @@ section {
 
 
   
+
+
+
