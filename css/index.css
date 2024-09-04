@@ -34,6 +34,7 @@ body{
       max-width: 700px; /* Or any width you want for mobile display */
       margin: 0 auto;
       overflow-x: hidden; /* Prevent horizontal scrolling */
+      
     }
   }
 
@@ -53,6 +54,7 @@ header{
     display: flex;
     justify-content: space-between;
     padding: 0rem 2rem;
+    background-color: rgb(62, 5, 155);
 }
   
 .logo{
@@ -197,10 +199,28 @@ header{
 }
 
 
-.hero{
-    padding: 0rem 2rem;
-    margin-top: 3rem;
+.hero {
+  padding: 1.5rem 2rem;
+  margin-top: 3rem;
+  background: linear-gradient(45deg, rgba(62, 5, 155, 1) 0%, rgba(87, 2, 183, 1) 50%, rgba(146, 51, 187, 1) 100%);
+  background-size: 300% 300%; /* Ensures smooth gradient transition */
+  animation: gradientAnimation 10s ease infinite;
+  color: #fff; /* Ensure text is visible against the background */
+  margin-top: -1px;
 }
+
+@keyframes gradientAnimation {
+  0% {
+    background: linear-gradient(45deg, rgba(62, 5, 155, 1) 0%, rgba(87, 2, 183, 1) 50%, rgba(146, 51, 187, 1) 100%);
+  }
+  50% {
+    background: linear-gradient(45deg, rgba(87, 2, 183, 1) 0%, rgba(146, 51, 187, 1) 50%, rgba(62, 5, 155, 1) 100%);
+  }
+  100% {
+    background: linear-gradient(45deg, rgba(146, 51, 187, 1) 0%, rgba(62, 5, 155, 1) 50%, rgba(87, 2, 183, 1) 100%);
+  }
+}
+
 
 .hero-text{
     margin-bottom: -15rem;
@@ -211,6 +231,7 @@ header{
     color: white;
     font-size: 13px;
     text-align: left;
+    margin-bottom: 10px;
 }
 
 .hero-text p{
@@ -239,15 +260,15 @@ header{
   }
 
 .glow-button {
-    padding: 8px ;
+    padding: 8px 20px;
     font-size: 10px;
-    color: white;
-    background-color: rgb(146, 51, 187);
+    color: rgb(0, 0, 0);
+    background-color: #fdcb85;
     border: none;
-    border-radius: 10px;
+    border-radius: 2px;
     text-transform: uppercase;
     cursor: pointer;
-    box-shadow: 0 0 10px #1e71ff, 0 0 20px  #fdcb85, 0 0 40px #055299;
+    box-shadow: 0 0 5px #1e71ff, 0 0 10px  #48004d, 0 0 40px #055299;
     transition: all 0.3s ease-in-out;
     outline: none;
 }
@@ -264,14 +285,16 @@ header{
 
 /* Partners Section */
 .partners-section {
-  
+  width: 100%;
   text-align: center;
-  margin-bottom: -11rem;
+  margin-bottom: -12.5rem;
+  margin-left: -3rem;
 }
 
 .partners-section h2 {
   font-size: 10px;
   color: #ffffff;
+  width: 100%;
  
 }
 
@@ -327,10 +350,9 @@ header{
     margin-top: -5rem;
 }
 
-.container1{
-    
-    background-color: rgb(48, 0, 103);
-   padding: 1rem 0rem;
+.container1 {
+  background: linear-gradient(45deg, rgba(48, 0, 103, 1) 0%, rgba(87, 2, 183, 0.8) 100%);
+  padding: 1rem 0rem;
 }
 
 .circle3{
@@ -356,7 +378,7 @@ header{
 
 h2{
     color: white;
-    font-size: 13px;
+    font-size: 12px;
     text-align: center;
 }
 
@@ -480,7 +502,7 @@ section {
   .works{
     display: flex;
     justify-content: space-between;
-    padding: 2rem;
+    padding: 1rem 2rem;
     margin-top: -2rem;
     font-size: 10px;
   }
@@ -528,15 +550,15 @@ section {
 
 
   .beaming-circle {
-    width: 80px;
-    height: 80px;
+    width: 50px;
+    height: 50px;
     background-color: #f39c12;
     border-radius: 50%;
     box-shadow: 0 0 10px rgba(243, 156, 18, 0.7);
     /* position: relative; */
     animation: beam 3s ease-in-out infinite;
     /* margin-left: 2rem; */
-    margin-top: 1rem;
+    margin-top: 2rem;
    
   }
   
@@ -555,11 +577,11 @@ section {
   }
 
 /* Parallax Section */
-.parallax-section {
-  background-image: url('https://img.freepik.com/free-vector/abstract-geometric-round-shape-blue-background-design_1017-42785.jpg?t=st=1725346504~exp=1725350104~hmac=a0ce1be721321dad3467adfe3eeae100048512c88b985e0bd2c8df8be1982d0c&w=826');
+/* .parallax-section {
+  background-image: url('https://img.freepik.com/free-photo/bitcoin-top-keyboard-with-plant_23-2148285307.jpg?uid=R55814283&ga=GA1.1.1328920485.1725346503&semt=ais_hybrid');
   background-size: cover;
   background-position: center;
-  background-attachment: fixed; /* Creates the static, parallax effect */
+  background-attachment: fixed; 
   
  display: grid;
   justify-content: center;
@@ -567,7 +589,33 @@ section {
   color: #fff;
   text-align: center;
   background-color: rgb(62, 5, 155);
+} */
+.parallax-section {
+  position: relative;
+  overflow: hidden;
+  background-image: url('https://img.freepik.com/free-photo/bitcoin-top-keyboard-with-plant_23-2148285307.jpg?uid=R55814283&ga=GA1.1.1328920485.1725346503&semt=ais_hybrid');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed; /* Creates the parallax effect */
+  color: #fff;
+  text-align: center;
+  height: 300px; /* Adjust based on your design needs */
+  margin-top: -5px;
 }
+
+.parallax-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, rgba(183, 0, 183, 0.108) 0%, rgba(59, 13, 225, 0.559) 50%, rgba(146, 51, 187, 0.7) 100%);
+  z-index: 1; /* Ensure the gradient is above the background image */
+}
+
+
+
 
 .parallax-section .content {
   background: rgba(62, 5, 155, 0.763); /* Semi-transparent background for text readability */
@@ -575,23 +623,25 @@ section {
   padding-top: 1rem;
   justify-content: center;
   text-align: center;
-  width: 8rem;
+  width: 100px;
+  z-index: 2; /* Ensures text is above the gradient */
+  justify-content: center;
 }
 
 .parallax-section h2 {
-  font-size: 13px;
+  font-size: 10px;
  
 }
 
 .parallax-section p {
-  font-size: 1.5em;
+  font-size: 10px;
 }
 
 .plans{
   display: flex;
-  justify-content: center;
-  gap: 1rem;
+  justify-content: space-around;
   margin-top: 1rem;
+  gap: 5px;
 }
 
 .parallax-section .content .percent{
@@ -605,28 +655,27 @@ section {
 
 .parallax-section .content .percent h4{
   padding: 0.66rem 0rem;
-  font-size: 12px;
+  font-size: 10px;
 }
 
 .parallax-section .content .time{
   font-size: 10px;
   margin-bottom: 0.5rem;
-  padding: 0rem 0.5rem;
+ 
 }
 
 .parallax-section .content .props{
-  font-size: 12px;
+  font-size: 8px;
   background-color:rgba(87, 2, 183, 0.389);
-  padding: 1rem 0rem;
+  padding: 1px;
   border-top-right-radius: 3rem;
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.234);
-  border-bottom-right-radius: 10px;
-  border-bottom-left-radius: 10px;
+  
 }
 
 .parallax-section .content .props ul li{
   list-style: none;
-  margin: 0.5rem;
+ margin-bottom: 3px;
   font-size: 8px;
 }
 
@@ -640,7 +689,7 @@ section {
   border-color: white;
   color: white;
   background-color: transparent;
-  margin: 0.5rem;
+  margin: 5px;
 }
 
 .small-circle{
@@ -740,6 +789,7 @@ section {
       width: 60px;
       margin-bottom: 5px;
       font-size: 10px;
+      font-weight: bold;
     }
   }
 
@@ -905,9 +955,9 @@ section {
 #market-container {
   display: flex; 
   flex-wrap: wrap; 
-  gap: 1rem;
+  gap: 0.2rem;
   justify-content: center;
-  padding: 0rem 0.2rem;
+  padding: 0rem 0.9rem;
 }
 
 .coin {
@@ -973,7 +1023,237 @@ section {
 
 
 
+#stats {
+  background-color: rgba(87, 2, 183, 0.389); /* Using your primary background color */
+  padding: 50px 0;
+  text-align: center;
+  margin-top: -3rem;
+}
+
+.stat-container {
+  display: flex;
+  justify-content: space-around;
   
+}
+
+.stat {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 10px;
+  border-radius: 5px;
+  margin: 5px;
+  box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease;
+  font-size: 10px;
+  width: 70px;
+  margin: 2rem 0.2rem;
+}
+
+.stat:hover {
+  transform: translateY(-10px);
+}
+
+.stat h2 {
+  font-size: 12px;
+  font-weight: bold;
+  margin: 0;
+  color: #1e71ff; /* Glow effect color */
+  text-shadow: 0 0 20px #1e71ff;
+}
+
+.stat p {
+  font-size: 10px;
+  color: #fff;
+  font-weight: bold;
+}
+
+.stat-container::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(270deg, #1e71ff, rgba(87, 2, 183, 0.7));
+  background-size: 200% 200%;
+  animation: gradient-shift 5s ease infinite;
+  z-index: -1;
+}
+
+@keyframes gradient-shift {
+  0% {
+    background-position: 0 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes countUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
 
 
+.activity-section {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
+}
+
+.investment-side, .withdrawal-side {
+  width: 45%;
+  background: rgba(10, 10, 40, 0.8);
+  padding: 20px;
+  border-radius: px;
+  position: relative;
+  overflow: hidden;
+}
+
+.activity-section h2 {
+  font-size: 12px;
+  text-align: center;
+  margin-bottom: 5px;
+  color: #1e71ff;
+  text-shadow: 0 0 10px #1e71ff, 0 0 20px #1e71ff;
+}
+
+.activity-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.activity-section li {
+  font-size: 10px;
+  margin-bottom: 10px;
+  padding: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 5px;
+  position: relative;
+  animation: scrollText 20s linear infinite;
+  color: rgb(194, 207, 255);
+  /* box-shadow: 0 0 10px rgba(30, 113, 255, 0.5), 0 0 20px rgba(253, 203, 133, 0.4); */
+}
+
+li::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* background: rgba(30, 113, 255, 0.1); */
+  filter: blur(4px);
+  z-index: -1;
+}
+
+@keyframes scrollText {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
+}
+
+.investment-side ul, .withdrawal-side ul {
+  height: 200px;
+  overflow: hidden;
+}
+
+.investment-side li, .withdrawal-side li {
+  animation: slide 20s linear infinite;
+}
+
+@keyframes slide {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
+}
+
+li span.currency {
+  color: #fdcb85;
+}
+
+li span.amount {
+  
+}
+
+
+
+
+/* General styles for the news section */
+.news-section {
+  position: relative;
+  overflow: hidden;
+  height: 300px; /* Adjust height as needed */
+  padding: 1rem 1.5rem;
+}
+
+/* Background image and gradient */
+.news-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, rgba(10, 10, 40, 0.8) 50%, rgba(87, 2, 183, 0.5) 50%) no-repeat, url('https://img.freepik.com/premium-photo/coin-table-with-word-euro-it_1044943-60303.jpg?uid=R55814283&ga=GA1.1.1328920485.1725346503&semt=ais_hybrid') center center/cover;
+  z-index: -1; /* Place the background behind content */
+  transform: skewY(-5deg); /* Create a 45-degree skew effect */
+}
+
+/* News content styling */
+.news-content {
+  position: relative;
+ 
+  color: #fff; /* Text color to contrast with background */
+  z-index: 1;
+  margin-top: -5rem;
+}
+
+/* News list styling */
+#news-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  height: 10rem;
+}
+
+#news-list li {
+  margin-bottom: 10px;
+  font-size: 10px;
+ /* Prevent line breaks */
+  overflow: hidden; /* Hide overflow text */
+  text-overflow: ellipsis;
+}
+
+
+#news-list li:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px #1e71ff;
+}
+
+#news-list a {
+  color: #fdcb85;
+  text-decoration: none;
+  font-size: 10px;
+}
+
+
+.newsandimage{
+  display: flex;
+  justify-content: space-around;
+}
+
+.newsandimage img{
+  width: 10rem;
+  
+}
