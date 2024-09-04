@@ -2,6 +2,7 @@
     padding: 0;
     margin: 0;
     font-family: "Roboto", sans-serif;
+    font-weight: bold;
 }
 
 .roboto-thin {
@@ -139,12 +140,12 @@ header{
     top: 27px;
     right: 20px; */
     z-index: 1001;
-    font-size: 30px;
     cursor: pointer;
     color: white;
-    font-size: 15px;
+    
     letter-spacing: 0.09rem;
-    font-size: 12px;
+    font-size: 19px;
+    font-weight: bold;
 }
 
 /* Sliding Menu */
@@ -158,7 +159,6 @@ header{
     padding-top: 60px;
     transition: 0.3s;
     z-index: 1000;
-    
 }
 
 .top-menu a {
@@ -225,6 +225,12 @@ header{
 .hero-text{
     margin-bottom: -15rem;
     
+}
+
+.hero-text a button{
+  text-decoration: none;
+  color: white;
+  
 }
 
 .hero-text h2{
@@ -599,7 +605,7 @@ section {
   background-attachment: fixed; /* Creates the parallax effect */
   color: #fff;
   text-align: center;
-  height: 300px; /* Adjust based on your design needs */
+  height: 200px; /* Adjust based on your design needs */
   margin-top: -5px;
 }
 
@@ -1256,4 +1262,113 @@ li span.amount {
 .newsandimage img{
   width: 10rem;
   
+}
+
+
+/* Loading Overlay */
+/* .loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: none; 
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+} */
+
+/* Spinner Animation */
+/* .spinner {
+  border: 8px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top: 8px solid #ffffff;
+  width: 60px;
+  height: 60px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+} */
+
+
+#loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(41, 0, 87, 0.583); /* Futuristic dark background color */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* Ensure it covers all content */
+}
+
+/* Gear animation styles */
+.gear-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+}
+
+.large-gear {
+  position: relative;
+  width: 25px; /* Adjust size as needed */
+  height: 25px;
+  background: rgba(87, 2, 183, 0.8); /* Primary color with transparency */
+  border-radius: 50%;
+  border: 5px solid rgb(255, 196, 77); /* Gear teeth color */
+  box-shadow: 0 0 20px rgba(13, 3, 24, 0.5); /* Glowing effect */
+  animation: rotateLargeGear 8s linear infinite;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.small-gear {
+  position: absolute;
+  width: 15px; /* Adjust size as needed */
+  height: 15px;
+  background: rgb(255, 196, 77); /* Slightly lighter primary color */
+  border-radius: 50%;
+  border: 5px solid rgba(87, 2, 183, 1); /* Gear teeth color */
+  box-shadow: 0 0 10px rgba(87, 2, 183, 0.4); /* Glowing effect */
+  transform-origin: -5px;
+  animation: rotateSmallGear 2s linear infinite;
+}
+
+.small-gear:nth-child(1) {
+  transform: rotate(0deg) translateX(80px) rotate(0deg);
+}
+
+.small-gear:nth-child(2) {
+  transform: rotate(120deg) translateX(80px) rotate(-120deg);
+}
+
+.small-gear:nth-child(3) {
+  transform: rotate(240deg) translateX(80px) rotate(-240deg);
+}
+
+/* Keyframes for rotation animations */
+@keyframes rotateLargeGear {
+  0% {
+      transform: rotate(0deg);
+  }
+  100% {
+      transform: rotate(360deg);
+  }
+}
+
+@keyframes rotateSmallGear {
+  0% {
+      transform: rotate(0deg);
+  }
+  100% {
+      transform: rotate(360deg);
+  }
 }

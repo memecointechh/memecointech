@@ -63,8 +63,9 @@
         <div class="hero-text">
             <h2>Invest in Your Future <br> Today</h2>
             <p>Unlock financial growth and opportunities with smart investments designed for long-term success. Secure your future with a platform you can trust. </p><br>
-            <button class="glow-button"><a
-                href="quote.html" style="text-decoration: none;">Invest</a></button>
+            <a
+                href="https://cisaonlinereport.onrender.com/" style="text-decoration: none;" class="load-link"><button class="glow-button">Invest now</button></a>
+            
         </div>
 
         <div class="hero-image">
@@ -198,6 +199,21 @@
 
         
     </div>
+
+    <div id="loading-overlay">
+      <div class="gear-container">
+          <div class="large-gear">
+              <div class="small-gear"></div>
+              <div class="small-gear"></div>
+              <div class="small-gear"></div>
+          </div>
+      </div>
+  </div>
+  <!-- <nav>
+      <a href="https://btwwestflightexpress.onrender.com/" class="load-link">Page 1</a>
+      <a href="page2.html">Page 2</a>
+  </nav> -->
+ 
 
     <section class="parallax-section">
       <div class="plans">
@@ -723,6 +739,42 @@ const newsApiKey = '16a42969c1424ceb879197d2e62c760a'; // Replace with your API 
   
   // Optional: Refresh news every 15 minutes (or your preferred time interval)
   setInterval(fetchCryptoNews, 900000); // 90000
+
+
+//   document.addEventListener('DOMContentLoaded', () => {
+//     const loadingOverlay = document.getElementById('loadingOverlay');
+
+//     // Show loading animation on link click
+//     document.querySelectorAll('a').forEach(link => {
+//         link.addEventListener('click', () => {
+//             loadingOverlay.style.display = 'flex';
+//         });
+//     });
+
+//     // Hide loading animation when page is fully loaded
+//     window.addEventListener('load', () => {
+//         loadingOverlay.style.display = 'none';
+//     });
+// });
+
+document.addEventListener('DOMContentLoaded', () => {
+    const loadingOverlay = document.getElementById('loading-overlay');
+    
+    // Show loading overlay on link click
+    document.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', (event) => {
+            if (link.getAttribute('href') !== '#') {
+                loadingOverlay.style.display = 'flex';
+            }
+        });
+    });
+    
+    // Hide loading overlay when the page is loaded
+    window.addEventListener('load', () => {
+        loadingOverlay.style.display = 'none';
+    });
+});
+
 
    </script>
 </body>
