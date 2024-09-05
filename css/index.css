@@ -19,7 +19,7 @@
 
 
 body{
-    background-color: rgb(62, 5, 155);
+    background-color: #3e059b;
     font-family: "Roboto", sans-serif;
     
     width: auto;
@@ -198,6 +198,28 @@ header{
     visibility: visible;
 }
 
+nav ul{
+  display: flex;
+  justify-content: space-around;
+  margin-top: 8px;
+}
+
+nav ul a li{
+  text-decoration: none;
+  list-style: none;
+  color: white;
+  font-size: 8px;
+  margin: 3px;
+ 
+  padding: 10px 3px;
+}
+
+nav ul a li:hover{
+  background: linear-gradient(45deg, rgba(48, 0, 103, 1) 0%, rgba(87, 2, 183, 0.8) 100%);
+  padding: 5px;
+  color: #f39c12;
+}
+
 
 .hero {
   padding: 1.5rem 2rem;
@@ -254,9 +276,10 @@ header{
 
 .hero-image img{
     width: 45%;
-    margin-top: 5rem;
-    position: relative;
+    margin-top: 7rem;
+    /* position: relative; */
     animation: juggle-animation 1.5s infinite ease-in-out;
+    
 }
 
 @keyframes juggle-animation {
@@ -507,15 +530,17 @@ section {
 
   .works{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     padding: 1rem 2rem;
     margin-top: -2rem;
-    font-size: 10px;
+    font-size: 8px;
+    margin-bottom: 0.5rem;
   }
 
 .how-text{
     text-align: left;
     color: white;
+    margin-top: 1rem;
 }
 
 .heartbeat-bullets {
@@ -526,7 +551,7 @@ section {
   .heartbeat-bullets li {
     position: relative;
     padding-left: 30px; /* Space for the custom bullet */
-    margin-bottom: 15px;
+    margin-bottom: 5px;
   }
   
   .heartbeat-bullets li::before {
@@ -624,7 +649,7 @@ section {
 
 
 .parallax-section .content {
-  background: rgba(62, 5, 155, 0.763); /* Semi-transparent background for text readability */
+  background: rgb(15, 0, 38); /* Semi-transparent background for text readability */
   border-radius: 10px;
   padding-top: 1rem;
   justify-content: center;
@@ -672,7 +697,7 @@ section {
 
 .parallax-section .content .props{
   font-size: 8px;
-  background-color:rgba(87, 2, 183, 0.389);
+  background-color:rgba(32, 0, 68, 0.163);
   padding: 1px;
   border-top-right-radius: 3rem;
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.234);
@@ -696,6 +721,7 @@ section {
   color: white;
   background-color: transparent;
   margin: 5px;
+  background-color: #f39c12;
 }
 
 .small-circle{
