@@ -297,7 +297,8 @@ nav ul{
     font-size: 10px;
     color:  rgb(255, 196, 77);
     transform: perspective(50px) skewY(deg);
-    font-weight: bold;
+    font-weight: bolder;
+    margin-top: 10px;
   }
 
   form p{
@@ -314,11 +315,11 @@ nav ul{
     width: 80%;
     margin: 5px;
    
-    padding: 3px;
+    padding: 5px 3px;
     border-width: 2px;
     border-color: #3e059b;
     color: #3e059b;
-   border-radius: 2px;
+   border-radius: 7px;
     font-size: 10px;
     transform: perspective(50px) skewY(deg);
     font-weight: bolder;
@@ -333,8 +334,8 @@ nav ul{
   }
 
   button{
-    padding: 4px 20px;
-    margin-top: 10px;
+    padding: 5px 20px;
+    margin-top: 7px;
     background: linear-gradient(45deg, rgba(48, 0, 103, 1) 0%, rgba(87, 2, 183, 0.8) 100%);
     border-radius: 10px;
     border-width: 1px;
@@ -369,12 +370,13 @@ nav ul{
   }
 
   .auto .google img{
-    width: 1.5rem;
-    height: 1.5rem;
+    width: 1rem;
+    height: 1rem;
   }
 
   .auto .google p{
     padding: 0.3rem 0rem;
+    font-size: 8px;
   }
 
 
