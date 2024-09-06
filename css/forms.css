@@ -210,7 +210,7 @@ nav ul{
   /* News content styling */
   .news-content {
     text-align: center;
-   width: 50%;
+   width: 60%;
     color: #fff; /* Text color to contrast with background */
     z-index: 1;
    
@@ -280,7 +280,7 @@ nav ul{
     width: 100%;
     box-shadow: 2px 2px 10px  #12002fd3;
     transform: perspective(100px) skewY(3deg);
-    height: 350px;
+    height: 410px;
     font-weight: bolder;
     border-radius: 2px;
   }
@@ -314,9 +314,8 @@ nav ul{
   input{
     width: 80%;
     margin: 5px;
-   
     padding: 5px 3px;
-    border-width: 2px;
+    border-width: 1px;
     border-color: #3e059b;
     color: #3e059b;
    border-radius: 7px;
@@ -333,10 +332,34 @@ nav ul{
     border-radius: 10rem;
   }
 
+  .split{
+    display: flex;
+    background-color: #94c4ff;
+    justify-content: center;
+    
+  }
+
+  .split input{
+    width: 10px;
+  }
+
+  .split .agree-to-terms{
+    font-size: 8px;
+    margin-top: 7px;
+  }
+
+  .input-split{
+    display: flex;
+    justify-content: space-around;
+    padding: 0% 7%;
+  }
+
   button{
     padding: 5px 20px;
     margin-top: 7px;
-    background: linear-gradient(45deg, rgba(48, 0, 103, 1) 0%, rgba(87, 2, 183, 0.8) 100%);
+    background: 
+    linear-gradient(45deg, rgba(48, 0, 103, 1) 0%, rgba(87, 2, 183, 0.8) 100%);
+    width: 70%;
     border-radius: 10px;
     border-width: 1px;
     border-color: #5e0ce2;
@@ -349,6 +372,7 @@ nav ul{
   button:hover{
     transform: perspective(50px) skewY(-2deg); 
      transition: 0.5s ease;
+     width: 50%;
   }
 
   .auto{
