@@ -1,0 +1,513 @@
+*{
+    padding: 0;
+    margin: 0;
+    font-family: "Roboto", sans-serif;
+    font-weight: bold;
+}
+
+.roboto-thin {
+  font-family: "Roboto", sans-serif;
+  font-weight: 100;
+  font-style: normal;
+}
+
+.roboto-thin-italic {
+  font-family: "Roboto", sans-serif;
+  font-weight: 100;
+  font-style: italic;
+}
+
+
+body{
+    background-color: #3e059b;
+    font-family: "Roboto", sans-serif;
+    
+    width: auto;
+  margin: 0 auto;
+  overflow-x: hidden;
+} 
+
+
+
+@media (min-width: 900px) {
+    /* Styles for devices with a viewport wider than 768px */
+    body {
+      max-width: 700px; /* Or any width you want for mobile display */
+      margin: 0 auto;
+      overflow-x: hidden; /* Prevent horizontal scrolling */
+      
+    }
+  }
+
+  
+.circle{
+    height: 8rem;
+    background-color: rgba(87, 2, 183, 0.423);
+    justify-self: center;
+    width: 8rem;
+    border-radius: 20rem;
+    margin-right: 10%;
+    margin-top: -5rem;
+    margin-bottom: -1.5rem;
+}
+
+header{
+    display: flex;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding: 0rem 2rem;
+    background-color: rgb(62, 5, 155);
+}
+  
+.logo{
+    font-size: 12px;
+    font-weight: bold;
+    color:rgb(255, 196, 77);
+    background-color: transparent;
+    display: flex;
+    margin-top: 1rem;
+    
+}
+
+.logo .gear-container{
+   background-color: transparent;
+  margin-right: 0.4rem;
+    margin-top: -0.5rem;
+ 
+}
+
+.logo .gear-container .large-gear {
+  position: relative;
+  width: 15px;
+  height: 15px;
+  background: rgba(87, 2, 183, 0.8); /* Your primary color with transparency */
+  border-radius: 50%;
+  border: 5px solid rgb(255, 196, 77); /* Primary color for gear teeth */
+  box-shadow: 0 0 20px rgba(13, 3, 24, 0.5); /* Glowing effect */
+  animation: rotateLargeGear 8s linear infinite;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Style for the small gears */
+.logo .gear-container .small-gear {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: rgb(255, 196, 77); /* Slightly lighter primary color */
+  border-radius: 50%;
+  border: 8px solid rgba(87, 2, 183, 1); /* Primary color for small gear teeth */
+  box-shadow: 0 0 10px rgba(87, 2, 183, 0.4); /* Glowing effect */
+  transform-origin: -3px;
+  animation: rotateSmallGear 2s linear infinite;
+}
+
+/* Position small gears around the large gear */
+.logo .gear-container .small-gear:nth-child(1) {
+  transform: rotate(0deg) translateX(80px) rotate(0deg);
+}
+
+.logo .gear-container .small-gear:nth-child(2) {
+  transform: rotate(120deg) translateX(80px) rotate(-120deg);
+}
+
+.logo .gear-container .small-gear:nth-child(3) {
+  transform: rotate(240deg) translateX(80px) rotate(-240deg);
+}
+
+/* Animation for the large gear */
+@keyframes rotateLargeGear {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Animation for the small gears */
+@keyframes rotateSmallGear {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.menu-btn {
+    /* position: fixed;
+    top: 27px;
+    right: 20px; */
+    z-index: 1001;
+    cursor: pointer;
+    color: white;
+    
+    letter-spacing: 0.09rem;
+    font-size: 19px;
+    font-weight: bold;
+}
+
+/* Sliding Menu */
+.top-menu {
+    position: fixed;
+    top: -100%;
+    left: 0;
+    width: 100%;
+    height: 250px;
+    background-color:  rgb(86, 2, 183);
+    padding-top: 60px;
+    transition: 0.3s;
+    z-index: 1000;
+}
+
+.top-menu a {
+    padding: 10px 15px;
+    text-decoration: none;
+    font-size: 15px;
+    color: white;
+    display: block;
+    transition: 0.3s;
+    
+}
+
+.top-menu a:hover {
+    background-color: #575757;
+}
+
+/* Overlay for background when menu is open */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.3s;
+    z-index: 999;
+}
+
+/* Show menu and overlay */
+.top-menu.active {
+    top: 0;
+}
+
+.overlay.active {
+    visibility: visible;
+}
+
+nav ul{
+  display: flex;
+  justify-content: space-around;
+  margin-top: 8px;
+}
+
+nav ul a li{
+  text-decoration: none;
+  list-style: none;
+  color: white;
+  font-size: 8px;
+  margin: 3px;
+ 
+  padding: 10px 3px;
+}
+
+nav ul a li:hover{
+  background: linear-gradient(45deg, rgba(48, 0, 103, 1) 0%, rgba(87, 2, 183, 0.8) 100%);
+  padding: 5px;
+  color:  rgb(255, 196, 77);
+}
+
+  /* Partners Section */
+  .partners-section {
+    width: 100%;
+    text-align: center;
+    margin-top: 1.5rem;
+    
+    
+  }
+  
+  .partners-section h2 {
+    font-size: 10px;
+    color: #ffffff;
+    width: 100%;
+   
+  }
+  
+  .scrolling-logos {
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  
+  .logos-container {
+    display: flex;
+    align-items: center;
+    animation: scroll 40s linear infinite; /* Infinite scroll animation */
+  }
+  
+  .logos-container img {
+    width: 8px;
+    border-radius: 5rem;
+    height: auto;
+    margin: 0 15px;
+    opacity: 0.8;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+  
+  .logos-container img:hover {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .logos-container img {
+      width: 25px;
+    }
+  }
+
+.body{
+    display: flex;
+    justify-content: center;
+    padding: 0rem 1rem;
+    background: linear-gradient(45deg, rgba(32, 8, 62, 0) 50%, rgba(242, 148, 25, 0) 50%) no-repeat, url('https://img.freepik.com/free-photo/still-life-stacks-papers-documents_23-2151118338.jpg?uid=R55814283&ga=GA1.1.1328920485.1725346503&semt=ais_hybrid') center center/cover;
+    gap: 0rem;
+    z-index: -1; /* Place the background behind content */
+    transform: skewY(-deg); 
+}
+
+
+.dashboard-container {
+    /* display: grid; */
+    grid-template-columns: 250px 1fr;
+    height: 100vh;
+    width: 100%;
+  }
+  
+  .dashboard-header {
+    grid-column: 1 / -1;
+    background: linear-gradient(45deg, rgba(48, 0, 103, 1) 0%, rgba(87, 2, 183, 0.8) 100%);
+    padding: 1rem 0.6rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    font-size: 6px;
+    color: white;
+  }
+  
+  .profile-settings {
+   
+    align-items: center;
+    justify-content: space-around;
+    
+  }
+  
+  .profile-pic {
+    border-radius: 50%;
+    width: 25px;
+    margin-right: 10px;
+  }
+  
+  .dashboard-sidebar {
+    background: rgb(48, 0, 103);
+    padding: 0.5rem;
+    transition: all 0.3s ease;
+    font-weight: bold;
+    font-size: 8px;
+  }
+  
+  .dashboard-sidebar ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .dashboard-sidebar li {
+    margin: 1rem 0;
+    display: flex;
+    justify-content: space-between;
+   
+  }
+
+
+  .dashboard-sidebar li img{
+    width: 14px;
+    margin-bottom: -5px;
+    margin-right: 2px;
+  }
+  
+  .dashboard-sidebar nav ul li a {
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  .dashboard-main {
+    padding: 0.4rem;
+    background: rgba(22, 12, 33, 0.92);
+    width: 70%;
+  }
+
+  .user-info{
+    text-align: left;
+    font-size: 6px;
+  }
+
+  .user-info p{
+    margin-top: 5px;
+  }
+
+  .virtual-card-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: rem;
+    /* Blended with your primary color */
+  }
+  
+  .virtual-card {
+    position: relative;
+    width:30px;
+    height: 8px;
+    background: linear-gradient(45deg, rgba(62, 5, 155, 0.9), rgb(164, 0, 0));
+    border-radius: 5px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1.5rem;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    transform: rotateX(10deg);
+    animation: cardFlip 6s infinite ease-in-out alternate;
+    margin-left: -12rem;
+  }
+  
+  @keyframes cardFlip {
+    0% {
+      transform: rotateX(0deg) rotateY(0deg);
+    }
+    50% {
+      transform: rotateX(10deg) rotateY(180deg);
+    }
+    100% {
+      transform: rotateX(0deg) rotateY(360deg);
+    }
+  }
+
+  .virtual-card .chip {
+    width: 20px;
+    height: 10px;
+    background: gold;
+    border-radius: 2px;
+  }
+  
+  .virtual-card .card-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-top: -1.1rem;
+    line-height: 5px;
+  }
+  
+  .virtual-card .card-number {
+    font-size: 4px;
+    letter-spacing: 1px;
+    text-align: left;
+    margin-left: -1rem;
+  }
+  
+  .virtual-card .card-holder,
+  .virtual-card .card-expiry {
+    font-size: 5px;
+    margin-left: -1rem;
+  }
+  
+  .virtual-card .card-brand {
+    font-size:8px ;
+    text-align: right;
+    margin-right: -1rem;
+  }
+
+ 
+
+  .virtual-card .card-details .card-logo img{
+    width: 20px;
+    margin-right: -10rem;
+  }
+  
+  
+  .stats-section {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+  }
+  
+  .stat-card {
+    background: rgba(87, 2, 183, 0.7);
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 8px;
+    font-weight: bold;
+    color: white;
+  }
+
+  .stat-card span{
+    font-size: 10px;
+  }
+  
+  .count-up {
+    
+    animation: count 2s ease-in-out;
+  }
+  
+  @keyframes count {
+    from {
+      opacity: 0;
+      transform: scale(0.5);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  .charts-section {
+    display: flex;
+    justify-content: space-between;
+    font-size: 8px;
+  }
+  
+  .activity-feed {
+    margin-top: 2rem;
+    background: rgba(62, 5, 155, 0.3);
+    padding: 1rem;
+    border-radius: 8px;
+    font-size: 8px;
+    overflow: hidden;
+  }
+  
+  #activity-list {
+    display: flex;
+    flex-direction: column;
+    animation: scrollUp 10s linear infinite;
+  }
+  
+  @keyframes scrollUp {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-100%); }
+  }

@@ -1,0 +1,1525 @@
+*{
+    padding: 0;
+    margin: 0;
+    font-family: "Roboto", sans-serif;
+    font-weight: bold;
+}
+
+.roboto-thin {
+  font-family: "Roboto", sans-serif;
+  font-weight: 100;
+  font-style: normal;
+}
+
+.roboto-thin-italic {
+  font-family: "Roboto", sans-serif;
+  font-weight: 100;
+  font-style: italic;
+}
+
+
+body{
+    background-color: #3e059b;
+    font-family: "Roboto", sans-serif;
+    
+    width: auto;
+  margin: 0 auto;
+  overflow-x: hidden;
+} 
+
+
+
+@media (min-width: 900px) {
+    /* Styles for devices with a viewport wider than 768px */
+    body {
+      max-width: 700px; /* Or any width you want for mobile display */
+      margin: 0 auto;
+      overflow-x: hidden; /* Prevent horizontal scrolling */
+      
+    }
+  }
+
+  
+.circle{
+    height: 8rem;
+    background-color: rgba(87, 2, 183, 0.423);
+    justify-self: center;
+    width: 8rem;
+    border-radius: 20rem;
+    margin-right: 10%;
+    margin-top: -5rem;
+    margin-bottom: -1.5rem;
+}
+
+header{
+    display: flex;
+    justify-content: space-between;
+    padding: 0rem 2rem;
+    background-color: rgb(62, 5, 155);
+}
+  
+.logo{
+    font-size: 12px;
+    font-weight: bold;
+    color:rgb(255, 196, 77);
+    background-color: transparent;
+    display: flex;
+    margin-top: 1rem;
+    
+}
+
+.logo .gear-container{
+   background-color: transparent;
+  margin-right: -2.5rem; 
+  margin-left: -3rem;
+  margin-top: -3.5rem;
+}
+
+.logo .gear-container .large-gear {
+  position: relative;
+  width: 15px;
+  height: 15px;
+  background: rgba(87, 2, 183, 0.8); /* Your primary color with transparency */
+  border-radius: 50%;
+  border: 5px solid rgb(255, 196, 77); /* Primary color for gear teeth */
+  box-shadow: 0 0 20px rgba(13, 3, 24, 0.5); /* Glowing effect */
+  animation: rotateLargeGear 8s linear infinite;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Style for the small gears */
+.logo .gear-container .small-gear {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: rgb(255, 196, 77); /* Slightly lighter primary color */
+  border-radius: 50%;
+  border: 8px solid rgba(87, 2, 183, 1); /* Primary color for small gear teeth */
+  box-shadow: 0 0 10px rgba(87, 2, 183, 0.4); /* Glowing effect */
+  transform-origin: -3px;
+  animation: rotateSmallGear 2s linear infinite;
+}
+
+/* Position small gears around the large gear */
+.logo .gear-container .small-gear:nth-child(1) {
+  transform: rotate(0deg) translateX(80px) rotate(0deg);
+}
+
+.logo .gear-container .small-gear:nth-child(2) {
+  transform: rotate(120deg) translateX(80px) rotate(-120deg);
+}
+
+.logo .gear-container .small-gear:nth-child(3) {
+  transform: rotate(240deg) translateX(80px) rotate(-240deg);
+}
+
+/* Animation for the large gear */
+@keyframes rotateLargeGear {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Animation for the small gears */
+@keyframes rotateSmallGear {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.menu-btn {
+    /* position: fixed;
+    top: 27px;
+    right: 20px; */
+    z-index: 1001;
+    cursor: pointer;
+    color: white;
+    
+    letter-spacing: 0.09rem;
+    font-size: 19px;
+    font-weight: bold;
+}
+
+/* Sliding Menu */
+.top-menu {
+    position: fixed;
+    top: -100%;
+    left: 0;
+    width: 100%;
+    height: 250px;
+    background-color:  rgb(86, 2, 183);
+    padding-top: 60px;
+    transition: 0.3s;
+    z-index: 1000;
+}
+
+.top-menu a {
+    padding: 10px 15px;
+    text-decoration: none;
+    font-size: 15px;
+    color: white;
+    display: block;
+    transition: 0.3s;
+    
+}
+
+.top-menu a:hover {
+    background-color: #575757;
+}
+
+/* Overlay for background when menu is open */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.3s;
+    z-index: 999;
+}
+
+/* Show menu and overlay */
+.top-menu.active {
+    top: 0;
+}
+
+.overlay.active {
+    visibility: visible;
+}
+
+nav ul{
+  display: flex;
+  justify-content: space-around;
+  margin-top: 8px;
+}
+
+nav ul a li{
+  text-decoration: none;
+  list-style: none;
+  color: white;
+  font-size: 8px;
+  margin: 3px;
+ 
+  padding: 10px 3px;
+}
+
+nav ul a li:hover{
+  background: linear-gradient(45deg, rgba(48, 0, 103, 1) 0%, rgba(87, 2, 183, 0.8) 100%);
+  padding: 5px;
+  color: #f39c12;
+}
+
+
+.hero {
+  padding: 1.5rem 2rem;
+  margin-top: 3rem;
+  background: linear-gradient(45deg, rgba(62, 5, 155, 1) 0%, rgba(87, 2, 183, 1) 50%, rgba(146, 51, 187, 1) 100%);
+  background-size: 300% 300%; /* Ensures smooth gradient transition */
+  animation: gradientAnimation 10s ease infinite;
+  color: #fff; /* Ensure text is visible against the background */
+  margin-top: -1px;
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background: linear-gradient(45deg, rgba(62, 5, 155, 1) 0%, rgba(87, 2, 183, 1) 50%, rgba(146, 51, 187, 1) 100%);
+  }
+  50% {
+    background: linear-gradient(45deg, rgba(87, 2, 183, 1) 0%, rgba(146, 51, 187, 1) 50%, rgba(62, 5, 155, 1) 100%);
+  }
+  100% {
+    background: linear-gradient(45deg, rgba(146, 51, 187, 1) 0%, rgba(62, 5, 155, 1) 50%, rgba(87, 2, 183, 1) 100%);
+  }
+}
+
+
+.hero-text{
+    margin-bottom: -15rem;
+    
+}
+
+.hero-text a button{
+  text-decoration: none;
+  color: white;
+  
+}
+
+.hero-text h2{
+    color: white;
+    font-size: 13px;
+    text-align: left;
+    margin-bottom: 10px;
+}
+
+.hero-text p{
+    color:  rgb(215, 180, 255);
+    width: 50%;
+    font-size: 10px;
+}
+
+.hero-image{
+    background-color: #1e8fff00;
+    text-align: right;
+    
+}
+
+.hero-image img{
+    width: 45%;
+    margin-top: 7rem;
+    /* position: relative; */
+    animation: juggle-animation 1.5s infinite ease-in-out;
+    
+}
+
+@keyframes juggle-animation {
+    0% { transform: translateY(0); } /* Start at original position */
+    50% { transform: translateY(-10px); } /* Move up by 50px */
+    100% { transform: translateY(0); } /* Move back down to original position */
+  }
+
+.glow-button {
+    padding: 8px 20px;
+    font-size: 10px;
+    color: rgb(0, 0, 0);
+    background-color: #fdcb85;
+    border: none;
+    border-radius: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    box-shadow: 0 0 5px #1e71ff, 0 0 10px  #48004d, 0 0 40px #055299;
+    transition: all 0.3s ease-in-out;
+    outline: none;
+}
+
+.glow-button a{
+    color: white;
+    font-size: 14px;
+}
+
+.glow-button:hover {
+    box-shadow: 0 0 10px #F06868, 0 0 40px #1e90ff, 0 0 100px #1e90ff;
+    transform: scale(1.05);
+}
+
+/* Partners Section */
+.partners-section {
+  width: 100%;
+  text-align: center;
+  margin-bottom: -12.5rem;
+  margin-left: -3rem;
+}
+
+.partners-section h2 {
+  font-size: 10px;
+  color: #ffffff;
+  width: 100%;
+ 
+}
+
+.scrolling-logos {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.logos-container {
+  display: flex;
+  align-items: center;
+  animation: scroll 40s linear infinite; /* Infinite scroll animation */
+}
+
+.logos-container img {
+  width: 28px;
+  border-radius: 5rem;
+  height: auto;
+  margin: 0 15px;
+  opacity: 0.8;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.logos-container img:hover {
+  transform: scale(1.2);
+  opacity: 1;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .logos-container img {
+    width: 25px;
+  }
+}
+
+
+.circle2{
+    height: 8rem;
+    background-color: rgba(87, 2, 183, 0.389);
+    justify-self: center;
+    width: 8rem;
+    border-radius: 20rem;
+    margin-left: 90%;
+    margin-top: -5rem;
+}
+
+.container1 {
+  background: linear-gradient(45deg, rgba(48, 0, 103, 1) 0%, rgba(87, 2, 183, 0.8) 100%);
+  padding: 1rem 0rem;
+}
+
+.circle3{
+    height: 8rem;
+    background-color: rgba(87, 2, 183, 0.389);
+    justify-self: center;
+    width: 8rem;
+    border-radius: 20rem;
+    margin-left: 10%;
+    margin-top: -9rem;
+}
+
+.rectangle{
+    height: 8rem;
+    background-color: rgba(87, 2, 183, 0.389);
+    width: 70%;
+    transform: rotate(deg);
+    border-radius: 7rem;
+    margin-left: -8rem;
+    margin-top: -5rem;
+    
+}
+
+h2{
+    color: white;
+    font-size: 12px;
+    text-align: center;
+}
+
+section {
+    padding: 50px;
+    background-color:transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .circle-container {
+    position: relative;
+    width: 100px;
+    height: 100px;
+  }
+  
+  .central-logo {
+    position: absolute;
+    top: 50%;
+    margin-left: -3rem;
+    transform: translate(-50%, -50%);
+    width: 15px;
+    height: 15px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+  }
+  
+  .central-logo img {
+    width: 50px;
+    height:50px;
+  }
+  
+  .orbit {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 50%;
+    margin-top: -3rem;
+    margin-left: -6rem;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    animation: rotate 20s linear infinite;
+  }
+  
+  .hexagon {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-color: transparent;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  
+  .hexagon img {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .hexagon p {
+    margin: 10px 0 0;
+    font-size: 0.9em;
+    color: #555;
+  }
+  
+  /* Hexagon Positions */
+  .hexagon-1 { transform: rotate(0deg) translateX(50px) rotate(0deg); }
+  .hexagon-2 { transform: rotate(60deg) translateX(50px) rotate(-60deg); }
+  .hexagon-3 { transform: rotate(120deg) translateX(50px) rotate(-120deg); }
+  .hexagon-4 { transform: rotate(180deg) translateX(50px) rotate(-180deg); }
+  .hexagon-5 { transform: rotate(240deg) translateX(50px) rotate(-240deg); }
+  .hexagon-6 { transform: rotate(300deg) translateX(50px) rotate(-300deg); }
+  
+  /* Animation for rotating the orbit */
+  @keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  .welcome{
+    width: 100%;
+    color: rgb(255, 196, 77);
+    font-size: 10px;
+  }
+
+  .rotate-image-container {
+    position: relative;
+    /* width: 150px;
+    height: 150px; */
+    
+  }
+  
+  /* Image rotation */
+  .rotating-image {
+    width:   50%;
+   
+    animation: rotate 5s linear infinite;
+    transform-origin: center;
+    margin-left: 25%;
+    margin-top: 3rem;
+  }
+  
+  /* Keyframes for rotation */
+  @keyframes rotate {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .works{
+    display: flex;
+    justify-content: space-between;
+    padding: 0.6rem 2rem;
+    margin-top: -2rem;
+    font-size: 8px;
+    margin-bottom: 0.5rem;
+  }
+
+.how-text{
+    text-align: left;
+    color: white;
+    
+    width: 100%;
+}
+
+.heartbeat-bullets {
+    list-style: none; /* Remove default bullets */
+    padding: 0;
+  }
+  
+  .heartbeat-bullets li {
+    position: relative;
+    padding-left: 30px; /* Space for the custom bullet */
+    margin-bottom: 5px;
+  }
+  
+  .heartbeat-bullets li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 15px; /* Width of the short line */
+    height: 2px; /* Thickness of the short line */
+    background-color: #f39c12; /* Color of the line */
+    animation: pulse 1.5s ease-in-out infinite; /* Heartbeat-like animation */
+    transform-origin: left center; /* Pulse from the left */
+  }
+  
+  @keyframes pulse {
+    0%, 100% {
+      transform: scaleX(1); /* Normal size */
+    }
+    25%, 75% {
+      transform: scaleX(1.5); /* Enlarge slightly during the pulse */
+    }
+    50% {
+      transform: scaleX(1.3); /* Peak of the heartbeat */
+    }
+  }
+
+
+
+  .beaming-circle {
+    width: 50px;
+    height: 50px;
+    background-color: #f39c12;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(243, 156, 18, 0.7);
+    /* position: relative; */
+    animation: beam 3s ease-in-out infinite;
+    /* margin-left: 2rem; */
+    margin-top: 2rem;
+   
+  }
+  
+  /* Beaming light animation */
+  @keyframes beam {
+    0%, 100% {
+      box-shadow: 0 0 20px rgba(243, 156, 18, 0.7), 
+                  0 0 40px rgba(243, 156, 18, 0.5), 
+                  0 0 60px rgba(243, 156, 18, 0.3);
+    }
+    50% {
+      box-shadow: 0 0 40px rgba(243, 156, 18, 0.9), 
+                  0 0 80px rgba(243, 156, 18, 0.7), 
+                  0 0 120px rgba(243, 156, 18, 0.5);
+    }
+  }
+
+/* Parallax Section */
+/* .parallax-section {
+  background-image: url('https://img.freepik.com/free-photo/bitcoin-top-keyboard-with-plant_23-2148285307.jpg?uid=R55814283&ga=GA1.1.1328920485.1725346503&semt=ais_hybrid');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed; 
+  
+ display: grid;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  text-align: center;
+  background-color: rgb(62, 5, 155);
+} */
+.parallax-section {
+  position: relative;
+  overflow: hidden;
+  background-image: url('https://img.freepik.com/free-photo/bitcoin-top-keyboard-with-plant_23-2148285307.jpg?uid=R55814283&ga=GA1.1.1328920485.1725346503&semt=ais_hybrid');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed; /* Creates the parallax effect */
+  color: #fff;
+  text-align: center;
+  height: 200px; /* Adjust based on your design needs */
+  margin-top: -5px;
+}
+
+.parallax-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, rgba(183, 0, 183, 0.108) 0%, rgba(59, 13, 225, 0.559) 50%, rgba(146, 51, 187, 0.7) 100%);
+  z-index: 1; /* Ensure the gradient is above the background image */
+}
+
+
+
+
+.parallax-section .content {
+  background: rgb(15, 0, 38); /* Semi-transparent background for text readability */
+  border-radius: 10px;
+  padding-top: 1rem;
+  justify-content: center;
+  text-align: center;
+  width: 80px;
+  z-index: 2; /* Ensures text is above the gradient */
+  justify-content: center;
+}
+
+.parallax-section h2 {
+  font-size: 10px;
+ 
+}
+
+.parallax-section p {
+  font-size: 10px;
+}
+
+.plans{
+  display: flex;
+  justify-content: space-around;
+  margin-top: 1rem;
+  gap: 5px;
+}
+
+.parallax-section .content .percent{
+  display: flex;
+  justify-content: center;
+}
+
+.parallax-section .content .percent img{
+  width: 2rem;
+}
+
+.parallax-section .content .percent h4{
+  padding: 0.66rem 0rem;
+  font-size: 10px;
+}
+
+.parallax-section .content .time{
+  font-size: 14px;
+  margin-bottom: 0.5rem;
+ 
+}
+
+.parallax-section .content .props{
+  font-size: 5px;
+  background-color:rgba(32, 0, 68, 0.163);
+  padding: 1px;
+  border-top-right-radius: 3rem;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.234);
+  
+}
+
+.parallax-section .content .props ul li{
+  list-style: none;
+ margin-bottom: 3px;
+  font-size: 5px;
+}
+
+.parallax-section .content button{
+  font-size: 7px;
+  font-weight: bold;
+  padding: 0.2rem;
+  border-radius: 10rem;
+  border-style: double;
+  border-width: 1px;
+  border-color: white;
+  color: white;
+  background-color: transparent;
+  margin: 5px;
+  width: 80%;
+  background-color: #f39c12;
+}
+
+.small-circle{
+  height: 2rem;
+  background-color:rgba(163, 93, 244, 0.389);
+  width: 2rem;
+  border-radius: 5rem;
+  filter: blur(5px);
+  margin-top: -1rem;
+}
+
+.small-circle2{
+  height: 2rem;
+  background-color:rgba(0, 153, 255, 0.389);
+  width: 2rem;
+  border-radius: 5rem;
+  filter: blur(3px);
+  margin-top: -1.6rem;
+  margin-left: 1.2rem;
+  margin-bottom: -1rem;
+}
+
+  /* Crypto Features Section */
+.crypto-features {
+   display: flex;
+   flex-direction: column;
+   
+    text-align: center;
+    background-color: rgba(87, 2, 183, 0.389); /* Match your background color */
+   
+  }
+  
+  .crypto-features h2 {
+    font-size: 10px;
+    color: #fff;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 10px;
+  }
+
+  .flexforfeatures{
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+
+  }
+  
+  .features-container {
+    /* display: flex;
+    flex-wrap: wrap; */
+    justify-content: space-around;
+  }
+  
+  .feature-card {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    font-size: 5px;
+    padding: 0.5rem;
+    margin-bottom: 5px;
+   
+    
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+    color: #fff;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  }
+  
+  .feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  }
+  
+  .feature-card img {
+    width: 20px;
+    margin-bottom: 6px;
+  }
+  
+  .feature-card h3 {
+    font-size: 10px;
+    margin-bottom: 4px;
+  }
+  
+  .feature-card p {
+    font-size: 5px;
+    line-height: 1.6;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .features-container {
+      /* flex-direction: column; */
+      align-items: center;
+    }
+  
+    .feature-card {
+      width: 60px;
+      margin-bottom: 5px;
+      font-size: 10px;
+      font-weight: bold;
+    }
+  }
+
+
+  .tab {
+    opacity: 0;
+    transform: translateX(0) translateY(0);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    padding: 5px;
+    margin: 20px 10px;
+    background-color: rgba(87, 2, 183, 0.389); /* Your primary color */
+    color: #fff;
+    border-radius: 1px;
+    text-align: center;
+    font-size: 12px;
+    width: 100px;
+    
+  }
+  
+  /* Animations for different directions */
+  .tab.from-left {
+    transform: translateX(-100%);
+  }
+  
+  .tab.from-right {
+    transform: translateX(100%);
+  }
+  
+  .tab.from-top {
+    transform: translateY(-100%);
+  }
+  
+  .tab.from-bottom {
+    transform: translateY(100%);
+  }
+  
+  .tab.in-view {
+    opacity: 1;
+    transform: translateX(0) translateY(0);
+  }
+
+  .tab::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, rgba(0, 128, 255, 0.7), rgba(255, 0, 128, 0.7), rgba(0, 255, 255, 0.7), rgba(255, 255, 0, 0.7));
+    background-size: 600% 600%;
+    animation: gradientFlow 10s ease infinite;
+    z-index: -1; /* Ensure the gradient is behind other content */
+  }
+  
+  /* Keyframes for the gradient flow animation */
+  @keyframes gradientFlow {
+    0% {
+      background-position: 0% 0%;
+    }
+    50% {
+      background-position: 100% 100%;
+    }
+    100% {
+      background-position: 0% 0%;
+    }
+  }
+
+  .the-flow{
+    background-color:rgb(41, 0, 87);
+    display: flex;
+    justify-content: center;
+   
+  }
+
+/* Container for the gears */
+.gear-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+   /* Adjust height as needed */
+  background:rgb(41, 0, 87); /* Futuristic dark background color */
+}
+
+/* Style for the large gear */
+.large-gear {
+  position: relative;
+  width: 25px;
+  height: 25px;
+  background: rgba(87, 2, 183, 0.8); /* Your primary color with transparency */
+  border-radius: 50%;
+  border: 10px solid rgb(172, 115, 0); /* Primary color for gear teeth */
+  box-shadow: 0 0 20px rgba(13, 3, 24, 0.5); /* Glowing effect */
+  animation: rotateLargeGear 8s linear infinite;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Style for the small gears */
+.small-gear {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background: rgb(172, 115, 0); /* Slightly lighter primary color */
+  border-radius: 50%;
+  border: 8px solid rgba(87, 2, 183, 1); /* Primary color for small gear teeth */
+  box-shadow: 0 0 10px rgba(87, 2, 183, 0.4); /* Glowing effect */
+  transform-origin: -3px;
+  animation: rotateSmallGear 2s linear infinite;
+}
+
+/* Position small gears around the large gear */
+.small-gear:nth-child(1) {
+  transform: rotate(0deg) translateX(80px) rotate(0deg);
+}
+
+.small-gear:nth-child(2) {
+  transform: rotate(120deg) translateX(80px) rotate(-120deg);
+}
+
+.small-gear:nth-child(3) {
+  transform: rotate(240deg) translateX(80px) rotate(-240deg);
+}
+
+/* Animation for the large gear */
+@keyframes rotateLargeGear {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Animation for the small gears */
+@keyframes rotateSmallGear {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+  
+  
+.certificate{
+  padding: 2rem 3rem;
+  background: linear-gradient(45deg, rgb(103, 0, 0) 0%, rgba(87, 2, 183, 0.8) 100%);
+}
+
+.certificate-background{
+ padding: 1rem;
+ background-color: white;
+ display: flex;
+ justify-content: center;
+ gap: 2rem;
+}
+
+.certificate-background img{
+  width: 8rem;
+}
+
+.certificate-background .certificate-text{
+  font-size: 8px;
+  width: 50%;
+}
+
+.certificate-background .certificate-text h2{
+  color: #3e059b;
+  text-align: left;
+  margin: 0.5rem 0rem;
+  font-weight: bolder;
+}
+
+.certificate-background .certificate-text .small-text{
+  font-size: 5px;
+  margin-top: 0.5rem;
+}
+
+.activity-section {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
+}
+
+.investment-side, .withdrawal-side {
+  width: 45%;
+  background: rgba(10, 10, 40, 0.8);
+  padding: 20px;
+  border-radius: px;
+  position: relative;
+  overflow: hidden;
+}
+
+.activity-section h2 {
+  font-size: 12px;
+  text-align: center;
+  margin-bottom: 5px;
+  color: #1e71ff;
+  text-shadow: 0 0 10px #1e71ff, 0 0 20px #1e71ff;
+}
+
+.activity-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#stats {
+  background-color: rgba(87, 2, 183, 0.389); /* Using your primary background color */
+  padding: 50px 0;
+  text-align: center;
+  margin-top: -3rem;
+}
+
+.stat-container {
+  display: flex;
+  justify-content: space-around;
+  
+}
+
+.stat {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 10px;
+  border-radius: 5px;
+  margin: 5px;
+  box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease;
+  font-size: 10px;
+  width: 70px;
+  margin: 2rem 0.2rem;
+}
+
+.stat:hover {
+  transform: translateY(-10px);
+}
+
+.stat h2 {
+  font-size: 12px;
+  font-weight: bold;
+  margin: 0;
+  color: #1e71ff; /* Glow effect color */
+  text-shadow: 0 0 20px #1e71ff;
+}
+
+.stat p {
+  font-size: 10px;
+  color: #fff;
+  font-weight: bold;
+}
+
+.stat-container::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(270deg, #1e71ff, rgba(87, 2, 183, 0.7));
+  background-size: 200% 200%;
+  animation: gradient-shift 5s ease infinite;
+  z-index: -1;
+}
+
+@keyframes gradient-shift {
+  0% {
+    background-position: 0 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes countUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+.referral-section {
+  padding: 2rem 0rem;
+  background: url('https://img.freepik.com/premium-photo/futuristic-black-robots-black-backgroundxaxa_1417-21477.jpg?uid=R55814283&ga=GA1.1.1328920485.1725346503&semt=ais_hybrid') no-repeat center center fixed;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: white;
+  text-align: center;
+  position: relative;
+  background-attachment: fixed;
+}
+
+.referral-content h2 {
+  font-size: 13px;
+  color: #fff;
+  letter-spacing: 2px;
+  margin-bottom: 1rem;
+  animation: fadeIn 1s ease-in-out;
+  font-weight: bolder;
+  text-shadow: 0px 4px 20px rgba(0, 0, 0, 0.8);
+}
+
+.referral-content p {
+  font-size: 8px;
+  color: rgb(255, 196, 77);;
+  margin-bottom: 2rem;
+  text-shadow: 0px 4px 10px rgba(0, 0, 0, 0.6);
+}
+
+.referral-steps {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  max-width: 1000px;
+  animation: fadeInUp 1.5s ease-in-out;
+  padding: 0rem 3rem;
+}
+
+.step {
+  background: rgba(87, 2, 183, 0.3);
+  padding: 1rem;
+  border-radius: 15px;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  cursor: pointer;
+  text-align: center;
+  flex: 1;
+  position: relative;
+  backdrop-filter: blur(10px);
+  font-size: 5px;
+}
+
+.step-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: #ff9f1c;
+  animation: rotateIcon 2s infinite linear;
+}
+
+.step h3 {
+  font-size:10px;
+  margin-bottom: 0.5rem;
+  color: rgb(255, 196, 77);;
+}
+
+.step p {
+  font-size: 8px;
+  color: #dcdcdc;
+}
+
+.step:hover {
+  transform: translateY(-10px);
+  box-shadow: 0px 10px 30px rgba(87, 2, 183, 0.6);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(50px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes rotateIcon {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+
+
+
+.activity-section li {
+  font-size: 10px;
+  margin-bottom: 10px;
+  padding: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 5px;
+  position: relative;
+  animation: scrollText 20s linear infinite;
+  color: rgb(194, 207, 255);
+  /* box-shadow: 0 0 10px rgba(30, 113, 255, 0.5), 0 0 20px rgba(253, 203, 133, 0.4); */
+}
+
+li::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* background: rgba(30, 113, 255, 0.1); */
+  filter: blur(4px);
+  z-index: -1;
+}
+
+@keyframes scrollText {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
+}
+
+.investment-side ul, .withdrawal-side ul {
+  height: 200px;
+  overflow: hidden;
+}
+
+.investment-side li, .withdrawal-side li {
+  animation: slide 20s linear infinite;
+}
+
+@keyframes slide {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
+}
+
+li span.currency {
+  color: #fdcb85;
+}
+
+li span.amount {
+  
+}
+
+
+
+
+/* General styles for the news section */
+.news-section {
+  position: relative;
+  overflow: hidden;
+  height: 300px; /* Adjust height as needed */
+  padding: 1rem 1.5rem;
+}
+
+/* Background image and gradient */
+.news-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, rgba(10, 10, 40, 0.8) 50%, rgba(87, 2, 183, 0.5) 50%) no-repeat, url('https://img.freepik.com/premium-photo/coin-table-with-word-euro-it_1044943-60303.jpg?uid=R55814283&ga=GA1.1.1328920485.1725346503&semt=ais_hybrid') center center/cover;
+  z-index: -1; /* Place the background behind content */
+  transform: skewY(-5deg); /* Create a 45-degree skew effect */
+}
+
+/* News content styling */
+.news-content {
+  position: relative;
+ 
+  color: #fff; /* Text color to contrast with background */
+  z-index: 1;
+  margin-top: -5rem;
+}
+
+/* News list styling */
+#news-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  height: 10rem;
+}
+
+#news-list li {
+  margin-bottom: 10px;
+  font-size: 10px;
+ /* Prevent line breaks */
+  overflow: hidden; /* Hide overflow text */
+  text-overflow: ellipsis;
+}
+
+
+#news-list li:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px #1e71ff;
+}
+
+#news-list a {
+  color: #fdcb85;
+  text-decoration: none;
+  font-size: 10px;
+}
+
+
+.newsandimage{
+  display: flex;
+  justify-content: space-around;
+}
+
+.newsandimage img{
+  width: 10rem;
+  
+}
+
+
+/* Loading Overlay */
+/* .loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: none; 
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+} */
+
+/* Spinner Animation */
+/* .spinner {
+  border: 8px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top: 8px solid #ffffff;
+  width: 60px;
+  height: 60px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+} */
+
+
+#loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(41, 0, 87, 0.764); /* Futuristic dark background color */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* Ensure it covers all content */
+}
+
+/* Gear animation styles */
+.gear-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+}
+
+.large-gear {
+  position: relative;
+  width: 25px; /* Adjust size as needed */
+  height: 25px;
+  background: rgba(87, 2, 183, 0.8); /* Primary color with transparency */
+  border-radius: 50%;
+  border: 5px solid rgb(255, 196, 77); /* Gear teeth color */
+  box-shadow: 0 0 20px rgba(13, 3, 24, 0.5); /* Glowing effect */
+  animation: rotateLargeGear 8s linear infinite;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.small-gear {
+  position: absolute;
+  width: 15px; /* Adjust size as needed */
+  height: 15px;
+  background: rgb(255, 196, 77); /* Slightly lighter primary color */
+  border-radius: 50%;
+  border: 5px solid rgba(87, 2, 183, 1); /* Gear teeth color */
+  box-shadow: 0 0 10px rgba(87, 2, 183, 0.4); /* Glowing effect */
+  transform-origin: -5px;
+  animation: rotateSmallGear 2s linear infinite;
+}
+
+.small-gear:nth-child(1) {
+  transform: rotate(0deg) translateX(80px) rotate(0deg);
+}
+
+.small-gear:nth-child(2) {
+  transform: rotate(120deg) translateX(80px) rotate(-120deg);
+}
+
+.small-gear:nth-child(3) {
+  transform: rotate(240deg) translateX(80px) rotate(-240deg);
+}
+
+/* Keyframes for rotation animations */
+@keyframes rotateLargeGear {
+  0% {
+      transform: rotate(0deg);
+  }
+  100% {
+      transform: rotate(360deg);
+  }
+}
+
+@keyframes rotateSmallGear {
+  0% {
+      transform: rotate(0deg);
+  }
+  100% {
+      transform: rotate(360deg);
+  }
+}
+
+footer{
+  background: linear-gradient(45deg, rgb(21, 21, 21) 0%, rgb(4, 0, 24) 100%);
+  padding: 2rem;
+}
+
+.layer1{
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.layer1 h3{
+  color: #fdcb85;
+  font-size: 8px;
+}
+
+.layer1 .one ul a li{
+  text-decoration: none;
+  list-style: none;
+  color: white;
+  font-size: 8px;
+}
+
+.layer1 .two ul a{
+  text-decoration: none;
+  list-style: none;
+  color: white;
+  font-size: 8px;
+}
+
+.layer1 .three ul a{
+  text-decoration: none;
+  list-style: none;
+  color: white;
+  font-size: 8px;
+  
+}
+
+.layer1 .four a li{
+  text-decoration: none;
+  list-style: none;
+  color: white;
+  font-size: 8px;
+}
+
+.layer1 .five ul li{
+  text-decoration: none;
+  list-style: none;
+  color: white;
+  font-size: 8px;
+}
+
+.layer2{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+ 
+}
+
+.layer2 .images{
+  display: flex;
+  
+}
+
+.layer2 .images .images1{
+  display: flex;
+  flex-direction: column;
+}
+
+.layer2 .images .images1 img{
+  width: 3rem;
+  border-color: white;
+  border-width: 1px;
+  margin-bottom: 7px;
+  margin-right: 10px;
+  
+}  

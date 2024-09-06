@@ -1,0 +1,646 @@
+*{
+    padding: 0;
+    margin: 0;
+    font-family: "Roboto", sans-serif;
+    font-weight: bold;
+}
+
+.roboto-thin {
+  font-family: "Roboto", sans-serif;
+  font-weight: 100;
+  font-style: normal;
+}
+
+.roboto-thin-italic {
+  font-family: "Roboto", sans-serif;
+  font-weight: 100;
+  font-style: italic;
+}
+
+
+body{
+    background-color: #3e059b;
+    font-family: "Roboto", sans-serif;
+    font-weight: bold;
+    width: auto;
+  margin: 0 auto;
+  overflow-x: hidden;
+} 
+
+
+
+@media (min-width: 900px) {
+    /* Styles for devices with a viewport wider than 768px */
+    body {
+      max-width: 700px; /* Or any width you want for mobile display */
+      margin: 0 auto;
+      font-weight: bold;
+      overflow-x: hidden; /* Prevent horizontal scrolling */
+      
+    }
+  }
+
+  .circle{
+    height: 8rem;
+    background-color: rgba(87, 2, 183, 0.423);
+    justify-self: center;
+    width: 8rem;
+    border-radius: 20rem;
+    margin-right: 10%;
+    margin-top: -5rem;
+    margin-bottom: -1.5rem;
+}
+
+.circle2{
+    height: 4rem;
+    background-color: rgba(87, 2, 183, 0.389);
+    justify-self: center;
+    width: 4rem;
+    border-radius: 20rem;
+    margin-left: 50%;
+    margin-top: -5rem;
+}
+
+.circle3{
+    height: 4rem;
+    background-color: rgba(247, 232, 118, 0.079);
+    justify-self: center;
+    width: 4rem;
+    border-radius: 20rem;
+    margin-left: 40%;
+    margin-top: -2rem;
+}
+
+header{
+    display: flex;
+    justify-content: center;
+    justify-content: space-around;
+    width: 100%;
+    /* padding: 0rem 2rem; */
+    background-color: rgb(62, 5, 155);
+    
+}
+  
+.logo{
+    font-size: 12px;
+    font-weight: bolder;
+    color:rgb(255, 196, 77);
+    background-color: transparent;
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1.3rem;
+    
+}
+
+.logo .gear-container{
+   background-color: transparent;
+    margin-top: -0.3rem;
+  
+}
+
+.logo .gear-container .large-gear {
+  position: relative;
+  width: 15px;
+  height: 15px;
+  background: rgba(87, 2, 183, 0.8); /* Your primary color with transparency */
+  border-radius: 50%;
+  border: 5px solid rgb(255, 196, 77); /* Primary color for gear teeth */
+  box-shadow: 0 0 20px rgba(13, 3, 24, 0.5); /* Glowing effect */
+  animation: rotateLargeGear 8s linear infinite;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Style for the small gears */
+.logo .gear-container .small-gear {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: rgb(255, 196, 77); /* Slightly lighter primary color */
+  border-radius: 50%;
+  border: 8px solid rgba(87, 2, 183, 1); /* Primary color for small gear teeth */
+  box-shadow: 0 0 10px rgba(87, 2, 183, 0.4); /* Glowing effect */
+  transform-origin: -3px;
+  animation: rotateSmallGear 2s linear infinite;
+}
+
+/* Position small gears around the large gear */
+.logo .gear-container .small-gear:nth-child(1) {
+  transform: rotate(0deg) translateX(80px) rotate(0deg);
+}
+
+.logo .gear-container .small-gear:nth-child(2) {
+  transform: rotate(120deg) translateX(80px) rotate(-120deg);
+}
+
+.logo .gear-container .small-gear:nth-child(3) {
+  transform: rotate(240deg) translateX(80px) rotate(-240deg);
+}
+
+/* Animation for the large gear */
+@keyframes rotateLargeGear {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Animation for the small gears */
+@keyframes rotateSmallGear {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+nav ul{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 8px;
+  }
+
+  nav ul a{
+    text-decoration: none;
+  }
+  
+  nav ul a li{
+    text-decoration: none;
+    list-style: none;
+    color: white;
+    font-size: 10px;
+    margin: 3px;
+    font-weight: bold;
+    padding: 10px 3px;
+  }
+  
+  nav ul a li:hover{
+    background: linear-gradient(45deg, rgba(48, 0, 103, 1) 0%, rgba(87, 2, 183, 0.8) 100%);
+    padding: 5px;
+    color:rgb(255, 196, 77);
+    border-radius: 10px;
+  }
+
+  /* General styles for the news section */
+.news-section {
+    position: relative;
+    overflow: hidden;
+    /* height: 300px;  */
+    padding: 1rem 1rem;
+    margin-top: 5rem;
+    text-align: center;
+  }
+  
+  /* Background image and gradient */
+  .news-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, rgba(32, 8, 62, 0.864) 50%, rgba(242, 148, 25, 0.519) 50%) no-repeat, url('https://img.freepik.com/free-photo/3d-illustration-computer-monitor-login-screen_107791-16390.jpg?uid=R55814283&ga=GA1.2.1328920485.1725346503&semt=ais_hybrid') center center/cover;
+    z-index: -1; /* Place the background behind content */
+    transform: skewY(-deg); /* Create a 45-degree skew effect */
+  }
+  
+  /* News content styling */
+  .news-content {
+    text-align: center;
+   width: 60%;
+    color: #fff; /* Text color to contrast with background */
+    z-index: 1;
+   
+  }
+  
+  /* News list styling */
+  #news-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    height: 10rem;
+  }
+  
+  #news-list li {
+    margin-bottom: 10px;
+    font-size: 10px;
+   /* Prevent line breaks */
+    overflow: hidden; /* Hide overflow text */
+    text-overflow: ellipsis;
+  }
+  
+  
+  #news-list li:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px #1e71ff;
+  }
+  
+  #news-list a {
+    color: #fdcb85;
+    text-decoration: none;
+    font-size: 10px;
+  }
+  
+  
+  .newsandimage{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 2rem;
+   
+  }
+  
+  .newsandimage img{
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 10rem;
+    
+  }
+
+  .intro{
+    background: linear-gradient(45deg, rgba(48, 0, 103, 1) 0%, rgb(87, 2, 183) 100%);
+    width: 150px;
+    transform: perspective(100px) skewY(-3deg);
+    padding: 10px 10px;
+    border-radius: 2px;
+    height: 200px;
+    
+  }
+
+  .intro:hover{
+    transform: perspective(100px) skewY(-deg);
+  }
+
+  .form{
+    text-align: center;
+    background: linear-gradient(45deg, rgb(255, 255, 255) 0%, rgb(255, 255, 255) 100%);
+    padding: 10px 0px;
+    width: 100%;
+    box-shadow: 2px 2px 10px  #12002fd3;
+    transform: perspective(100px) skewY(3deg);
+    height: 410px;
+    font-weight: bolder;
+    border-radius: 2px;
+  }
+
+  .form:hover{
+    transform: perspective(50px) skewY(-0deg);
+    
+    height: 370px;
+    transition: 0.5s ease;
+    border-radius: 10px;
+  }
+
+  h2{
+    font-size: 10px;
+    color:  rgb(255, 196, 77);
+    transform: perspective(50px) skewY(deg);
+    font-weight: bolder;
+    margin-top: 10px;
+  }
+
+  form p{
+    font-size: 5px;
+    color: #3e059b;
+    font-weight: bold;
+    text-align: left;
+    margin-left: 1.5rem;
+    margin-bottom: 5px;
+    margin-top: -4px;
+  }
+
+  input{
+    width: 80%;
+    margin: 5px;
+    padding: 5px 3px;
+    border-width: 1px;
+    border-color: #3e059b;
+    color: #3e059b;
+   border-radius: 7px;
+    font-size: 10px;
+    transform: perspective(50px) skewY(deg);
+    font-weight: bolder;
+  }
+
+  input:hover{
+    transform: perspective(50px) skewY(-0deg);
+    background: linear-gradient(45deg, rgba(48, 0, 103, 1) 0%, rgba(87, 2, 183, 0.8) 100%);
+    color: white;
+    transition: 0.5s ease;
+    border-radius: 10rem;
+  }
+
+  .split{
+    display: flex;
+    background-color: #94c4ff;
+    justify-content: center;
+    
+  }
+
+  .split input{
+    width: 10px;
+  }
+
+  .split .agree-to-terms{
+    font-size: 8px;
+    margin-top: 7px;
+  }
+
+  .input-split{
+    display: flex;
+    justify-content: space-around;
+    padding: 0% 7%;
+  }
+
+  button{
+    padding: 5px 20px;
+    margin-top: 7px;
+    background: 
+    linear-gradient(45deg, rgba(48, 0, 103, 1) 0%, rgba(87, 2, 183, 0.8) 100%);
+    width: 70%;
+    border-radius: 10px;
+    border-width: 1px;
+    border-color: #5e0ce2;
+    color: white;
+    font-size: 8px;
+    transform: perspective(50px) skewY(deg);
+    font-weight: bolder;
+  }
+
+  button:hover{
+    transform: perspective(50px) skewY(-2deg); 
+     transition: 0.5s ease;
+     width: 50%;
+  }
+
+  .auto{
+    text-align: center;
+    color: black;
+    font-size: 10px;
+    font-weight: bolder;
+    margin-top: 8px;
+  }
+
+  .auto .google{
+    display: flex;
+    padding: 0.5rem;
+    justify-content: center;
+    border-radius: 10rem;
+    border-color: black;
+   
+   
+  }
+
+  .auto .google img{
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .auto .google p{
+    padding: 0.3rem 0rem;
+    font-size: 8px;
+  }
+
+
+  /* Partners Section */
+.partners-section {
+    width: 100%;
+    text-align: center;
+    margin-top: 1.5rem;
+    margin-bottom: -2.3rem;
+    
+  }
+  
+  .partners-section h2 {
+    font-size: 10px;
+    color: #ffffff;
+    width: 100%;
+   
+  }
+  
+  .scrolling-logos {
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  
+  .logos-container {
+    display: flex;
+    align-items: center;
+    animation: scroll 40s linear infinite; /* Infinite scroll animation */
+  }
+  
+  .logos-container img {
+    width: 8px;
+    border-radius: 5rem;
+    height: auto;
+    margin: 0 15px;
+    opacity: 0.8;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+  
+  .logos-container img:hover {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .logos-container img {
+      width: 25px;
+    }
+  }
+
+  .welcome-section {
+    font-size: 8px;
+    display: none; /* Initially hidden */
+    color:  rgb(255, 196, 77);
+    text-align: left;
+    
+}
+
+.typing {
+    border-right: 3px solid rgba(255, 255, 255, 0.75); /* Simulates cursor */
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+@keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+@keyframes blink {
+    50% { border-color: transparent; }
+}
+
+.typing.active {
+    display: block;
+    width: 24ch; /* Adjust this to the length of the text */
+    animation: typing 4s steps(24) 1s forwards, blink 0.7s infinite;
+}
+
+
+.lead{
+    text-align: left;
+    color: white;
+    font-size: 8px;
+    margin-top: 1rem;
+}
+
+.lead button{
+    padding: 4px 20px;
+    margin-top: 10px;
+    background: linear-gradient(45deg, rgba(48, 0, 103, 1) 0%, rgba(87, 2, 183, 0.8) 100%);
+    border-radius: 10px;
+    border-width: 1px;
+    border-color: #ffffff;
+    color: white;
+    font-size: 8px;
+    transform: perspective(50px) skewY(-2deg);
+}
+
+.tips-container {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    overflow: hidden;
+    background: transparent;
+    color: #fff;
+    font-family: 'Open Sans', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 8px;
+    margin-top: 1rem;
+  }
+  
+  .tip {
+    position: absolute;
+    opacity: 0;
+    animation: fadeInOut 15s infinite;
+  }
+  
+  .tip:nth-child(1) { animation-delay: 0s; }
+  .tip:nth-child(2) { animation-delay: 3s; }
+  .tip:nth-child(3) { animation-delay: 6s; }
+  .tip:nth-child(4) { animation-delay: 9s; }
+  .tip:nth-child(5) { animation-delay: 12s; }
+  
+  @keyframes fadeInOut {
+    0% {
+      opacity: 0;
+      transform: translateY(50px);
+    }
+    10% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    40% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+      transform: translateY(-50px);
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  /* Basic styling for the market trends section */
+.market-trends-section {
+    background: rgba(87, 2, 183, 0.567);
+    color: #fff;
+    padding: 1rem 0rem;
+    
+    border-radius: 8px;
+    font-size: 8px;
+    display: flex;
+    flex-direction: column;
+    background-image: url('https://img.freepik.com/free-vector/connections-background-with-abstract-lattice-design_1048-12861.jpg?t=st=1725381926~exp=1725385526~hmac=96364a328084becf9a8cbe8ae2c3da12112510391eb687f0b326ba1b7fef9b56&w=826');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+  }
+  
+  #market-container {
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 0.2rem;
+    justify-content: center;
+    padding: 0rem 0.9rem;
+    
+  }
+  
+  .coin {
+    background: rgba(148, 2, 2, 0.216);
+    border-radius: 0px;
+    padding: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.148);
+    width: 100%;
+    transition: transform 0.3s ease;
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .coin:hover {
+    transform: scale(1.05);
+  }
+  
+  .coin-image {
+    width: 25px;
+    height: 25px;
+    object-fit: cover;
+    border-radius: 50%;
+    
+  }
+  
+  .coin h3 {
+    font-size: 1.2rem;
+    margin: 0;
+  }
+  
+  .coin p {
+    margin: 0.5rem 0;
+  }
+  
+  .price-up {
+    color: #4caf50; /* Green for positive trends */
+  }
+  
+  .price-down {
+    color: #f44336; /* Red for negative trends */
+  }
+  
+  /* Add futuristic glowing effect to the price trend indicators */
+  .price-up::before,
+  .price-down::before {
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 8px;
+  }
+  
+  .price-up::before {
+    background: #4caf50;
+    box-shadow: 0 0 8px rgba(76, 175, 80, 0.8);
+  }
+  
+  .price-down::before {
+    background: #f44336;
+    box-shadow: 0 0 8px rgba(244, 67, 54, 0.8);
+  }
+  
