@@ -518,8 +518,8 @@ section {
    
     animation: rotate 5s linear infinite;
     transform-origin: center;
-    margin-left: 40%;
-    /* margin-top: 4rem; */
+    margin-left: 25%;
+    margin-top: 3rem;
   }
   
   /* Keyframes for rotation */
@@ -542,7 +542,7 @@ section {
   }
 
 .how-text{
-    text-align: right;
+    text-align: left;
     color: white;
     
     width: 100%;
@@ -659,7 +659,7 @@ section {
   padding-top: 1rem;
   justify-content: center;
   text-align: center;
-  width: 90px;
+  width: 80px;
   z-index: 2; /* Ensures text is above the gradient */
   justify-content: center;
 }
@@ -726,6 +726,7 @@ section {
   color: white;
   background-color: transparent;
   margin: 5px;
+  width: 80%;
   background-color: #f39c12;
 }
 
@@ -973,92 +974,68 @@ section {
 
   
   
+.certificate{
+  padding: 2rem 3rem;
+  background: linear-gradient(45deg, rgb(103, 0, 0) 0%, rgba(87, 2, 183, 0.8) 100%);
+}
 
-  /* Basic styling for the market trends section */
-.market-trends-section {
-  background: rgba(87, 2, 183, 0.389);
-  color: #fff;
-  padding: 2rem 0rem;
-  border-radius: 8px;
-  font-size: 9px;
+.certificate-background{
+ padding: 1rem;
+ background-color: white;
+ display: flex;
+ justify-content: center;
+ gap: 2rem;
+}
+
+.certificate-background img{
+  width: 8rem;
+}
+
+.certificate-background .certificate-text{
+  font-size: 8px;
+  width: 50%;
+}
+
+.certificate-background .certificate-text h2{
+  color: #3e059b;
+  text-align: left;
+  margin: 0.5rem 0rem;
+  font-weight: bolder;
+}
+
+.certificate-background .certificate-text .small-text{
+  font-size: 5px;
+  margin-top: 0.5rem;
+}
+
+.activity-section {
   display: flex;
-  flex-direction: column;
-  background-image: url('https://img.freepik.com/free-vector/connections-background-with-abstract-lattice-design_1048-12861.jpg?t=st=1725381926~exp=1725385526~hmac=96364a328084becf9a8cbe8ae2c3da12112510391eb687f0b326ba1b7fef9b56&w=826');
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
+  justify-content: space-around;
+  padding: 10px;
 }
 
-#market-container {
-  display: flex; 
-  flex-wrap: wrap; 
-  gap: 0.2rem;
-  justify-content: center;
-  padding: 0rem 0.9rem;
+.investment-side, .withdrawal-side {
+  width: 45%;
+  background: rgba(10, 10, 40, 0.8);
+  padding: 20px;
+  border-radius: px;
+  position: relative;
+  overflow: hidden;
 }
 
-.coin {
-  background: rgba(148, 2, 2, 0.216);
-  border-radius: 0px;
-  padding: 1rem;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.148);
-  width: 100%;
-  transition: transform 0.3s ease;
-  display: flex;
-  gap: 1rem;
+.activity-section h2 {
+  font-size: 12px;
+  text-align: center;
+  margin-bottom: 5px;
+  color: #1e71ff;
+  text-shadow: 0 0 10px #1e71ff, 0 0 20px #1e71ff;
 }
 
-.coin:hover {
-  transform: scale(1.05);
-}
-
-.coin-image {
-  width: 25px;
-  height: 25px;
-  object-fit: cover;
-  border-radius: 50%;
-  
-}
-
-.coin h3 {
-  font-size: 1.2rem;
+.activity-section ul {
+  list-style: none;
+  padding: 0;
   margin: 0;
 }
-
-.coin p {
-  margin: 0.5rem 0;
-}
-
-.price-up {
-  color: #4caf50; /* Green for positive trends */
-}
-
-.price-down {
-  color: #f44336; /* Red for negative trends */
-}
-
-/* Add futuristic glowing effect to the price trend indicators */
-.price-up::before,
-.price-down::before {
-  content: '';
-  display: inline-block;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  margin-right: 8px;
-}
-
-.price-up::before {
-  background: #4caf50;
-  box-shadow: 0 0 8px rgba(76, 175, 80, 0.8);
-}
-
-.price-down::before {
-  background: #f44336;
-  box-shadow: 0 0 8px rgba(244, 67, 54, 0.8);
-}
-
-
 
 #stats {
   background-color: rgba(87, 2, 183, 0.389); /* Using your primary background color */
@@ -1135,35 +1112,100 @@ section {
 }
 
 
-
-.activity-section {
+.referral-section {
+  padding: 2rem 0rem;
+  background: url('https://img.freepik.com/premium-photo/futuristic-black-robots-black-backgroundxaxa_1417-21477.jpg?uid=R55814283&ga=GA1.1.1328920485.1725346503&semt=ais_hybrid') no-repeat center center fixed;
+  background-size: cover;
   display: flex;
-  justify-content: space-around;
-  padding: 10px;
-}
-
-.investment-side, .withdrawal-side {
-  width: 45%;
-  background: rgba(10, 10, 40, 0.8);
-  padding: 20px;
-  border-radius: px;
-  position: relative;
-  overflow: hidden;
-}
-
-.activity-section h2 {
-  font-size: 12px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: white;
   text-align: center;
-  margin-bottom: 5px;
-  color: #1e71ff;
-  text-shadow: 0 0 10px #1e71ff, 0 0 20px #1e71ff;
+  position: relative;
+  background-attachment: fixed;
 }
 
-.activity-section ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+.referral-content h2 {
+  font-size: 13px;
+  color: #fff;
+  letter-spacing: 2px;
+  margin-bottom: 1rem;
+  animation: fadeIn 1s ease-in-out;
+  font-weight: bolder;
+  text-shadow: 0px 4px 20px rgba(0, 0, 0, 0.8);
 }
+
+.referral-content p {
+  font-size: 8px;
+  color: rgb(255, 196, 77);;
+  margin-bottom: 2rem;
+  text-shadow: 0px 4px 10px rgba(0, 0, 0, 0.6);
+}
+
+.referral-steps {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  max-width: 1000px;
+  animation: fadeInUp 1.5s ease-in-out;
+  padding: 0rem 3rem;
+}
+
+.step {
+  background: rgba(87, 2, 183, 0.3);
+  padding: 1rem;
+  border-radius: 15px;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  cursor: pointer;
+  text-align: center;
+  flex: 1;
+  position: relative;
+  backdrop-filter: blur(10px);
+  font-size: 5px;
+}
+
+.step-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: #ff9f1c;
+  animation: rotateIcon 2s infinite linear;
+}
+
+.step h3 {
+  font-size:10px;
+  margin-bottom: 0.5rem;
+  color: rgb(255, 196, 77);;
+}
+
+.step p {
+  font-size: 8px;
+  color: #dcdcdc;
+}
+
+.step:hover {
+  transform: translateY(-10px);
+  box-shadow: 0px 10px 30px rgba(87, 2, 183, 0.6);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(50px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes rotateIcon {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+
+
 
 .activity-section li {
   font-size: 10px;
@@ -1403,3 +1445,81 @@ li span.amount {
       transform: rotate(360deg);
   }
 }
+
+footer{
+  background: linear-gradient(45deg, rgb(21, 21, 21) 0%, rgb(4, 0, 24) 100%);
+  padding: 2rem;
+}
+
+.layer1{
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.layer1 h3{
+  color: #fdcb85;
+  font-size: 8px;
+}
+
+.layer1 .one ul a li{
+  text-decoration: none;
+  list-style: none;
+  color: white;
+  font-size: 8px;
+}
+
+.layer1 .two ul a{
+  text-decoration: none;
+  list-style: none;
+  color: white;
+  font-size: 8px;
+}
+
+.layer1 .three ul a{
+  text-decoration: none;
+  list-style: none;
+  color: white;
+  font-size: 8px;
+  
+}
+
+.layer1 .four a li{
+  text-decoration: none;
+  list-style: none;
+  color: white;
+  font-size: 8px;
+}
+
+.layer1 .five ul li{
+  text-decoration: none;
+  list-style: none;
+  color: white;
+  font-size: 8px;
+}
+
+.layer2{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+ 
+}
+
+.layer2 .images{
+  display: flex;
+  
+}
+
+.layer2 .images .images1{
+  display: flex;
+  flex-direction: column;
+}
+
+.layer2 .images .images1 img{
+  width: 3rem;
+  border-color: white;
+  border-width: 1px;
+  margin-bottom: 7px;
+  margin-right: 10px;
+  
+}  

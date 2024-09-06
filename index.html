@@ -320,14 +320,20 @@
     </div>
     
 
-<section id="market-trends" class="market-trends-section">
-  <h2>Current Market Trends</h2><br><br>
-  <div id="market-container"></div>
-  <div id="chart-container">
-    <canvas id="price-chart" width="400" height="200"></canvas>
-  </div>
-</section>
 
+<div class="certificate">
+  <div class="certificate-background">
+    <img src="./images/certificate.png" alt="">
+    <div class="certificate-text">
+      <em>Legal Equity</em>
+      <h2>MemecoinTech</h2>
+      <p>MemecoinTech is a legitimate company based in the United Kingdom.  MemecoinTech Company Nature (SIC) is Activities of financial services holding companies #738362.</p>
+      <div class="small-text">Our platform empowers you to make informed investment decisions with real-time insights and advanced tools. Whether you're a seasoned investor or just starting, we provide a user-centric experience tailored to meet your financial goals.
+
+        Backed by our commitment to transparency and a futuristic approach, we strive to build lasting partnerships that drive success. Invest with confidence, grow with certainty, and experience the future of wealth management today.</div>
+    </div>
+  </div>
+</div>
 
 
 <div class="stream">
@@ -405,8 +411,40 @@
         </div>
       </div>
 
-
     </section>
+
+
+    <section class="referral-section">
+      <div class="referral-content">
+        <h2>Earn with Us</h2>
+        <p>Refer friends and family and enjoy exclusive rewards.</p>
+        <div class="referral-steps">
+          <div class="step">
+            <div class="step-icon">
+              <i class="fa fa-user-plus"></i>
+            </div>
+            <h3>Invite</h3>
+            <p>Share your unique referral link.</p>
+          </div>
+          <div class="step">
+            <div class="step-icon">
+              <i class="fa fa-users"></i>
+            </div>
+            <h3>Sign Up</h3>
+            <p>Your referrals sign up and start investing.</p>
+          </div>
+          <div class="step">
+            <div class="step-icon">
+              <i class="fa fa-dollar-sign"></i>
+            </div>
+            <h3>Earn</h3>
+            <p>Earn commission on their investments.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+
 
     <div class="activity-section">
       <div class="investment-side">
@@ -431,7 +469,79 @@
       
     </section>
     
+<footer>
+  <div class="layer1">
+    <div class="one">
+      <h3>Useful links</h3>
+       <ul>
+        <a href="index.html"><li>HOME</li></a>
+        <a href="about.html"><li>About</li></a>
+       </ul>
+    </div>
+  
+    <div class="two">
+      <ul>
+        <a href="signup.html">Register</a>
+        <a href="terms.html">Rules</a>
+      </ul>
+    </div>
+  
+    <div class="three">
+      <ul>
+        <a href="faq.html"><li>FAQ</li></a>
+        <a href="support.html"><li>Support</li></a>
+      </ul>
+    </div>
+  
+    <div class="four">
+      <h3>My Account</h3>
+      <a href="signin.html"><li>Personal account</li></a>
+      <a href="signin.html"><li>Make a deposit</li></a>
+    </div>
+  
+    <div class="five">
+      <h3>CONATCT</h3>
+      <ul>
+        <li>AMINISTRATOR OFFICE</li>
+        <li>@memecointech.dev.support</li>
+      </ul>
+    </div>
+  </div><br>
+  <hr style="border-color: rgb(151, 148, 193);">
 
+  <div class="layer2">
+   
+    <div class="images">
+      <div class="images1">
+        <img src="https://zenchainfinance.com/images/pay1.png" alt="">
+        <img src="https://zenchainfinance.com/images/pay7.png" alt="">
+        <img src="https://zenchainfinance.com/images/pay10.png" alt="">
+        <img src="https://zenchainfinance.com/images/pay4.png" alt="">
+      </div>
+      <div class="images1">
+        <img src="https://zenchainfinance.com/images/pay3.png" alt="">
+        <img src="https://zenchainfinance.com/images/pay6.png" alt="">
+        <img src="https://zenchainfinance.com/images/pay9.png" alt="">
+        <img src="https://zenchainfinance.com/images/pay12.png" alt="">
+      </div>
+      <div class="images1">
+        <img src="https://zenchainfinance.com/images/pay2.png" alt="">
+        <img src="https://zenchainfinance.com/images/pay5.png" alt="">
+        <img src="https://zenchainfinance.com/images/pay8.png" alt="">
+        <img src="https://zenchainfinance.com/images/pay11.png" alt="">
+      </div>
+    </div>
+    <div class="footer-logo">
+      <a href="index.html"><div class="logo" > <section class="gear-container">
+        <div class="large-gear">
+          <div class="small-gear"></div>
+          <div class="small-gear"></div>
+          <div class="small-gear"></div>
+        </div>
+      </section>MemecoinTech</div></a>
+    </div>
+  </div>
+</footer>
    
 
 
@@ -496,81 +606,7 @@ window.addEventListener('resize', checkTabsInView);
 // Fetching Market Data
 const apiUrl = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1&sparkline=false';
 
-fetch(apiUrl)
-  .then(response => {
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    return response.json();
-  })
-  .then(data => {
-    console.log("Data fetched:", data);
-    displayMarketData(data);
-    updateChart(data); // Update chart with fetched data
-  })
-  .catch(error => {
-    console.error('Error fetching data:', error);
-    document.getElementById('market-container').innerHTML = `<p>Unable to load market data. Please try again later.</p>`;
-  });
 
-// Display Market Data
-function displayMarketData(coins) {
-  const marketContainer = document.getElementById('market-container');
-  marketContainer.innerHTML = '';
-
-  coins.forEach(coin => {
-    const coinElement = document.createElement('div');
-    coinElement.classList.add('coin');
-    coinElement.innerHTML = `
-      <img src="${coin.image}" alt="${coin.name}" class="coin-image">
-      <h4>${coin.name} (${coin.symbol.toUpperCase()})</h4>
-      <p class="${coin.price_change_percentage_24h >= 0 ? 'price-up' : 'price-down'}">
-        Current Price: $${coin.current_price}
-      </p>
-      <p>Market Cap: $${coin.market_cap.toLocaleString()}</p>
-      <p>24h Change: ${coin.price_change_percentage_24h.toFixed(2)}%</p>
-    `;
-    marketContainer.appendChild(coinElement);
-  });
-}
-
-// Initialize Chart.js
-const ctx = document.getElementById('price-chart').getContext('2d');
-const priceChart = new Chart(ctx, {
-  type: 'line',
-  data: {
-    labels: [], // Fill with date/time labels
-    datasets: [{
-      label: 'Price Trend',
-      data: [], // Fill with price data
-      backgroundColor: 'rgba(87, 2, 183, 0.389)',
-      borderColor: 'rgba(87, 2, 183, 1)',
-      borderWidth: 1
-      
-    }]
-  },
-  options: {
-    responsive: true,
-    scales: {
-      x: {
-        beginAtZero: true
-      },
-      y: {
-        beginAtZero: true
-      }
-    }
-  }
-});
-
-// Update Chart with Data
-function updateChart(coins) {
-  const labels = coins.map(coin => coin.name);
-  const data = coins.map(coin => coin.current_price);
-
-  priceChart.data.labels = labels;
-  priceChart.data.datasets[0].data = data;
-  priceChart.update();
-}
 
 
 const counters = document.querySelectorAll('.count');
