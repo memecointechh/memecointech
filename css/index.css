@@ -499,23 +499,27 @@ section {
     to { transform: rotate(360deg); }
   }
 
-
+  .welcome{
+    width: 100%;
+    color: rgb(255, 196, 77);
+    font-size: 10px;
+  }
 
   .rotate-image-container {
     position: relative;
-    width: 150px;
-    height: 150px;
-    margin-top: -3rem;
+    /* width: 150px;
+    height: 150px; */
+    
   }
   
   /* Image rotation */
   .rotating-image {
-    width: 90%;
-    height: 100%;
+    width:   50%;
+   
     animation: rotate 5s linear infinite;
     transform-origin: center;
-   
-    margin-top: 4rem;
+    margin-left: 40%;
+    /* margin-top: 4rem; */
   }
   
   /* Keyframes for rotation */
@@ -530,17 +534,18 @@ section {
 
   .works{
     display: flex;
-    justify-content: space-around;
-    padding: 1rem 2rem;
+    justify-content: space-between;
+    padding: 0.6rem 2rem;
     margin-top: -2rem;
     font-size: 8px;
     margin-bottom: 0.5rem;
   }
 
 .how-text{
-    text-align: left;
+    text-align: right;
     color: white;
-    margin-top: 1rem;
+    
+    width: 100%;
 }
 
 .heartbeat-bullets {
@@ -654,7 +659,7 @@ section {
   padding-top: 1rem;
   justify-content: center;
   text-align: center;
-  width: 100px;
+  width: 90px;
   z-index: 2; /* Ensures text is above the gradient */
   justify-content: center;
 }
@@ -690,13 +695,13 @@ section {
 }
 
 .parallax-section .content .time{
-  font-size: 10px;
+  font-size: 14px;
   margin-bottom: 0.5rem;
  
 }
 
 .parallax-section .content .props{
-  font-size: 8px;
+  font-size: 5px;
   background-color:rgba(32, 0, 68, 0.163);
   padding: 1px;
   border-top-right-radius: 3rem;
@@ -707,7 +712,7 @@ section {
 .parallax-section .content .props ul li{
   list-style: none;
  margin-bottom: 3px;
-  font-size: 8px;
+  font-size: 5px;
 }
 
 .parallax-section .content button{
