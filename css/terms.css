@@ -1,0 +1,388 @@
+*{
+    padding: 0;
+    margin: 0;
+    font-family: "Roboto", sans-serif;
+    font-weight: bold;
+}
+
+.roboto-thin {
+  font-family: "Roboto", sans-serif;
+  font-weight: 100;
+  font-style: normal;
+}
+
+.roboto-thin-italic {
+  font-family: "Roboto", sans-serif;
+  font-weight: 100;
+  font-style: italic;
+}
+
+
+body{
+    background-color: #3e059b;
+    font-family: "Roboto", sans-serif;
+    
+    width: auto;
+  margin: 0 auto;
+  overflow-x: hidden;
+} 
+
+
+
+@media (min-width: 900px) {
+    /* Styles for devices with a viewport wider than 768px */
+    body {
+      max-width: 700px; /* Or any width you want for mobile display */
+      margin: 0 auto;
+      overflow-x: hidden; /* Prevent horizontal scrolling */
+      
+    }
+  }
+
+  
+.circle{
+    height: 8rem;
+    background-color: rgba(87, 2, 183, 0.423);
+    justify-self: center;
+    width: 8rem;
+    border-radius: 20rem;
+    margin-right: 10%;
+    margin-top: -5rem;
+    margin-bottom: -1.5rem;
+}
+
+header{
+    display: flex;
+    justify-content: space-between;
+    padding: 0rem 2rem;
+    background-color: rgb(62, 5, 155);
+    margin-bottom: 1.5rem;
+}
+  
+.logo{
+    font-size: 12px;
+    font-weight: bold;
+    color:rgb(255, 196, 77);
+    background-color: transparent;
+    display: flex;
+    margin-top: 1rem;
+    gap: 0.4rem;
+}
+
+.logo .gear-container{
+   background-color: transparent;
+    margin-top: -0.4rem;
+    margin-left: -rem;
+}
+
+.logo .gear-container .large-gear {
+  position: relative;
+  width: 15px;
+  height: 15px;
+  background: rgba(87, 2, 183, 0.8); /* Your primary color with transparency */
+  border-radius: 50%;
+  border: 5px solid rgb(255, 196, 77); /* Primary color for gear teeth */
+  box-shadow: 0 0 20px rgba(13, 3, 24, 0.5); /* Glowing effect */
+  animation: rotateLargeGear 8s linear infinite;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Style for the small gears */
+.logo .gear-container .small-gear {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: rgb(255, 196, 77); /* Slightly lighter primary color */
+  border-radius: 50%;
+  border: 8px solid rgba(87, 2, 183, 1); /* Primary color for small gear teeth */
+  box-shadow: 0 0 10px rgba(87, 2, 183, 0.4); /* Glowing effect */
+  transform-origin: -3px;
+  animation: rotateSmallGear 2s linear infinite;
+}
+
+/* Position small gears around the large gear */
+.logo .gear-container .small-gear:nth-child(1) {
+  transform: rotate(0deg) translateX(80px) rotate(0deg);
+}
+
+.logo .gear-container .small-gear:nth-child(2) {
+  transform: rotate(120deg) translateX(80px) rotate(-120deg);
+}
+
+.logo .gear-container .small-gear:nth-child(3) {
+  transform: rotate(240deg) translateX(80px) rotate(-240deg);
+}
+
+/* Animation for the large gear */
+@keyframes rotateLargeGear {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Animation for the small gears */
+@keyframes rotateSmallGear {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.menu-btn {
+    /* position: fixed;
+    top: 27px;
+    right: 20px; */
+    z-index: 1001;
+    cursor: pointer;
+    color: white;
+    
+    letter-spacing: 0.09rem;
+    font-size: 19px;
+    font-weight: bold;
+}
+
+/* Sliding Menu */
+.top-menu {
+    position: fixed;
+    top: -100%;
+    left: 0;
+    width: 100%;
+    height: 250px;
+    background-color:  rgb(86, 2, 183);
+    padding-top: 60px;
+    transition: 0.3s;
+    z-index: 1000;
+}
+
+.top-menu a {
+    padding: 10px 15px;
+    text-decoration: none;
+    font-size: 15px;
+    color: white;
+    display: block;
+    transition: 0.3s;
+    
+}
+
+.top-menu a:hover {
+    background-color: #575757;
+}
+
+/* Overlay for background when menu is open */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.3s;
+    z-index: 999;
+}
+
+/* Show menu and overlay */
+.top-menu.active {
+    top: 0;
+}
+
+.overlay.active {
+    visibility: visible;
+}
+
+nav ul{
+  display: flex;
+  justify-content: space-around;
+  margin-top: 8px;
+}
+
+nav ul a li{
+  text-decoration: none;
+  list-style: none;
+  color: white;
+  font-size: 8px;
+  margin: 3px;
+ 
+  padding: 10px 3px;
+}
+
+nav ul a li:hover{
+  background: linear-gradient(45deg, rgba(48, 0, 103, 1) 0%, rgba(87, 2, 183, 0.8) 100%);
+  padding: 5px;
+  color: #f39c12;
+}
+
+
+.hero {
+  padding: 1.5rem 2rem;
+  margin-top: 3rem;
+  background: linear-gradient(45deg, rgba(62, 5, 155, 1) 0%, rgba(87, 2, 183, 1) 50%, rgba(146, 51, 187, 1) 100%);
+  background-size: 300% 300%; /* Ensures smooth gradient transition */
+  animation: gradientAnimation 10s ease infinite;
+  color: #fff; /* Ensure text is visible against the background */
+  margin-top: -1px;
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background: linear-gradient(45deg, rgba(62, 5, 155, 1) 0%, rgba(87, 2, 183, 1) 50%, rgba(146, 51, 187, 1) 100%);
+  }
+  50% {
+    background: linear-gradient(45deg, rgba(87, 2, 183, 1) 0%, rgba(146, 51, 187, 1) 50%, rgba(62, 5, 155, 1) 100%);
+  }
+  100% {
+    background: linear-gradient(45deg, rgba(146, 51, 187, 1) 0%, rgba(62, 5, 155, 1) 50%, rgba(87, 2, 183, 1) 100%);
+  }
+}
+
+main{
+    background-image: url('https://img.freepik.com/free-vector/realistic-technology-particle-background_23-2148428033.jpg?uid=R55814283&ga=GA1.1.1328920485.1725346503&semt=ais_hybrid');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+main h2{
+    font-size: 12px;
+    color: white;
+    font-weight: bolder;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.78);
+
+    padding: 1.5rem;
+}
+
+.body{
+    background-image: url('https://img.freepik.com/free-vector/abstract-gears-background_1048-5821.jpg?uid=R55814283&ga=GA1.1.1328920485.1725346503&semt=ais_hybrid');
+    padding:1rem;
+}
+
+.content{
+    background-color: rgba(255, 255, 255, 0.871);
+    border: 1px solid black;
+    padding: 1rem;
+    font-size: 8px;
+    line-height: 0.9rem;
+}
+
+
+.content h4{
+    color: #3e059b;
+    letter-spacing: 2px;
+    text-shadow: 1px 1px 4px black;
+    margin-top: 5px;
+}
+
+.content em{
+    color: gold;
+    font-weight: bold;
+}
+.content ul{
+    margin: 5px;
+}
+
+.content ul li{
+    list-style: georgian;
+}
+
+.outro{
+    background-image: url('https://img.freepik.com/free-vector/realistic-technology-particle-background_23-2148428033.jpg?uid=R55814283&ga=GA1.1.1328920485.1725346503&semt=ais_hybrid');
+}
+
+
+
+
+
+
+
+footer{
+    background: linear-gradient(45deg, rgb(21, 21, 21) 0%, rgb(4, 0, 24) 100%);
+    padding: 2rem;
+    bottom: 0;
+
+
+  }
+  
+  .layer1{
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+  
+  .layer1 h3{
+    color: #fdcb85;
+    font-size: 8px;
+  }
+  
+  .layer1 .one ul a li{
+    text-decoration: none;
+    list-style: none;
+    color: white;
+    font-size: 8px;
+  }
+  
+  .layer1 .two ul a{
+    text-decoration: none;
+    list-style: none;
+    color: white;
+    font-size: 8px;
+  }
+  
+  .layer1 .three ul a{
+    text-decoration: none;
+    list-style: none;
+    color: white;
+    font-size: 8px;
+    
+  }
+  
+  .layer1 .four a li{
+    text-decoration: none;
+    list-style: none;
+    color: white;
+    font-size: 8px;
+  }
+  
+  .layer1 .five ul li{
+    text-decoration: none;
+    list-style: none;
+    color: white;
+    font-size: 8px;
+  }
+  
+  .layer2{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+   
+  }
+  
+  .layer2 .images{
+    display: flex;
+    
+  }
+  
+  .layer2 .images .images1{
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .layer2 .images .images1 img{
+    width: 3rem;
+    border-color: white;
+    border-width: 1px;
+    margin-bottom: 7px;
+    margin-right: 10px;
+    
+  }  
+
+

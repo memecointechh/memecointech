@@ -357,8 +357,9 @@ nav ul a li:hover{
   
   .dashboard-main {
     padding: 0.4rem;
-    background: rgba(22, 12, 33, 0.92);
+    background: rgba(255, 255, 255, 0.845);
     width: 70%;
+    border: 1px solid #b9b9b9;
   }
 
   .user-info{
@@ -624,8 +625,7 @@ nav ul a li:hover{
   }
 
   .tabs{
-    display: flex;
-    margin-top: 1rem;
+    display: grid;
     justify-content: center;
     
   }
@@ -633,12 +633,11 @@ nav ul a li:hover{
   .tabs .tab{
     
     color: white;
-    font-size: 13px;
-    background: linear-gradient(45deg, rgb(0, 0, 0) 0%, rgb(11, 0, 67) 100%);
+    background: linear-gradient(45deg, rgb(10, 0, 44) 0%, rgb(11, 0, 67) 100%);
     padding: 1rem;
-    margin: 0px 5px;
+    margin: 10px 5px;
     width: 100%;
-    height: 40px;
+    height: 75px;
     border-radius: 5px;
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.623);
     border-width: 1px;
@@ -648,66 +647,181 @@ nav ul a li:hover{
 
   .tabs .tab img{
     width: 1.2rem;
-    margin-left: -5px;
-    margin-top: -8px;
+  }
+
+  .tabs .tab button{
+    background-color: gold;
+    color: white;
+    border-radius: 10px;
+    box-shadow: 1px 1px 6px black;
+    padding: 5px;
+    margin-top: 4px;
+  }
+
+  .tab1{
+    display: flex;
+    justify-content: center;
   }
 
   .tabs .tab h2{
-    font-size: 14px;
-    margin-left: 60%;
-    margin-top: -13px;
-    margin-bottom: 5px;
+    font-size: 10px;
+    color: gold;
+  }
+
+  .tabs .tab .range{
+    font-size: 8px;
+  }
+
+  .tabs .tab input{
+    width: 0.5rem;
   }
 
   .tabs .tab h3{
     font-size: 8px;
-    margin-top: 12px;
     color: rgb(238, 227, 255);
   }
 
+  .spend{
+    color: white;
+    font-size: 8px;
+    display: grid;
+    margin: 5px;
+  }
 
-  /* Style the overlay content */
-#overlay-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: none;
-}
+  .spend input{
+    margin: 5px 0px;
+  }
 
-#overlay-container.show {
-  display: block;
-}
 
-#overlay-content {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #fff;
-  padding: 20px;
-  border: 1px solid #ddd;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-}
 
-#overlay-content h1 {
-  margin-top: 0;
-}
+  .container {
+    
+    margin: 0;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 0px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  .header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .details {
+    margin-bottom: 20px;
+  }
+   h1{
+    font-size: 11px;
+    font-weight: bold;
+    color: #3e059b;
+  }
+  .details h2 {
+    margin-top: 0;
+    font-size: 10px;
+    color: #3e059b;
+  }
+  .details ul {
+    list-style: none;
+    padding: 0;
+    margin: 5px 0px;
+  }
+  .details li {
+    margin-bottom: 5px;
+    font-size: 8px;
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid #3a3a3a5c;
+  }
+  .details li span {
+    font-weight: bold;
+    font-size: 8px;
+    padding: 4px 10px;
+  }
 
-#overlay-content p {
-  margin-bottom: 20px;
-}
+  .label{
+    background: linear-gradient(45deg, rgb(41, 0, 143) 0%, rgb(11, 0, 67) 100%);
+    padding: 2px 10px;
+    width: 30%;
+    color: white;
+  }
+  .actions {
+    text-align: center;
+  }
 
-#overlay-content .close-button {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 18px;
-  cursor: pointer;
-}
+  .head{
+    padding: 10px;
+  }
 
-#overlay-content .close-button:hover {
-  color: #666;
-}
+  .head h2{
+    color: #3e059b;
+    text-align: center;
+    font-size: 12px;
+    font-weight: bold;
+    text-decoration: underline;
+  }
+
+  .bitcoinaddress{
+    background: linear-gradient(45deg, rgb(26, 0, 92) 0%, rgb(11, 0, 67) 100%);
+    padding: 10px;
+  }
+
+  .bitcoinaddress h2{
+    color: gold;
+    font-size: 10px;
+    font-weight: bold;
+    margin: 15px 0px;
+  }
+
+  .bitcoinaddress p{
+    font-size: 8px;
+    margin: 10px 0px;
+    color: white;
+  }
+
+  .btc-address{
+    color: #3e059b;
+    font-size: 10px;
+    font-weight: bold;
+    background-color: white;
+    padding: 5px;
+    box-shadow: 1px 1px 7px black;
+
+  }
+
+  .confirm-button{
+    color: white;
+    background: linear-gradient(45deg, rgb(0, 142, 102) 0%, rgb(6, 126, 0) 100%);
+    padding: 5px 10px;
+    font-size: 8px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    border-radius: 5px;
+    border-style: none;
+  }
+
+  .confirm-button:hover{
+    background: white;
+    color: green;
+    box-shadow: 1px 1px 5px black;
+    padding: 6px 10px;
+    transition: 0.5s ease-in;
+  }
+
+  .cancel-button{
+    color: white;
+    background: linear-gradient(45deg, rgb(142, 0, 0) 0%, rgb(126, 0, 0) 100%);
+    padding: 5px 10px;
+    font-size: 8px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    border-radius: 5px;
+    border-style: none;
+  }
+
+  .cancel-button:hover{
+    background: white;
+    color: rgb(128, 0, 0);
+    box-shadow: 1px 1px 5px black;
+    padding: 6px 10px;
+    transition: 0.5s ease-in;
+  }

@@ -39,9 +39,9 @@
             <a href="signup.html"><li>SIGN UP</li></a>
            
             <a href="index.html"><li>HOME</li></a>
-            <a href=""><li>FAQ</li></a>
-            <a href=""><li>TERMS</li></a>
-            <a href=""><li>SUPPORT</li></a>
+            <a href="faq.html"><li>FAQ</li></a>
+            <a href="terms.html"><li>TERMS</li></a>
+            <a href="support.html"><li>SUPPORT</li></a>
           </ul>
             
         </nav>
@@ -141,7 +141,7 @@
               <ul>
                 <li><a href="#"><img src="https://cdn-icons-png.freepik.com/256/16108/16108349.png?uid=R55814283&ga=GA1.1.1328920485.1725346503&semt=ais_hybrid" alt="">Account</a></li><hr style="">
 
-                <li><a href="#"><img src="https://cdn-icons-png.freepik.com/256/12477/12477651.png?uid=R55814283&ga=GA1.1.1328920485.1725346503&semt=ais_hybrid" alt="">Deposits History</a></li><hr>
+                <li><a href="invest.html"><img src="https://cdn-icons-png.freepik.com/256/12477/12477651.png?uid=R55814283&ga=GA1.1.1328920485.1725346503&semt=ais_hybrid" alt="">Make Deposit</a></li><hr>
 
                 <li><a href="#"><img src="https://cdn-icons-png.freepik.com/256/15017/15017061.png?uid=R55814283&ga=GA1.1.1328920485.1725346503&semt=ais_hybrid" alt="">Earning History</a></li><hr>
 
@@ -161,16 +161,18 @@
               </ul>
             </nav>
           </aside>
+          
+
 
           
-          
+        <!-- <div id="user-data">   -->
           <main class="dashboard-main">
 
             <header class="dashboard-header">
               <div class="user-info">
-                <h4 style="text-align: left;">Welcome User156r!</h4>
-                <p>Sign up Date: 01-01-2050 <br>
-                  Last access: 01-01-2050
+                <h4 style="text-align: left;">Welcome <h2 id="username"></h2></h4>
+                <p>Sign up Date: <p id="created-at"></p><br>
+                  Last access: <p id="days-since-creation"></p>
                 </p>
               </div>
              
@@ -212,18 +214,18 @@
           <div class="tabs">
             <div class="tab">
               <img src="https://cdn-icons-png.freepik.com/256/7840/7840649.png?uid=R55814283&ga=GA1.2.1328920485.1725346503&semt=ais_hybrid" alt="">
-              <h2>$60</h2><hr  style="border-style: solid; border-color: rgba(62, 5, 155, 0.587);">
+              <p id="balance"></p><hr  style="border-style: solid; border-color: rgba(62, 5, 155, 0.587);">
               <h3>ACOUNT BALANCE</h3>
             </div>
 
             <div class="tab">
               <img src="https://cdn-icons-png.freepik.com/256/10000/10000987.png?uid=R55814283&ga=GA1.2.1328920485.1725346503&semt=ais_hybrid" alt="">
-              <h2>$1000</h2><hr style="border-style: solid; border-color: rgba(62, 5, 155, 0.587);">
+              <p id="total-deposits"></p><hr style="border-style: solid; border-color: rgba(62, 5, 155, 0.587);">
               <h3>ACTIVE DEPOSIT</h3>
             </div>
 
           </div>
-            
+              
 
             <br><br><br><b></b>
 
@@ -235,11 +237,11 @@
               </div>
               <div class="stat-card">
                 <h3>Active Investments</h3>
-                <span class="count-up">1,500</span>
+                <p id="total-deposits"></p>
               </div>
               <div class="stat-card">
                 <h3>Total Withdrawals</h3>
-                <span class="count-up">$200,000</span>
+                <p id="total-withdrawals"></p>
               </div>
             </section>
             <div class="dashboard-sections">
@@ -260,7 +262,7 @@
             <section class="activity-feed">
               <h2>Recent Activities</h2>
               <ul id="activity-list">
-                <!-- Dynamic content -->
+                
               </ul>
             </section>
           </main>
@@ -344,6 +346,75 @@
 
 
   <script>
+
+  // Client-side JavaScript code
+  const username = localStorage.getItem('username');
+fetch(`/users?username=${username}`, {
+  method: 'GET',
+  headers: {
+    'Content-Type': 'application/json'
+  }
+})
+.then(response => response.json())
+.then(data => {
+  console.log(data);
+  // Check if the response data is an array
+  if (Array.isArray(data)) {
+    
+    const userData = data[0];
+    document.getElementById('username').innerHTML = `Username: ${userData.username}`;
+    document.getElementById('balance').innerHTML = `Balance: ${userData.balance}`;
+    document.getElementById('total-withdrawals').innerHTML = `Total Withdrawals: ${userData.total_withdrawals}`;
+    document.getElementById('total-deposits').innerHTML = `Total Deposits: ${userData.total_deposits}`;
+    document.getElementById('created-at').innerHTML = `Created at: ${userData.created_at}`;
+    document.getElementById('days-since-creation').innerHTML = `Days since creation: ${userData.days_since_creation}`;
+  } else {
+    // If it's not an array, handle the error
+    console.error('Invalid response data');
+  }
+})
+.catch(error => console.error(error));
+
+
+
+// // Get the container element
+// const container = document.getElementById('overlay-container');
+
+// // Define a function to load the content of each page
+// function loadOverlayContent(url) {
+//   // Load the content using the fetch API
+//   fetch(url)
+//     .then(response => response.text())
+//     .then(html => {
+//       // Insert the content into the container element
+//       container.innerHTML = html;
+//     })
+//     .catch(error => console.error('Error loading overlay content:', error));
+// }
+
+// // Add event listeners to the links to load the overlay content
+// // Add event listeners to the links to load the overlay content
+// document.querySelectorAll('.dashboard-sidebar a').forEach(link => {
+//   link.addEventListener('click', event => {
+//     event.preventDefault();
+//     const url = link.href;
+//     loadOverlayContent(url);
+//     // Add the class to show the overlay content when a link is clicked
+//     container.classList.add('show');
+//   });
+// });
+
+
+
+
+// // Add an event listener to the close button
+// document.querySelector('.close-button').addEventListener('click', () => {
+//   // Remove the class to hide the overlay content
+//   container.classList.remove('show');
+// });
+// ``
+
+
     const ctx = document.getElementById('investmentChart').getContext('2d');
 const investmentChart = new Chart(ctx, {
     type: 'line',

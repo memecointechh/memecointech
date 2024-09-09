@@ -245,7 +245,7 @@ nav ul a li:hover{
 
 
 .hero-text{
-    margin-bottom: -15rem;
+    /* margin-bottom: -15rem; */
     
 }
 
@@ -257,7 +257,7 @@ nav ul a li:hover{
 
 .hero-text h2{
     color: white;
-    font-size: 13px;
+    font-size: 14px;
     text-align: left;
     margin-bottom: 10px;
 }
@@ -276,9 +276,11 @@ nav ul a li:hover{
 
 .hero-image img{
     width: 45%;
-    margin-top: 7rem;
+    /* margin-top: 7rem; */
     /* position: relative; */
     animation: juggle-animation 1.5s infinite ease-in-out;
+   
+    margin-top: -8rem;
     
 }
 
