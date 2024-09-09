@@ -167,7 +167,7 @@
 
    
 
-    <div id="loading-overlay">
+    <!-- <div id="loading-overlay">
       <div class="gear-container">
           <div class="large-gear">
               <div class="small-gear"></div>
@@ -175,7 +175,7 @@
               <div class="small-gear"></div>
           </div>
       </div>
-  </div>
+  </div> -->
   <!-- <nav>
       <a href="https://btwwestflightexpress.onrender.com/" class="load-link">Page 1</a>
       <a href="page2.html">Page 2</a>
@@ -651,23 +651,23 @@ const newsApiKey = '16a42969c1424ceb879197d2e62c760a'; // Replace with your API 
   setInterval(fetchCryptoNews, 900000); // 90000
 
 
-document.addEventListener('DOMContentLoaded', () => {
-    const loadingOverlay = document.getElementById('loading-overlay');
+// document.addEventListener('DOMContentLoaded', () => {
+//     const loadingOverlay = document.getElementById('loading-overlay');
     
-    // Show loading overlay on link click
-    document.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', (event) => {
-            if (link.getAttribute('href') !== '#') {
-                loadingOverlay.style.display = 'flex';
-            }
-        });
-    });
+//     // Show loading overlay on link click
+//     document.querySelectorAll('a').forEach(link => {
+//         link.addEventListener('click', (event) => {
+//             if (link.getAttribute('href') !== '#') {
+//                 loadingOverlay.style.display = 'flex';
+//             }
+//         });
+//     });
     
-    // Hide loading overlay when the page is loaded
-    window.addEventListener('load', () => {
-        loadingOverlay.style.display = 'none';
-    });
-});
+//     // Hide loading overlay when the page is loaded
+//     window.addEventListener('load', () => {
+//         loadingOverlay.style.display = 'none';
+//     });
+// });
 
 
    </script>
