@@ -263,6 +263,19 @@
 
 <script src="signin-script.js"></script>
 
+<!-- Smartsupp Live Chat script -->
+<script type="text/javascript">
+  var _smartsupp = _smartsupp || {};
+  _smartsupp.key = 'e2ef1ba0fdb27cb9a6d1e17fbede4b2d97e23d5d';
+  window.smartsupp||(function(d) {
+    var s,c,o=smartsupp=function(){ o._.push(arguments)};o._=[];
+    s=d.getElementsByTagName('script')[0];c=d.createElement('script');
+    c.type='text/javascript';c.charset='utf-8';c.async=true;
+    c.src='https://www.smartsuppchat.com/loader.js?';s.parentNode.insertBefore(c,s);
+  })(document);
+  </script>
+  <noscript> Powered by <a href=“https://www.smartsupp.com” target=“_blank”>Smartsupp</a></noscript>
+
 <script>
 
 // Assuming you are using Fetch API to send the login request
@@ -278,7 +291,7 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
     return;
   }
 
-  if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)) {
+  if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[^\s@]+$/.test(email)) {
     alert('Invalid email address');
     return;
   }
@@ -290,14 +303,24 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
     },
     body: JSON.stringify({ email, password })
   })
-  .then(response => response.json())
+  .then(response => {
+    // Check if the response is a redirect
+    if (response.redirected) {
+      // Redirect to the appropriate page
+      window.location.href = response.url;
+      return; // Exit the function to avoid further processing
+    }
+    return response.json(); // Otherwise, parse as JSON
+  })
   .then(data => {
-    if (data.message === 'Login successful') {
-      // Store the username in local storage
-      localStorage.setItem('username', data.username);
-      window.location.href = '/dashboard.html';
-    } else {
-      alert(data.error);
+    if (data) { // If there's data after JSON parsing
+      if (data.message === 'Login successful') {
+        // Store the username in local storage
+        localStorage.setItem('username', data.username);
+        window.location.href = '/dashboard.html'; // Redirect to user dashboard
+      } else if (data.error) {
+        alert(data.error); // Show error message
+      }
     }
   })
   .catch(error => console.error('Error:', error));

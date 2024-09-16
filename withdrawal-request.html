@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Withdrawal Requests</title>
+    <style>
+        /* Add your CSS styling here */
+    </style>
+</head>
+<body onload="fetchWithdrawalRequests()">
+    <h1>Withdrawal Requests</h1>
+    <table id="withdrawal-requests-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>User ID</th>
+                <th>Amount</th>
+                <th>Status</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Rows will be populated here by JavaScript -->
+        </tbody>
+    </table>
+    <script>
+        // Fetch withdrawal requests and display on the dedicated page
+function fetchWithdrawalRequests() {
+  fetch('/api/admin/withdrawal-requests')
+    .then(response => response.json())
+    .then(data => {
+      const tableBody = document.querySelector('#withdrawal-requests-table tbody');
+      
+      data.forEach(request => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${request.id}</td>
+          <td>${request.user_id}</td>
+          <td>$${request.amount}</td>
+          <td>${request.status}</td>
+          <td>${request.date}</td>
+          <td>
+            <button onclick="approveWithdrawal(${request.id})">Approve</button>
+            <button onclick="rejectWithdrawal(${request.id})">Reject</button>
+          </td>
+        `;
+        tableBody.appendChild(row);
+      });
+    })
+    .catch(error => console.error('Error fetching withdrawal requests:', error));
+}
+
+// Function to approve a withdrawal request
+function approveWithdrawal(withdrawalId) {
+  fetch('/api/admin/approve-withdrawal', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ withdrawalId })
+  })
+  .then(response => response.json())
+  .then(data => {
+    alert(data.message);
+    location.reload(); // Reload page to reflect changes
+  })
+  .catch(error => console.error('Error:', error));
+}
+
+// Function to reject a withdrawal request
+function rejectWithdrawal(withdrawalId) {
+  fetch('/api/admin/reject-withdrawal', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ withdrawalId })
+  })
+  .then(response => response.json())
+  .then(data => {
+    alert(data.message);
+    location.reload(); // Reload page to reflect changes
+  })
+  .catch(error => console.error('Error:', error));
+}
+
+    </script>
+</body>
+</html>

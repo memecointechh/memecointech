@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>Memecointech Dashboard</title>
+    <meta name="theme-color" content=" #3e059b">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="Your Website">
+    <meta name="apple-mobile-web-app-status-bar-style" content=" #3e059b">
+    <link rel="stylesheet" href="./css/dashboard.css">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;1,100&display=swap" rel="stylesheet">
+
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+    
+</head>
+
+<body>
+
+    <div class="circle">
+
+    </div>
+    <header>
+      
+      <a href="index.html"><div class="logo" > <section class="gear-container">
+        <div class="large-gear">
+          <div class="small-gear"></div>
+          <div class="small-gear"></div>
+          <div class="small-gear"></div>
+        </div>
+      </section>MemecoinTech</div></a>
+        <nav>
+          <ul>
+            <a href="signup.html"><li>SIGN UP</li></a>
+           
+            <a href="index.html"><li>HOME</li></a>
+            <a href="faq.html"><li>FAQ</li></a>
+            <a href="terms.html"><li>TERMS</li></a>
+            <a href="support.html"><li>SUPPORT</li></a>
+          </ul>
+            
+        </nav>
+    </header>
+    <div class="dashboard-container">
+        <div class="body">
+            <aside class="dashboard-sidebar">
+                <nav>
+                  <ul>
+                    <li><a href="dashboard.html"><img src="https://cdn-icons-png.freepik.com/256/16108/16108349.png?uid=R55814283&ga=GA1.1.1328920485.1725346503&semt=ais_hybrid" alt="">Account</a></li><hr style="">
+    
+                    <li><a href="invest.html"><img src="https://cdn-icons-png.freepik.com/256/12477/12477651.png?uid=R55814283&ga=GA1.1.1328920485.1725346503&semt=ais_hybrid" alt="">Make Deposit</a></li><hr>
+    
+                    <li><a href="#"><img src="https://cdn-icons-png.freepik.com/256/15017/15017061.png?uid=R55814283&ga=GA1.1.1328920485.1725346503&semt=ais_hybrid" alt="">Earning History</a></li><hr>
+    
+                    <li><a href="#"><img src="https://cdn-icons-png.freepik.com/256/12477/12477651.png?uid=R55814283&ga=GA1.1.1328920485.1725346503&semt=ais_hybrid" alt="">Withdraw</a></li><hr>
+    
+                    <li><a href="#"><img src="https://cdn-icons-png.freepik.com/256/13843/13843283.png?uid=R55814283&ga=GA1.1.1328920485.1725346503&semt=ais_hybrid" alt="">Withdrawal History</a></li><hr>
+    
+                    <li><a href="#"><img src="https://cdn-icons-png.freepik.com/256/3503/3503638.png?uid=R55814283&ga=GA1.1.1328920485.1725346503&semt=ais_hybrid" alt="">Edit Profile</a></li><hr>
+    
+                    <li><a href="#"><img src="https://cdn-icons-png.freepik.com/256/11302/11302228.png?uid=R55814283&ga=GA1.1.1328920485.1725346503&semt=ais_hybrid" alt="">Logout</a></li>
+                  </ul>
+                </nav>
+              </aside>
+              <main class="dashboard-main">
+
+                <header class="dashboard-header">
+                  <div class="user-info">
+                    <p><strong>Balance:</strong> <span id="balance"></span></p>
+                  </div>
+                 
+                  <div class="profile-settings">
+                    <p><strong>Bitcoin Address:</strong> <span id="bitcoin_address"></span></p>
+       
+                   
+                  </div>
+                </header>
+
+                <div class="itemsa">
+                  <form id="withdraw-form" >
+                    <div class="form-flex">
+                      <label for="withdraw-amount">Withdrawal Amount</label>
+                    <input type="number" id="withdraw-amount" name="withdraw-amount" placeholder="0.00" required>
+                    </div>
+                    
+                    <button type="submit">Submit Withdrawal</button>
+                </form>
+                
+                    <p id="message"></p>
+                </div>
+              </main>
+        </div>
+    </div>
+
+    <footer>
+      <div class="layer1">
+        <div class="one">
+          <h3>Useful links</h3>
+           <ul>
+            <a href="index.html"><li>HOME</li></a>
+            <a href="about.html"><li>About</li></a>
+           </ul>
+        </div>
+      
+        <div class="two">
+          <ul>
+            <a href="signup.html">Register</a>
+            <a href="terms.html">Rules</a>
+          </ul>
+        </div>
+      
+        <div class="three">
+          <ul>
+            <a href="faq.html"><li>FAQ</li></a>
+            <a href="support.html"><li>Support</li></a>
+          </ul>
+        </div>
+      
+        <div class="four">
+          <h3>My Account</h3>
+          <a href="signin.html"><li>Personal account</li></a>
+          <a href="signin.html"><li>Make a deposit</li></a>
+        </div>
+      
+        <div class="five">
+          <h3>CONATCT</h3>
+          <ul>
+            <li>AMINISTRATOR OFFICE</li>
+            <li>@memecointech.dev.support</li>
+          </ul>
+        </div>
+      </div><br>
+      <hr style="border-color: rgb(151, 148, 193);">
+    
+      <div class="layer2">
+       
+        <div class="images">
+          <div class="images1">
+            <img src="https://zenchainfinance.com/images/pay1.png" alt="">
+            <img src="https://zenchainfinance.com/images/pay7.png" alt="">
+            <img src="https://zenchainfinance.com/images/pay10.png" alt="">
+            <img src="https://zenchainfinance.com/images/pay4.png" alt="">
+          </div>
+          <div class="images1">
+            <img src="https://zenchainfinance.com/images/pay3.png" alt="">
+            <img src="https://zenchainfinance.com/images/pay6.png" alt="">
+            <img src="https://zenchainfinance.com/images/pay9.png" alt="">
+            <img src="https://zenchainfinance.com/images/pay12.png" alt="">
+          </div>
+          <div class="images1">
+            <img src="https://zenchainfinance.com/images/pay2.png" alt="">
+            <img src="https://zenchainfinance.com/images/pay5.png" alt="">
+            <img src="https://zenchainfinance.com/images/pay8.png" alt="">
+            <img src="https://zenchainfinance.com/images/pay11.png" alt="">
+          </div>
+        </div>
+        <div class="footer-logo">
+          <a href="index.html"><div class="logo" > <section class="gear-container">
+            <div class="large-gear">
+              <div class="small-gear"></div>
+              <div class="small-gear"></div>
+              <div class="small-gear"></div>
+            </div>
+          </section>MemecoinTech</div></a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Smartsupp Live Chat script -->
+<script type="text/javascript">
+  var _smartsupp = _smartsupp || {};
+  _smartsupp.key = 'e2ef1ba0fdb27cb9a6d1e17fbede4b2d97e23d5d';
+  window.smartsupp||(function(d) {
+    var s,c,o=smartsupp=function(){ o._.push(arguments)};o._=[];
+    s=d.getElementsByTagName('script')[0];c=d.createElement('script');
+    c.type='text/javascript';c.charset='utf-8';c.async=true;
+    c.src='https://www.smartsuppchat.com/loader.js?';s.parentNode.insertBefore(c,s);
+  })(document);
+  </script>
+  <noscript> Powered by <a href=“https://www.smartsupp.com” target=“_blank”>Smartsupp</a></noscript>
+    
+    <script>
+ document.addEventListener('DOMContentLoaded', () => {
+    const username = localStorage.getItem('username'); // Get the username from local storage
+
+    // Fetch bitcoin_address and balance from the backend
+    fetch(`/api/user-info?username=${username}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.bitcoin_address && data.balance) {
+                document.getElementById('bitcoin_address').textContent = data.bitcoin_address;
+                document.getElementById('balance').textContent = data.balance;
+            } else {
+                console.error('User info not found');
+            }
+        })
+        .catch(error => console.error('Error fetching user info:', error));
+
+    // Handle withdrawal form submission
+    const withdrawForm = document.getElementById('withdraw-form');
+    withdrawForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const amount = document.getElementById('withdraw-amount').value;
+
+        fetch('/api/withdraw', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username, amount })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.message) {
+                alert(data.message);
+                window.location.reload(); // Reload page to update balance
+            }
+        })
+        .catch(error => console.error('Error processing withdrawal:', error));
+    });
+});
+
+
+
+
+    // Handle withdrawal request
+ 
+
+    </script>
+</body>
+</html>

@@ -143,19 +143,13 @@
 
                 <li><a href="invest.html"><img src="https://cdn-icons-png.freepik.com/256/12477/12477651.png?uid=R55814283&ga=GA1.1.1328920485.1725346503&semt=ais_hybrid" alt="">Make Deposit</a></li><hr>
 
-                <li><a href="#"><img src="https://cdn-icons-png.freepik.com/256/15017/15017061.png?uid=R55814283&ga=GA1.1.1328920485.1725346503&semt=ais_hybrid" alt="">Earning History</a></li><hr>
+                <li><a href="earning-history.html"><img src="https://cdn-icons-png.freepik.com/256/15017/15017061.png?uid=R55814283&ga=GA1.1.1328920485.1725346503&semt=ais_hybrid" alt="">Earning History</a></li><hr>
 
-                <li><a href="#"><img src="https://cdn-icons-png.freepik.com/256/12477/12477651.png?uid=R55814283&ga=GA1.1.1328920485.1725346503&semt=ais_hybrid" alt="">Withdraw</a></li><hr>
+                <li><a href="user-withdrawal.html"><img src="https://cdn-icons-png.freepik.com/256/12477/12477651.png?uid=R55814283&ga=GA1.1.1328920485.1725346503&semt=ais_hybrid" alt="">Withdraw</a></li><hr>
 
                 <li><a href="#"><img src="https://cdn-icons-png.freepik.com/256/13843/13843283.png?uid=R55814283&ga=GA1.1.1328920485.1725346503&semt=ais_hybrid" alt="">Withdrawal History</a></li><hr>
 
-                <li><a href="#"><img src="https://cdn-icons-png.freepik.com/256/13366/13366515.png?uid=R55814283&ga=GA1.1.1328920485.1725346503&semt=ais_hybrid" alt="">Your Referal </a></li><hr>
-
-                <li><a href="#"><img src="https://cdn-icons-png.freepik.com/256/16108/16108382.png?uid=R55814283&ga=GA1.1.1328920485.1725346503&semt=ais_hybrid" alt="">Referal Link</a></li><hr>
-
                 <li><a href="#"><img src="https://cdn-icons-png.freepik.com/256/3503/3503638.png?uid=R55814283&ga=GA1.1.1328920485.1725346503&semt=ais_hybrid" alt="">Edit Profile</a></li><hr>
-
-                <li><a href="#"><img src="https://cdn-icons-png.freepik.com/256/15016/15016708.png?uid=R55814283&ga=GA1.1.1328920485.1725346503&semt=ais_hybrid" alt="">Wallet</a></li><hr>
 
                 <li><a href="#"><img src="https://cdn-icons-png.freepik.com/256/11302/11302228.png?uid=R55814283&ga=GA1.1.1328920485.1725346503&semt=ais_hybrid" alt="">Logout</a></li>
               </ul>
@@ -220,7 +214,7 @@
 
             <div class="tab">
               <img src="https://cdn-icons-png.freepik.com/256/10000/10000987.png?uid=R55814283&ga=GA1.2.1328920485.1725346503&semt=ais_hybrid" alt="">
-              <p id="total-deposits"></p><hr style="border-style: solid; border-color: rgba(62, 5, 155, 0.587);">
+              <span id="mostRecentActiveDeposit">0</span></p><hr style="border-style: solid; border-color: rgba(62, 5, 155, 0.587);">
               <h3>ACTIVE DEPOSIT</h3>
             </div>
 
@@ -228,43 +222,85 @@
               
 
             <br><br><br><b></b>
-
-
-            <section class="stats-section">
-              <div class="stat-card">
-                <h3>Total Users</h3>
-                <span class="count-up">20,000</span>
-              </div>
-              <div class="stat-card">
-                <h3>Active Investments</h3>
-                <p id="total-deposits"></p>
-              </div>
-              <div class="stat-card">
-                <h3>Total Withdrawals</h3>
-                <p id="total-withdrawals"></p>
-              </div>
-            </section>
-            <div class="dashboard-sections">
-              
-
-              <div class="dashboard-tabs">
-
-              </div>
-            </div>
             
+            
+              <!-- <div class="dashboard-item">
+                <label>Most Recent Active Deposit:</label>
+                <span id="mostRecentActiveDeposit">0</span>
+              </div> -->
+            
+              <!-- <div class="dashboard-item">
+                <label>Total Pending Withdrawals:</label>
+                <span id="totalPendingWithdrawals">0</span>
+              </div> -->
+            
+              <!-- <div class="dashboard-item">
+                <label>Total Withdrawn Amount:</label>
+                <span id="totalWithdrawn">0</span>
+              </div> -->
+            
+              <!-- <div class="dashboard-item">
+                <label>Total Earned Amount:</label>
+                <span id="totalEarned">0</span>
+              </div> -->
+            
+              <!-- <div class="dashboard-item">
+                <label>Last Deposit:</label>
+                <span id="lastDeposit">0</span>
+              </div> -->
+            
+              <!-- <div class="dashboard-item">
+                <label>Total Deposits:</label>
+                <span id="totalDeposits">0</span>
+              </div> -->
+            
+              <!-- <div class="dashboard-item">
+                <label>Last Withdrawal:</label>
+                <span id="lastWithdrawal">0</span>
+              </div>
+            </div> -->
+            
+
+            
+            <table class="bottom-table" cellspacing="0" cellpadding="2" border="0">
+              <tbody><tr>
+               <td>Pending Withdrawal:</td>
+               <td class="text-right">$<span id="totalPendingWithdrawals">0</span></td>
+              </tr>
+              <tr>
+               <td>Withdrew Total:</td>
+               <td class="text-right">$ <span id="totalWithdrawn">0</span></td>
+              </tr><tr>
+               <td>Earned Total:</td>
+              <td class="text-right">$<span id="totalEarned">0</span></td>
+              </tr>
+              <td>Last Deposit:</td>
+              <td class="text-right">$<span id="lastDeposit">0</span></td>
+             </tr>
+           
+             <tr>
+              <td>Total Approved Deposit:</td>
+              <td class="text-right">$<span id="totalDeposits">0</span></td>
+             </tr>
+           
               
+             <tr>
+              <td>Last Withdrawal:</td>
+              <td class="text-right">$<span id="lastWithdrawal">0</span></td>
+             </tr>
+            </tbody></table>
+
+
+           <div class="affiliate">
+            
+           </div>
             
             <section class="charts-section">
               <canvas id="investmentChart" style="font-size: 8px;"></canvas>
               <canvas id="cryptoChart"></canvas>
             </section>
             
-            <section class="activity-feed">
-              <h2>Recent Activities</h2>
-              <ul id="activity-list">
-                
-              </ul>
-            </section>
+           
           </main>
     </div>
     
@@ -344,7 +380,19 @@
   </div>
 </footer>
 
-
+<!-- Smartsupp Live Chat script -->
+<script type="text/javascript">
+  var _smartsupp = _smartsupp || {};
+  _smartsupp.key = 'e2ef1ba0fdb27cb9a6d1e17fbede4b2d97e23d5d';
+  window.smartsupp||(function(d) {
+    var s,c,o=smartsupp=function(){ o._.push(arguments)};o._=[];
+    s=d.getElementsByTagName('script')[0];c=d.createElement('script');
+    c.type='text/javascript';c.charset='utf-8';c.async=true;
+    c.src='https://www.smartsuppchat.com/loader.js?';s.parentNode.insertBefore(c,s);
+  })(document);
+  </script>
+  <noscript> Powered by <a href=“https://www.smartsupp.com” target=“_blank”>Smartsupp</a></noscript>
+  
   <script>
 
   // Client-side JavaScript code
@@ -377,43 +425,6 @@ fetch(`/users?username=${username}`, {
 
 
 
-// // Get the container element
-// const container = document.getElementById('overlay-container');
-
-// // Define a function to load the content of each page
-// function loadOverlayContent(url) {
-//   // Load the content using the fetch API
-//   fetch(url)
-//     .then(response => response.text())
-//     .then(html => {
-//       // Insert the content into the container element
-//       container.innerHTML = html;
-//     })
-//     .catch(error => console.error('Error loading overlay content:', error));
-// }
-
-// // Add event listeners to the links to load the overlay content
-// // Add event listeners to the links to load the overlay content
-// document.querySelectorAll('.dashboard-sidebar a').forEach(link => {
-//   link.addEventListener('click', event => {
-//     event.preventDefault();
-//     const url = link.href;
-//     loadOverlayContent(url);
-//     // Add the class to show the overlay content when a link is clicked
-//     container.classList.add('show');
-//   });
-// });
-
-
-
-
-// // Add an event listener to the close button
-// document.querySelector('.close-button').addEventListener('click', () => {
-//   // Remove the class to hide the overlay content
-//   container.classList.remove('show');
-// });
-// ``
-
 
     const ctx = document.getElementById('investmentChart').getContext('2d');
 const investmentChart = new Chart(ctx, {
@@ -437,6 +448,41 @@ const investmentChart = new Chart(ctx, {
         }
     }
 });
+
+
+// Function to load user dashboard data
+async function loadUserDashboard() {
+  const username = localStorage.getItem('username'); // Assuming username is stored in localStorage
+
+  if (!username) {
+    console.error('Username not found in localStorage');
+    return;
+  }
+
+  try {
+    const response = await fetch(`/api/user-dashboard?username=${username}`);
+    const data = await response.json();
+
+    if (response.ok) {
+      // Update the DOM with the returned data
+      document.getElementById('mostRecentActiveDeposit').textContent = data.mostRecentActiveDeposit || 0;
+      document.getElementById('totalPendingWithdrawals').textContent = data.totalPendingWithdrawals || 0;
+      document.getElementById('totalWithdrawn').textContent = data.totalWithdrawn || 0;
+      document.getElementById('totalEarned').textContent = data.totalEarned || 0;
+      document.getElementById('lastDeposit').textContent = data.lastDeposit || 0;
+      document.getElementById('totalDeposits').textContent = data.totalDeposits || 0;
+      document.getElementById('lastWithdrawal').textContent = data.lastWithdrawal || 0;
+    } else {
+      console.error('Error fetching data:', data.message);
+    }
+  } catch (error) {
+    console.error('Error fetching user dashboard data:', error);
+  }
+}
+
+// Call the function when the page loads
+window.onload = loadUserDashboard;
+
 
   </script>
 </body>

@@ -51,9 +51,7 @@
             <aside class="dashboard-sidebar">
                 <nav>
                   <ul>
-                    <li><a href="#"><img src="https://cdn-icons-png.freepik.com/256/16108/16108349.png?uid=R55814283&ga=GA1.1.1328920485.1725346503&semt=ais_hybrid" alt="">Account</a></li><hr style="">
-    
-                    <li><a href="invest.html"><img src="https://cdn-icons-png.freepik.com/256/12477/12477651.png?uid=R55814283&ga=GA1.1.1328920485.1725346503&semt=ais_hybrid" alt="">Make Deposit</a></li><hr>
+                    <li><a href="dashboard.html"><img src="https://cdn-icons-png.freepik.com/256/16108/16108349.png?uid=R55814283&ga=GA1.1.1328920485.1725346503&semt=ais_hybrid" alt="">Account</a></li><hr style="">
     
                     <li><a href="#"><img src="https://cdn-icons-png.freepik.com/256/15017/15017061.png?uid=R55814283&ga=GA1.1.1328920485.1725346503&semt=ais_hybrid" alt="">Earning History</a></li><hr>
     
@@ -61,13 +59,7 @@
     
                     <li><a href="#"><img src="https://cdn-icons-png.freepik.com/256/13843/13843283.png?uid=R55814283&ga=GA1.1.1328920485.1725346503&semt=ais_hybrid" alt="">Withdrawal History</a></li><hr>
     
-                    <li><a href="#"><img src="https://cdn-icons-png.freepik.com/256/13366/13366515.png?uid=R55814283&ga=GA1.1.1328920485.1725346503&semt=ais_hybrid" alt="">Your Referal </a></li><hr>
-    
-                    <li><a href="#"><img src="https://cdn-icons-png.freepik.com/256/16108/16108382.png?uid=R55814283&ga=GA1.1.1328920485.1725346503&semt=ais_hybrid" alt="">Referal Link</a></li><hr>
-    
                     <li><a href="#"><img src="https://cdn-icons-png.freepik.com/256/3503/3503638.png?uid=R55814283&ga=GA1.1.1328920485.1725346503&semt=ais_hybrid" alt="">Edit Profile</a></li><hr>
-    
-                    <li><a href="#"><img src="https://cdn-icons-png.freepik.com/256/15016/15016708.png?uid=R55814283&ga=GA1.1.1328920485.1725346503&semt=ais_hybrid" alt="">Wallet</a></li><hr>
     
                     <li><a href="#"><img src="https://cdn-icons-png.freepik.com/256/11302/11302228.png?uid=R55814283&ga=GA1.1.1328920485.1725346503&semt=ais_hybrid" alt="">Logout</a></li>
                   </ul>
@@ -81,13 +73,14 @@
                       <input type="radio" name="plan" id="plan-1-radio" value="plan-1">
                       <h2>20% RIO AFTER 48 HOURS</h2>
                       <P class="range">$50 - $99</P> 
-                      <button>Calculate</button>                       
+                      
+                      <!-- <button>Calculate</button>                        -->
                     </div>
                     <div class="tab" data-plan="plan-2">
                       <input type="radio" name="plan" id="plan-2-radio" value="plan-2">
                       <h2>50% RIO AFTER 72 HOURS</h2>
                       <P class="range">$100 - $499</P> 
-                      <button>Calculate</button>                       
+                      <!-- <button>Calculate</button>                        -->
                     </div>
                   </div>
                   <div class="tab1">
@@ -95,13 +88,13 @@
                       <input type="radio" name="plan" id="plan-3-radio" value="plan-3">
                       <h2>100% RIO AFTER 96 HOURS</h2>
                       <P class="range">$500 - $4,999</P> 
-                      <button>Calculate</button>                       
+                      <!-- <button>Calculate</button>                        -->
                     </div>
                     <div class="tab" data-plan="plan-4">
                       <input type="radio" name="plan" id="plan-4-radio" value="plan-4">
                       <h2>200% RIO AFTER 120 HOURS</h2>
                       <P class="range">$5,000 - $10,000</P> 
-                      <button>Calculate</button>                       
+                      <!-- <button>Calculate</button>                        -->
                     </div>
                   </div>
                 </div>
@@ -112,10 +105,15 @@
                   <form action="">
                     <div class="spend">
                       <p id="account-balance"></p>
-                      <input type="number" id="deposit-amount" placeholder="$25.00" required>
+                      <input type="number" id="deposit-amount" placeholder="$50.00" required>
                       <div class="deposit-method">
                         <input type="radio" id="bitcoin" name="deposit-method" value="bitcoin" checked>
-                        <label for="bitcoin">Spend funds from bitcoin</label>
+                        <label for="bitcoin">Spend funds from Bitcoin</label> <br>
+                        <input type="radio" name="deposit-method" value="balance">
+                        <label for="deposit-method">
+                          Spend funds from Balance
+                        </label>
+                        <div id="extra-radio"></div>
                       </div>
                       <button id="deposit-button" class="spend button">Deposit</button>
                       <div id="deposit-error" style="color: red;"></div>
@@ -131,6 +129,19 @@
               </main>
         </div>
       </div>
+<!-- Smartsupp Live Chat script -->
+<script type="text/javascript">
+  var _smartsupp = _smartsupp || {};
+  _smartsupp.key = 'e2ef1ba0fdb27cb9a6d1e17fbede4b2d97e23d5d';
+  window.smartsupp||(function(d) {
+    var s,c,o=smartsupp=function(){ o._.push(arguments)};o._=[];
+    s=d.getElementsByTagName('script')[0];c=d.createElement('script');
+    c.type='text/javascript';c.charset='utf-8';c.async=true;
+    c.src='https://www.smartsuppchat.com/loader.js?';s.parentNode.insertBefore(c,s);
+  })(document);
+  </script>
+  <noscript> Powered by <a href=“https://www.smartsupp.com” target=“_blank”>Smartsupp</a></noscript>
+
       <script>
         // Add an event listener to the window load event
 window.addEventListener('load', function() {
@@ -180,6 +191,7 @@ const planDetails = [
     creditAmount: '',
     depositFee: '0.00%',
     debitAmount: '',
+    period: '2 days',
   },
   {
     name: '50% RIO AFTER 72 HOURS',
@@ -188,6 +200,7 @@ const planDetails = [
     creditAmount: '',
     depositFee: '0.00%',
     debitAmount: '',
+    period: '3 days',
   },
   {
     name: '100% RIO AFTER 96 HOURS',
@@ -196,6 +209,7 @@ const planDetails = [
     creditAmount: '',
     depositFee: '0.00%',
     debitAmount: '',
+    period: '4 days',
   },
   {
     name: '200% RIO AFTER 120 HOURS',
@@ -204,6 +218,7 @@ const planDetails = [
     creditAmount: '',
     depositFee: '0.00%',
     debitAmount: '',
+    period: '5 days'
   },
 ];
 
@@ -214,14 +229,17 @@ document.querySelectorAll('input[name="plan"]').forEach((radio, index) => {
 
 document.querySelector('.spend button').addEventListener('click', (event) => {
   event.preventDefault();
+
   const depositAmount = document.querySelector('#deposit-amount').value;
   const selectedPlanIndex = document.querySelector('input[name="plan"]:checked').dataset.index;
+  const depositMethod = document.querySelector('input[name="deposit-method"]:checked').value;
+
   if (selectedPlanIndex >= 0 && selectedPlanIndex < planDetails.length) {
     const selectedPlan = planDetails[selectedPlanIndex];
     if (selectedPlan) {
-      const depositMethod = 'bitcoin'; // Assuming this is the deposit method
       selectedPlan.creditAmount = depositAmount;
       selectedPlan.debitAmount = depositAmount;
+
       // Redirect to confirm.html page
       const encodedPlan = encodeURIComponent(selectedPlan.name);
       window.location.href = `confirm.html?plan=${encodedPlan}&deposit-method=${depositMethod}&credit-amount=${depositAmount}`;
@@ -232,6 +250,12 @@ document.querySelector('.spend button').addEventListener('click', (event) => {
     console.error('Invalid selected plan index:', selectedPlanIndex);
   }
 });
+
+
+
+
+
+
       </script>
 </body>
 </html>

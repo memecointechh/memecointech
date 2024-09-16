@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Bonus</title>
+    <link rel="stylesheet" href="./css/admindash.css">
+</head>
+<body>
+    <h2>Add Bonus for User</h2>
+
+    <form id="bonusForm">
+        <!-- Display user name -->
+        <p><strong>User:</strong> <span id="userName"></span></p>
+
+        <!-- Fixed Currency (Bitcoin) -->
+        <label for="currency">Currency:</label>
+        <input type="text" id="currency" name="currency" value="Bitcoin" readonly><br>
+
+        <label for="bonusAmount">Bonus Amount</label>
+        <input type="number" id="bonusAmount" name="bonusAmount" required>
+
+        <!-- Bonus Type -->
+        <label for="bonusType">Bonus Type:</label>
+        <select id="bonusType" name="bonusType" required>
+            <option value="">Select Bonus Type</option>
+            <option value="referral">Referral Bonus</option>
+            <option value="promotion">Promotion Bonus</option>
+            <option value="others">Others</option>
+        </select><br>
+
+        <!-- Description or Reason -->
+        <label for="description">Reason for Bonus:</label>
+        <textarea id="description" name="description" required></textarea><br>
+
+        <!-- Authentication (Fixed Password) -->
+        <label for="authPassword">Enter Admin Password:</label>
+        <input type="password" id="authPassword" name="authPassword" required><br>
+
+        <!-- Submit Button -->
+        <button type="submit">Submit Bonus</button>
+    </form>
+
+    <script>
+        // Function to get the userId from the URL
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        // Fetch user details on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const userId = getQueryParam('userId');
+
+            if (userId) {
+                // Use the userId dynamically in the fetch request
+                fetch(`/api/admin/user-details?userId=${userId}`)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('User not found');
+                        }
+                        return response.json();
+                    })
+                    .then(user => {
+                        // Populate the user details on the bonus page
+                        document.getElementById('userName').textContent = user.full_name;
+                        // You can add more details here as needed
+                    })
+                    .catch(error => console.error('Error fetching user details:', error));
+            } else {
+                console.error('User ID not found in URL');
+            }
+        });
+
+        // Handle form submission
+        document.getElementById('bonusForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const userId = getQueryParam('userId');
+    const bonusAmount = parseFloat(document.getElementById('bonusAmount').value); // Convert to float
+    const bonusType = document.getElementById('bonusType').value;
+    const reason = document.getElementById('description').value;
+    const authPassword = document.getElementById('authPassword').value;
+
+    if (isNaN(bonusAmount) || bonusAmount <= 0) {
+        alert('Please enter a valid bonus amount.');
+        return;
+    }
+
+            fetch('/api/admin/add-bonus', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    userId,
+                    bonusAmount,
+                    bonusType,
+                    reason,
+                    authPassword
+                }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Bonus added successfully');
+                } else {
+                    alert('Error adding bonus: ' + data.message);
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    </script>
+</body>
+</html>

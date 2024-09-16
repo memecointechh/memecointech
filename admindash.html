@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"> 
+<html > <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>Memecointech Dashboard</title>
+    <meta name="theme-color" content=" #3e059b">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="Your Website">
+    <meta name="apple-mobile-web-app-status-bar-style" content=" #3e059b">  <link href="images/adminstyle.css" rel="stylesheet" type="text/css">  <meta http-equiv="content-type" content="text/html; charset=UTF-8">   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" /> 
+  <link rel="stylesheet" href="./css/admindash.css">
+  
+     </head> <body bgcolor="#FFFFF2" link="#666699" vlink="#666699" alink="#666699" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">  <center> <table width="1280" border="0" cellpadding="0" cellspacing="0" > <tr> <td valign=top> <table cellspacing=0 cellpadding=0 border=0 width=100%> <tr> <td background="images/ver.gif" bgcolor=#FF8D00><img src="images/top.gif" border="0" align=left></td> <td background="images/ver.gif" bgcolor=#FF8D00 valign=bottom align=right> <span style="font-family: verdana; font-size: 12px; color: white"> <b> 
+ <div id="google_translate_element"></div> <a href="index.html" class=toplink>Home</a> &middot;  <a href=?a=logout class=toplink>Logout</a></b></span>&nbsp; &nbsp; </td> </tr> </table> </td> </tr> <tr> <td valign=top> <table cellspacing=0 cellpadding=1 border=0 width=100% bgcolor=#ff8d00> <tr> <td> <table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0"> <tr bgcolor="#FFFFFF" valign="top">  <td width="500" align=center>  <ul class="nav" style="width:220px">   <li class="nav-item dropdown"> <div class="nav-link dropdown-toggle">Plans</div> <div class="dropdown-menu">  <a class="dropdown-item" href="?a=programs"><i class="fa fa-signal"></i> Investment Programs</a>  <a class="dropdown-item" href="?a=expiring_deposits"><i class="fa fa-hourglass-end"></i> Expiring Deposits</a>  </div> </li>    <li class="nav-item dropdown"> <div class="nav-link dropdown-toggle">Users </div> <div class="dropdown-menu">  <a onclick="window.location.href='users.html'" class="dropdown-item" ><i class="fa fa-user"></i> Users <span class="badge sticker badge-success"><span id="totalUsersCount">0</span></span></a>  <a class="dropdown-item" href="?a=ext_accounts_blacklist"><i class="fa fa-times-circle"></i> Accounts Blacklist</a>  <a class="dropdown-item" href="?a=top_referral_earnings"><i class="fa fa-trophy"></i> Top Referral Earnings</a>  </div> </li>    <li class="nav-item dropdown"> <div class="nav-link dropdown-toggle">Transactions</div> <div class="dropdown-menu">  <a class="dropdown-item" href="?a=transactions"><i class="fa fa-book"></i> Transactions</a>  <a class="dropdown-item" onclick="viewPendingWithdrawals()"><i class="fa fa-hand-paper-o"></i> Withdrawal Requests</a>  <a class="dropdown-item" href="?a=transactions&ttype=add_funds"><i class="fa fa-list"></i> Add Funds</a>  <a class="dropdown-item" href="?a=transactions&ttype=deposit"><i class="fa fa-list"></i> Deposits</a>  <a class="dropdown-item" href="?a=transactions&ttype=withdrawal"><i class="fa fa-list"></i> Withdrawals</a>  <a class="dropdown-item" href="?a=transactions&ttype=earning"><i class="fa fa-list"></i> Earnings</a>  <a class="dropdown-item" href="?a=transactions&ttype=commissions"><i class="fa fa-list"></i> Referral</a>  <a class="dropdown-item" href="?a=transactions&ttype=exchange"><i class="fa fa-list"></i> Exchange</a>  <a class="dropdown-item" href="/pending-deposit"><i class="fa fa-compress"></i> Pending Deposits <span class="badge sticker badge-success"></span></a>  <a class="dropdown-item" href="?a=add_transactions"><i class="fa fa-plus-circle"></i> Add Bonus</a>  </div> </li>    <li class="nav-item dropdown"> <div class="nav-link dropdown-toggle">Settings</div>  </li>    <li class="nav-item"> <a class="nav-link" href="?a=logout">Logout</a> </li> </ul>  </td> <td bgcolor="#ff8d00" valign="top" width=1><img src=images/q.gif width=1 height=1></td>  <td bgcolor="#FFFFFF" valign="top" width=99%> <!-- Main: Start --> 
+ <table width="100%" height="100%" border="0" cellpadding="10" cellspacing="0" class="forTexts"> <tr> <td width=100% height=100% valign=top>   <style> .itm { width: 80px; border: solid 1px #FFC982; text-align: center; display: inline-block; height: 80px; margin: 2px; padding: 5px; border-radius: 5px; text-decoration: none; color: black; overflow:hidden; position: relative; } .itm:hover { background: #FCE7CA; color: #a45c07; } .itm i { display: block; padding: 10px; font-size: 20px; color: #a45c07; } .itm .badge { position: absolute; top: 0; right: 0; } </style>   <div class="cat">  <a class="itm" href="?a=perfomance"> <i class="fa fa-dashboard"></i> <span>Perfomance</span>  </a>  </div>   <h3>Plans</h3> <div class="cat">  <a class="itm" href="?a=programs"> <i class="fa fa-signal"></i> <span>Investment Programs</span>  </a>  <a class="itm" href="?a=expiring_deposits"> <i class="fa fa-hourglass-end"></i> <span>Expiring Deposits</span>  </a>  </div>  <h3>Users</h3> <div class="cat">  <a class="itm" href="?a=users"> <i class="fa fa-user"></i> <span>Users</span>  </a>  <a class="itm" href="?a=ext_accounts_blacklist"> <i class="fa fa-times-circle"></i> <span>Accounts Blacklist</span>  </a>  <a class="itm" href="?a=top_referral_earnings"> <i class="fa fa-trophy"></i> <span>Top Referral Earnings</span>  </a>  </div>  <h3>Transactions</h3> <div class="cat">  <a class="itm" href="?a=transactions"> <i class="fa fa-book"></i> <span>Transactions</span>  </a>  <a class="itm"  onclick="viewPendingWithdrawals()"> <i class="fa fa-hand-paper-o"></i> <span>Withdrawal Requests</span> <br><span class="badge sticker badge-danger"> <span id="pendingWithdrawalsCount">0</span></span> </a>  <a class="itm" href="?a=transactions&ttype=add_funds"> <i class="fa fa-list"></i> <span>Add Funds</span>  </a>  <a class="itm" href="?a=transactions&ttype=deposit"> <i class="fa fa-list"></i> <span>Deposits</span>  </a>  <a class="itm" href="?a=transactions&ttype=withdrawal"> <i class="fa fa-list"></i> <span>Withdrawals</span>  </a>  <a class="itm" href="?a=transactions&ttype=earning"> <i class="fa fa-list"></i> <span>Earnings</span>  </a>  <a class="itm" href="?a=transactions&ttype=commissions"> <i class="fa fa-list"></i> <span>Referral</span>  </a>  <a class="itm" href="?a=transactions&ttype=exchange"> <i class="fa fa-list"></i> <span>Exchange</span>  </a>  <a class="itm" href="/pending-deposit"> <i class="fa fa-compress"></i> <span>Pending Deposits</span> <br><span class="badge sticker badge-success"><p id="pending-deposits">Loading...</p></span> </a>  <a class="itm" href="?a=add_transactions"> <i class="fa fa-plus-circle"></i> <span>Add Bonus</span>  </a>  </div>  
+ </tr> </table> </center></body> </html> <!--Page generated 0.0345 sec. -->
+      
+      
+  </div>
+    </main>
+    
+  </div>
+  
+  
+  
+  <script>
+
+  // Fetch pending deposits count
+  document.addEventListener("DOMContentLoaded", () => {
+    fetch('/api/pending-withdrawals-count')
+        .then(response => response.json())
+        .then(data => {
+            // Update the count of pending withdrawals
+            document.getElementById('pendingWithdrawalsCount').innerText = `${data.count}`;
+        })
+        .catch(error => console.error('Error fetching pending withdrawals count:', error));
+});
+
+// Redirect to pending-withdrawals.html
+function viewPendingWithdrawals() {
+    window.location.href = '/pending-withdrawals.html';
+}
+
+
+
+fetch('/api/admin/pending-deposits/count')
+    .then(response => response.json())
+    .then(data => {
+        // Display the pending deposits count
+        document.getElementById('pending-deposits').textContent = data.pending_deposits;
+    })
+    .catch(error => console.error('Error fetching pending deposits count:', error));
+
+ 
+    document.addEventListener('DOMContentLoaded', function() {
+        fetch('/api/admin/total-users')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('totalUsersCount').textContent = data.total_users;
+            })
+            .catch(error => console.error('Error fetching total users:', error));
+    });
+
+//     // Fetch and display total withdrawals
+//     fetch('/api/admin/total-withdrawals')
+//         .then(response => response.json())
+//         .then(data => {
+//             document.getElementById('total-withdrawals').textContent = `$${data.totalWithdrawals.toFixed(2)}`;
+//         })
+//         .catch(error => console.error('Error fetching total withdrawals:', error));
+
+//     // Fetch and display total deposits
+//     fetch('/api/admin/total-deposits')
+//         .then(response => response.json())
+//         .then(data => {
+//             document.getElementById('total-deposits').textContent = `$${data.totalDeposits.toFixed(2)}`;
+//         })
+//         .catch(error => console.error('Error fetching total deposits:', error));
+
+//     // Fetch and display total balance
+//     fetch('/api/admin/total-balance')
+//         .then(response => response.json())
+//         .then(data => {
+//             document.getElementById('total-balance').textContent = `$${data.totalBalance.toFixed(2)}`;
+//         })
+//         .catch(error => console.error('Error fetching total balance:', error));
+// });
+
+
+
+  </script>
+</body>
+</html>

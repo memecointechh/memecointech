@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>Memecointech Dashboard</title>
+    <meta name="theme-color" content=" #3e059b">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="Your Website">
+    <meta name="apple-mobile-web-app-status-bar-style" content=" #3e059b">
+    <link rel="stylesheet" href="./css/extra.css">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;1,100&display=swap" rel="stylesheet">
+
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+    
+</head>
+</head>
+<body>
+
+  <h1>Pending Deposits</h1>
+
+  <table id="pending-deposits-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>User ID</th>
+        <th>Amount</th>
+        <th>Status</th>
+        <th>Date</th>
+        <th>Actions</th> <!-- New column for actions -->
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Rows will be inserted here -->
+    </tbody>
+  </table>
+  
+  <script>
+   function handleAction(depositId, action) {
+  fetch(`/api/admin/pending-deposits/${action}/${depositId}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+  .then(response => response.json())
+  .then(result => {
+    alert(result.message);
+    location.reload(); // Refresh the page to update the list
+  })
+  .catch(error => console.error('Error:', error));
+}
+
+fetch('/api/admin/pending-deposits')
+  .then(response => response.json())
+  .then(deposits => {
+    const tableBody = document.querySelector('#pending-deposits-table tbody');
+    deposits.forEach(deposit => {
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td>${deposit.id}</td>
+        <td>${deposit.user_id}</td>
+        <td>$${deposit.amount}</td>
+        <td>${deposit.plan_name}</td> <!-- Display the plan name here -->
+        <td>${deposit.status}</td>
+        <td>${new Date(deposit.date).toLocaleString()}</td>
+        <td>
+          <button onclick="approveDeposit(${deposit.id})" style="width:2.4rem; font-size:8px; background-color: #4CAF50; color: white; font-weight: bold; padding: 2px; border-style: none; border-radius: 1px;">Approve</button>
+          <button onclick="rejectDeposit(${deposit.id})" style="width:2.4rem; font-size:8px; background-color: red; color: white; font-weight: bold; padding: 2px; border-style: none; border-radius: 1px;">Reject</button>
+        </td>
+      `;
+      tableBody.appendChild(row);
+    });
+  })
+  .catch(error => console.error('Error fetching pending deposits:', error));
+
+// Function to approve a deposit
+function approveDeposit(depositId) {
+  fetch('/api/admin/approve-deposit', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ depositId })
+  })
+  .then(response => response.json())
+  .then(data => {
+    alert(data.message);
+    location.reload(); // Reload page to reflect changes
+  })
+  .catch(error => console.error('Error:', error));
+}
+
+// Function to reject a deposit
+function rejectDeposit(depositId) {
+  fetch('/api/admin/reject-deposit', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ depositId })
+  })
+  .then(response => response.json())
+  .then(data => {
+    alert(data.message);
+    location.reload(); // Reload page to reflect changes
+  })
+  .catch(error => console.error('Error:', error));
+}
+
+  </script>
+
+</body>
+</html>

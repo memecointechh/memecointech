@@ -202,7 +202,7 @@ nav ul{
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(45deg, rgba(32, 8, 62, 0.864) 50%, rgba(242, 148, 25, 0.519) 50%) no-repeat, url('https://img.freepik.com/free-photo/3d-illustration-computer-monitor-login-screen_107791-16390.jpg?uid=R55814283&ga=GA1.2.1328920485.1725346503&semt=ais_hybrid') center center/cover;
+    background: linear-gradient(45deg, rgba(32, 8, 62, 0.591) 50%, rgba(242, 148, 25, 0) 50%) no-repeat, url('https://img.freepik.com/free-vector/abstract-gears-background_1048-5821.jpg?uid=R55814283&ga=GA1.1.1328920485.1725346503&semt=ais_hybrid') center center/cover;
     z-index: -1; /* Place the background behind content */
     transform: skewY(-deg); /* Create a 45-degree skew effect */
   }

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pending Withdrawals</title>
+    <link rel="stylesheet" href="./css/extra.css">
+</head>
+<body>
+    <h1>Pending Withdrawals</h1>
+    <table id="withdrawals-list">
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Amount</th>
+                <th>Requested At</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Pending withdrawals will be inserted here -->
+        </tbody>
+    </table>
+
+   <script>
+// Fetch pending withdrawals
+fetch('/api/admin/pending-withdrawals')
+    .then(response => response.json())
+    .then(data => {
+        const withdrawalsContainer = document.getElementById('withdrawals-list');
+        data.forEach(withdrawal => {
+            const withdrawalItem = document.createElement('div');
+            withdrawalItem.innerHTML = `
+            <thead>
+                <p>User: ${withdrawal.username}</p>
+                <p>Amount: ${withdrawal.amount}</p>
+                <button onclick="approveWithdrawal(${withdrawal.id}, '${withdrawal.username}', ${withdrawal.amount})">Approve</button>
+                <button onclick="rejectWithdrawal(${withdrawal.id}, '${withdrawal.username}', ${withdrawal.amount})">Reject</button>
+            `;
+            withdrawalsContainer.appendChild(withdrawalItem);
+        });
+    });
+
+// Approve withdrawal
+function approveWithdrawal(id, username, amount) {
+    fetch('/api/admin/approve-withdrawal', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ id, username, amount }),
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert(data.message);
+        location.reload();
+    });
+}
+
+function rejectWithdrawal(id, username, amount) {
+    fetch('/api/admin/reject-withdrawal', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ id, username, amount }),  // Include username and amount
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert(data.message);
+        location.reload();
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
+
+</script>
+</body>
+</html>

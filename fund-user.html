@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Details</title>
+    <link rel="stylesheet" href="./css/admindash.css">
+</head>
+<body>
+    <h2>User Details</h2>
+    
+    <!-- Display user details -->
+    <div id="userDetails">
+        <p><strong>ID:</strong> <span id="userId"></span></p>
+        <p><strong>Full Name:</strong> <span id="userFullName"></span></p>
+        <p><strong>Email:</strong> <span id="userEmail"></span></p>
+        <p><strong>Username:</strong> <span id="userUsername"></span></p>
+        <p><strong>Bitcoin Address:</strong> <span id="userBitcoinAddress"></span></p>
+        <p><strong>Referral Code:</strong> <span id="userReferralCode"></span></p>
+        <p><strong>Created At:</strong> <span id="userCreatedAt"></span></p>
+        <p><strong>Balance:</strong> <span id="userBalance"></span></p>
+        <p><strong>Total Withdrawals:</strong> <span id="userTotalWithdrawals"></span></p>
+        <p><strong>Total Deposits:</strong> <span id="userTotalDeposits"></span></p>
+    </div>
+    
+    <!-- Buttons for additional actions -->
+    <button onclick="window.location.href='penalty.html?userId=' + encodeURIComponent(document.getElementById('userId').textContent)">Add Penalty</button>
+
+    <button onclick="window.location.href='bonus.html?userId=' + encodeURIComponent(document.getElementById('userId').textContent)">Add Bonus</button>
+
+    
+    <script>
+        // Assume `userId` is passed in the query string of the URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const userId = urlParams.get('userId');
+        
+        // Fetch user details using the userId
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch(`/api/admin/user-details?userId=${userId}`)
+                .then(response => response.json())
+                .then(user => {
+                    document.getElementById('userId').textContent = user.id;
+                    document.getElementById('userFullName').textContent = user.full_name;
+                    document.getElementById('userEmail').textContent = user.email;
+                    document.getElementById('userUsername').textContent = user.username;
+                    document.getElementById('userBitcoinAddress').textContent = user.bitcoin_address;
+                    document.getElementById('userReferralCode').textContent = user.referral_code;
+                    document.getElementById('userCreatedAt').textContent = new Date(user.created_at).toLocaleDateString();
+                    document.getElementById('userBalance').textContent = user.balance;
+                    document.getElementById('userTotalWithdrawals').textContent = user.total_withdrawals;
+                    document.getElementById('userTotalDeposits').textContent = user.total_deposits;
+                })
+                .catch(error => console.error('Error fetching user details:', error));
+        });
+        
+        // Event listeners for buttons
+        document.getElementById('addPenaltyBtn').addEventListener('click', function() {
+            window.location.href = `/penalty.html?userId=${userId}`;
+        });
+        
+        document.getElementById('addBonusBtn').addEventListener('click', function() {
+            window.location.href = `/add-bonus.html?userId=${userId}`;
+        });
+    </script>
+</body>
+</html>

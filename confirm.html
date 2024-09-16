@@ -54,8 +54,6 @@
                     <ul>
                       <li><a href="#"><img src="https://cdn-icons-png.freepik.com/256/16108/16108349.png?uid=R55814283&ga=GA1.1.1328920485.1725346503&semt=ais_hybrid" alt="">Account</a></li><hr style="">
       
-                      <!-- <li><a href="invest.html"><img src="https://cdn-icons-png.freepik.com/256/12477/12477651.png?uid=R55814283&ga=GA1.1.1328920485.1725346503&semt=ais_hybrid" alt="">Make Deposit</a></li><hr> -->
-      
                       <li><a href="#"><img src="https://cdn-icons-png.freepik.com/256/15017/15017061.png?uid=R55814283&ga=GA1.1.1328920485.1725346503&semt=ais_hybrid" alt="">Earning History</a></li><hr>
       
                       <li><a href="#"><img src="https://cdn-icons-png.freepik.com/256/12477/12477651.png?uid=R55814283&ga=GA1.1.1328920485.1725346503&semt=ais_hybrid" alt="">Withdraw</a></li><hr>
@@ -82,7 +80,7 @@
                         <p>Please send payment to the bitcoin address bellow</p>
                         <p>Make sure to only send exact amount in BTC</p>
                         <p>Kindly note that your deposit will automatically be confirmed after 2 blockchain verifications</p>
-                        <div class="btc-address">dsciedhahdasd3e36e3ghdgjsdfhg39</div>
+                        <div class="btc-address">bc1qx35fshkjv3jyrr0xgta36z09lrlqaznj080k8d</div>
                         <button class="confirm-button">COPY WALLET ADDRESS</button>
                     </div>
                 <div class="container">
@@ -123,6 +121,19 @@
             </main>
         </div>
     </div>
+
+    <!-- Smartsupp Live Chat script -->
+<script type="text/javascript">
+  var _smartsupp = _smartsupp || {};
+  _smartsupp.key = 'e2ef1ba0fdb27cb9a6d1e17fbede4b2d97e23d5d';
+  window.smartsupp||(function(d) {
+    var s,c,o=smartsupp=function(){ o._.push(arguments)};o._=[];
+    s=d.getElementsByTagName('script')[0];c=d.createElement('script');
+    c.type='text/javascript';c.charset='utf-8';c.async=true;
+    c.src='https://www.smartsuppchat.com/loader.js?';s.parentNode.insertBefore(c,s);
+  })(document);
+  </script>
+  <noscript> Powered by <a href=“https://www.smartsupp.com” target=“_blank”>Smartsupp</a></noscript>
     
       <script>
 
@@ -178,7 +189,7 @@
 
       // Display the plan details
       document.querySelector('#plan-name').innerHTML = planDetail.name;
-      document.querySelector('#plan-profit').innerHTML = planDetail.profit;
+      // document.querySelector('#plan-profit').innerHTML = planDetail.profit;
       document.querySelector('#plan-principle-return').innerHTML = planDetail.principleReturn;
       document.querySelector('#plan-credit-amount').innerHTML = `$${creditAmount}`;
       document.querySelector('#plan-deposit-fee').innerHTML = planDetail.depositFee;
@@ -199,25 +210,29 @@
   // Get the username from local storage
   const username = localStorage.getItem('username');
 
-  // Get the plan details
-  const planName = document.querySelector('#plan-name').innerHTML.replace('%', '').replace(/\s+/g, '_').replace(/_/g, '-'); // Remove spaces and replace with dashes
-  const planProfit = document.querySelector('#plan-profit').innerHTML.replace('%', ''); // Remove the percentage sign
+  // Get the plan details (already existing logic)
+  const planName = document.querySelector('#plan-name').innerHTML.replace('%', '').replace(/\s+/g, '_').replace(/_/g, '-');
   const planPrincipleReturn = document.querySelector('#plan-principle-return').innerHTML;
   const planCreditAmount = document.querySelector('#plan-credit-amount').innerHTML.replace('$', '');
-  const planDepositFee = document.querySelector('#plan-deposit-fee').innerHTML.replace('%', ''); // Remove the percentage sign
+  const planDepositFee = document.querySelector('#plan-deposit-fee').innerHTML.replace('%', '');
   const planDebitAmount = document.querySelector('#plan-debit-amount').innerHTML.replace('$', '');
+
+  // Get the deposit method passed from the invest page (balance or bitcoin)
   const depositMethod = document.querySelector('#deposit-method').innerHTML;
+
+  // Create the depositAmount from planDebitAmount
+  const depositAmount = parseFloat(planDebitAmount);
 
   console.log('username:', username);
   console.log('planName:', planName);
-  console.log('planProfit:', planProfit);
   console.log('planPrincipleReturn:', planPrincipleReturn);
   console.log('planCreditAmount:', planCreditAmount);
   console.log('planDepositFee:', planDepositFee);
   console.log('planDebitAmount:', planDebitAmount);
-  console.log('depositMethod:', depositMethod);
+  console.log('depositMethod:', depositMethod); // Dynamically passed from the invest page
+  console.log('depositAmount:', depositAmount);
 
-  // Send the deposit details to the server
+  // Send the deposit details to the server for further processing (deduction, etc.)
   fetch('/api/deposit', {
     method: 'POST',
     headers: {
@@ -226,20 +241,21 @@
     body: JSON.stringify({
       username: username,
       planName: planName,
-      planProfit: parseFloat(planProfit) / 100, // Convert to a decimal value
       planPrincipleReturn: planPrincipleReturn,
       planCreditAmount: parseFloat(planCreditAmount),
-      planDepositFee: parseFloat(planDepositFee) / 100, // Convert to a decimal value
-      planDebitAmount: parseFloat(planDebitAmount),
-      depositMethod: depositMethod
+      planDepositFee: parseFloat(planDepositFee) / 100,
+      planDebitAmount: depositAmount,
+      depositMethod: depositMethod,  // Send this deposit method to determine whether it's from balance or bitcoin
+      depositAmount: depositAmount
     })
   })
   .then(response => response.json())
   .then(data => {
     if (data.success) {
       console.log('Deposit successful!');
-      // Redirect to dashboard.html
-      window.location.href = 'dashboard.html';
+      alert('The deposit has been saved. Redirecting to the dashboard...');
+
+      window.location.href = 'dashboard.html'; // Redirect to dashboard
     } else {
       console.log('Error:', data.error);
     }
@@ -248,38 +264,18 @@
     console.log('Error:', error);
   });
 }
-  // Function to cancel deposit
-  function cancelDeposit(e) {
-    e.preventDefault();
-    // Redirect to dashboard.html
-    window.location.href = 'dashboard.html';
-  }
 
-  // Call the function when the page loads
-  document.addEventListener('DOMContentLoaded', handleConfirmPage);
+// Function to cancel deposit
+function cancelDeposit(e) {
+  e.preventDefault();
+  window.location.href = 'dashboard.html'; // Redirect to dashboard
+}
 
+document.addEventListener('DOMContentLoaded', handleConfirmPage);
 
 
-//          const urlParams = new URLSearchParams(window.location.search);
-// const plan = urlParams.get('plan');
-// const depositMethod = urlParams.get('deposit-method');
 
-// // Display the plan details
-// document.querySelector('#plan-name').innerHTML = planDetails[plan].name;
-// document.querySelector('#plan-profit').innerHTML = planDetails[plan].profit;
-// document.querySelector('#plan-principle-return').innerHTML = planDetails[plan].principleReturn;
-// document.querySelector('#plan-credit-amount').innerHTML = planDetails[plan].creditAmount;
-// document.querySelector('#plan-deposit-fee').innerHTML = planDetails[plan].depositFee;
-// document.querySelector('#plan-debit-amount').innerHTML = planDetails[plan].debitAmount;
-// document.querySelector('#deposit-method').innerHTML = depositMethod;
 
-//     // Add event listeners to the buttons
-//     document.querySelector('#confirm-button').addEventListener('click', () => {
-//       // Handle confirm button click
-//     });
-//     document.querySelector('#cancel-button').addEventListener('click', () => {
-//       // Handle cancel button click
-//     });
       </script>
 </body>
 </html>
