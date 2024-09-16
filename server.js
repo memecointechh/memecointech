@@ -134,52 +134,6 @@ app.post('/api/auth/login', (req, res) => {
 
 
 
-
-// Route for user login
-// // Route for user login
-// app.post('/api/auth/login', (req, res) => {
-//     const { email, password } = req.body;
-  
-//     // Input validation
-//     if (!email || !password) {
-//       return res.status(400).json({ error: 'Email and password are required' });
-//     }
-  
-//     if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)) {
-//       return res.status(400).json({ error: 'Invalid email address' });
-//     }
-  
-//     const query = 'SELECT * FROM users WHERE email = ? AND password = ?';
-//     pool.query(query, [email, password], (error, results) => {
-//       if (error) {
-//         console.error('Error querying the database:', error);
-//         return res.status(500).json({ error: 'Internal server error' });
-//       }
-  
-//       if (results.length > 0) {
-//         // User authenticated successfully
-//         const user = results[0]; // Assuming the first result is the user
-//         res.json({
-//           message: 'Login successful',
-//           username: user.username // Send username in response
-//         });
-//       } else {
-//         // Authentication failed
-//         res.status(401).json({ error: 'Invalid email or password' });
-//       }
-//     });
-//   });
-
-
-
-
-
-
-
-
-
-
-
   app.get('/users', (req, res) => {
     const username = req.query.username;
     const db = mysql.createConnection({
