@@ -16,13 +16,15 @@ body {
 
 table{
   width:100%; border: 0;
-  border: #ffc107;
+  border: #ff8b07;
 }
 
 
-table thead tr{
-  padding: 2rem 0rem;
+table thead tr td{
+  padding: 0.7rem 0.5rem;
   background-color: #ffc107;
+  font-weight: bold;
+ 
 }
 
 table tbody tr{
@@ -36,4 +38,39 @@ header{
 
   padding: 2rem;
   text-align: center;
+}
+
+.addpenalty{
+  padding: 10px 10px;
+  background-color: red;
+  border: none;
+  color: white;
+}
+
+.addbonus{
+  padding: 10px 10px; 
+  background-color: green;
+  color: white;
+  border: none;
+  
+}
+
+.addpenalty:hover{
+  background-color: rgb(97, 0, 0);
+}
+
+.addbonus:hover{
+  background-color: rgb(0, 71, 0);
+}
+
+h2{
+  text-align: center;
+  background-color: #ffc107;
+  padding: 2rem;
+  border-style: solid;
+  border-width: 3px;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-color: #973c00;
 }

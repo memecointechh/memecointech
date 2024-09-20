@@ -7,29 +7,99 @@
     <link rel="stylesheet" href="./css/admindash.css">
 </head>
 <body>
-    <h2>User Details</h2>
+    <div class="body">
+
+        <div class="menu">
+            <center> <table width="1280" border="0" cellpadding="0" cellspacing="0" > <tr> <td valign=top> <table cellspacing=0 cellpadding=0 border=0 width=100%> <tr> <td background="images/ver.gif" bgcolor=#FF8D00><img src="images/top.gif" border="0" align=left></td> <td background="images/ver.gif" bgcolor=#FF8D00 valign=bottom align=right> <span style="font-family: verdana; font-size: 12px; color: white"> <b> 
+                <div id="google_translate_element"></div> <a href="admindash.html" class=toplink>Home</a> &middot;  <a href="signin.html" class=toplink>Logout</a></b></span>&nbsp; &nbsp; </td> </tr> </table> </td> </tr> <tr> <td valign=top> <table cellspacing=0 cellpadding=1 border=0 width=100% bgcolor=#ff8d00> <tr> <td> <table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0"> <tr bgcolor="#FFFFFF" valign="top">  <td width="500" align=center>  <ul class="nav" style="width:220px">   <li class="nav-item dropdown"> <div class="nav-link dropdown-toggle">Plans</div> <div class="dropdown-menu">  <a class="dropdown-item" href="?a=programs"><i class="fa fa-signal"></i> Investment Programs</a>  <a class="dropdown-item" href="?a=expiring_deposits"><i class="fa fa-hourglass-end"></i> Expiring Deposits</a>  </div> </li>    <li class="nav-item dropdown"> <div class="nav-link dropdown-toggle">Users </div> <div class="dropdown-menu">  <a onclick="window.location.href='users.html'" class="dropdown-item" ><i class="fa fa-user"></i> Users <span class="badge sticker badge-success"><span id="totalUsersCount">0</span></span></a>  <a class="dropdown-item" href="?a=ext_accounts_blacklist"><i class="fa fa-times-circle"></i> Accounts Blacklist</a>  <a class="dropdown-item" href="?a=top_referral_earnings"><i class="fa fa-trophy"></i> Top Referral Earnings</a>  </div> </li>    <li class="nav-item dropdown"> <div class="nav-link dropdown-toggle">Transactions</div> <div class="dropdown-menu">  <a class="dropdown-item" href="?a=transactions"><i class="fa fa-book"></i> Transactions</a>  <a class="dropdown-item" onclick="viewPendingWithdrawals()"><i class="fa fa-hand-paper-o"></i> Withdrawal Requests</a>  <a class="dropdown-item" href="?a=transactions&ttype=add_funds"><i class="fa fa-list"></i> Add Funds</a>  <a class="dropdown-item" href="?a=transactions&ttype=deposit"><i class="fa fa-list"></i> Deposits</a>  <a class="dropdown-item" href="?a=transactions&ttype=withdrawal"><i class="fa fa-list"></i> Withdrawals</a>  <a class="dropdown-item" href="?a=transactions&ttype=earning"><i class="fa fa-list"></i> Earnings</a>  <a class="dropdown-item" href="?a=transactions&ttype=commissions"><i class="fa fa-list"></i> Referral</a>  <a class="dropdown-item" href="?a=transactions&ttype=exchange"><i class="fa fa-list"></i> Exchange</a>  <a class="dropdown-item" href="/pending-deposit"><i class="fa fa-compress"></i> Pending Deposits <span class="badge sticker badge-success"></span></a>  <a class="dropdown-item" href="?a=add_transactions"><i class="fa fa-plus-circle"></i> Add Bonus</a>  </div> </li>    <li class="nav-item dropdown"> <div class="nav-link dropdown-toggle">Settings</div>  </li>    <li class="nav-item"> <a class="nav-link" href="?a=logout">Logout</a> </li> </ul>  </td> <td bgcolor="#ff8d00" valign="top" width=1><img src=images/q.gif width=1 height=1></td>  <td bgcolor="#FFFFFF" valign="top" width=99%> 
+        </div>
+
+        <div class="tables">
+            <h2>User Details</h2>
     
-    <!-- Display user details -->
-    <div id="userDetails">
-        <p><strong>ID:</strong> <span id="userId"></span></p>
-        <p><strong>Full Name:</strong> <span id="userFullName"></span></p>
-        <p><strong>Email:</strong> <span id="userEmail"></span></p>
-        <p><strong>Username:</strong> <span id="userUsername"></span></p>
-        <p><strong>Bitcoin Address:</strong> <span id="userBitcoinAddress"></span></p>
-        <p><strong>Referral Code:</strong> <span id="userReferralCode"></span></p>
-        <p><strong>Created At:</strong> <span id="userCreatedAt"></span></p>
-        <p><strong>Balance:</strong> <span id="userBalance"></span></p>
-        <p><strong>Total Withdrawals:</strong> <span id="userTotalWithdrawals"></span></p>
-        <p><strong>Total Deposits:</strong> <span id="userTotalDeposits"></span></p>
+            <!-- Display user details -->
+            <div id="userDetails">
+                <table>
+                    <thead>
+                        <tr>
+                            <td>User ID</td>
+                            <td>Full Name</td>
+                            <td>Email</td>
+                            <td>Username</td>
+                            <td>Bitcoin Address</td>
+                            <td>Referral Code</td>
+                            <td>Created At</td>
+                            <td>Balance</td>
+                            <td>Total Withdrawals</td>
+                            <td>Total Deposits</td>
+                            <td>Actions</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><p><span id="userId"></span></p></td>
+                            <td><p><span id="userFullName"></span></p></td>
+                            <td><p><span id="userEmail"></span></p></td>
+                            <td> <p><span id="userUsername"></span></p></td>
+                            <td><p><span id="userBitcoinAddress"></span></p></td>
+                            <td> <p><span id="userReferralCode"></span></p></td>
+                            <td><p><span id="userCreatedAt"></span></p></td>
+                            <td><p><span id="userBalance"></span></p></td>
+                            <td> <p><span id="userTotalWithdrawals"></span></p></td>
+                            <td> <p><span id="userTotalDeposits"></span></p></td>
+                            <td><button class="addpenalty" onclick="window.location.href='penalty.html?userId=' + encodeURIComponent(document.getElementById('userId').textContent)">Add Penalty</button>
+        
+                                <button class="addbonus" onclick="window.location.href='bonus.html?userId=' + encodeURIComponent(document.getElementById('userId').textContent)">Add Bonus</button></td>
+                        </tr>
+                    </tbody>
+                </table> 
+            </div>
+        </div>
+    
     </div>
     
     <!-- Buttons for additional actions -->
-    <button onclick="window.location.href='penalty.html?userId=' + encodeURIComponent(document.getElementById('userId').textContent)">Add Penalty</button>
-
-    <button onclick="window.location.href='bonus.html?userId=' + encodeURIComponent(document.getElementById('userId').textContent)">Add Bonus</button>
+    
 
     
     <script>
+
+document.addEventListener("DOMContentLoaded", () => {
+    fetch('/api/pending-withdrawals-count')
+        .then(response => response.json())
+        .then(data => {
+            // Update the count of pending withdrawals
+            document.getElementById('pendingWithdrawalsCount').innerText = `${data.count}`;
+        })
+        .catch(error => console.error('Error fetching pending withdrawals count:', error));
+});
+
+// Redirect to pending-withdrawals.html
+function viewPendingWithdrawals() {
+    window.location.href = '/pending-withdrawals.html';
+}
+
+
+
+fetch('/api/admin/pending-deposits/count')
+    .then(response => response.json())
+    .then(data => {
+        // Display the pending deposits count
+        document.getElementById('pending-deposits').textContent = data.pending_deposits;
+    })
+    .catch(error => console.error('Error fetching pending deposits count:', error));
+
+ 
+    document.addEventListener('DOMContentLoaded', function() {
+        fetch('/api/admin/total-users')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('totalUsersCount').textContent = data.total_users;
+            })
+            .catch(error => console.error('Error fetching total users:', error));
+    });
+
+
         // Assume `userId` is passed in the query string of the URL
         const urlParams = new URLSearchParams(window.location.search);
         const userId = urlParams.get('userId');
@@ -61,6 +131,11 @@
         document.getElementById('addBonusBtn').addEventListener('click', function() {
             window.location.href = `/add-bonus.html?userId=${userId}`;
         });
+
+
+
+
+        
     </script>
 </body>
 </html>
