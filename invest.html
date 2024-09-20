@@ -1,261 +1,240 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <title>Memecointech Dashboard</title>
-    <meta name="theme-color" content=" #3e059b">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invest</title>
+    <meta name="theme-color" content="  #740000">
+    <meta name="apple-mobile-web-app-status-bar-style" content="  #740000">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-title" content="Your Website">
-    <meta name="apple-mobile-web-app-status-bar-style" content=" #3e059b">
     <link rel="stylesheet" href="./css/invest.css">
-<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;1,100&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;1,100;1,200&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;400;500;600&family=Protest+Guerrilla&display=swap" rel="stylesheet">
 
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
 
 
-    
+</style>
 </head>
-
 <body>
-
-    <div class="circle">
-
-    </div>
-    <header>
-      
-      <a href="index.html"><div class="logo" > <section class="gear-container">
-        <div class="large-gear">
-          <div class="small-gear"></div>
-          <div class="small-gear"></div>
-          <div class="small-gear"></div>
+    <header class="navbar">
+        <div class="container1">
+            <div class="header-flex">
+                <div class="logo">
+    
+                    <a href="index.html"><img src="" alt=""><img src="./images/biggy logo.png" alt=""></a>
+                </div>
+            </div>
         </div>
-      </section>MemecoinTech</div></a>
-        <nav>
-          <ul>
-           
-            <a href="index.html"><li>HOME</li></a>
-            <a href="faq.html"><li>FAQ</li></a>
-            <a href="terms.html"><li>TERMS</li></a>
-            <a href="support.html"><li>SUPPORT</li></a>
-          </ul>
-            
-        </nav>
     </header>
+    <!-- The menu button -->
+    <div class="menu-container">
+      <div class="flexer">
+        <button class="menu-button">Menu</button>
+        
+      </div>
+      <!-- The menu items container -->
+      <div class="menu-items">
+        <!-- Menu items -->
+        <ul>
+          <li><a href="#">Account</a></li><hr style="">
+    
+          <li><a href="invest.html">Your Dashboard</a></li><hr>
+    
+          <li><a href="earning-history.html">Earning History</a></li><hr>
+    
+          <li><a href="user-withdrawal.html">Withdraw</a></li><hr>
+    
+          <li><a href="#">Withdrawal History</a></li><hr>
+    
+          <li><a href="#">Edit Profile</a></li><hr>
+    
+          <li><a href="#">Logout</a></li>
+        </ul>
+      </div>
+    </div> 
+    </div>
 
-      <div class="dashboard-container">
+
+    <div class="dashboard-container"><br>
         <div class="body">
-            <aside class="dashboard-sidebar">
-                <nav>
-                  <ul>
-                    <li><a href="dashboard.html"><img src="https://cdn-icons-png.freepik.com/256/16108/16108349.png?uid=R55814283&ga=GA1.1.1328920485.1725346503&semt=ais_hybrid" alt="">Account</a></li><hr style="">
-    
-                    <li><a href="#"><img src="https://cdn-icons-png.freepik.com/256/15017/15017061.png?uid=R55814283&ga=GA1.1.1328920485.1725346503&semt=ais_hybrid" alt="">Earning History</a></li><hr>
-    
-                    <li><a href="#"><img src="https://cdn-icons-png.freepik.com/256/12477/12477651.png?uid=R55814283&ga=GA1.1.1328920485.1725346503&semt=ais_hybrid" alt="">Withdraw</a></li><hr>
-    
-                    <li><a href="#"><img src="https://cdn-icons-png.freepik.com/256/13843/13843283.png?uid=R55814283&ga=GA1.1.1328920485.1725346503&semt=ais_hybrid" alt="">Withdrawal History</a></li><hr>
-    
-                    <li><a href="#"><img src="https://cdn-icons-png.freepik.com/256/3503/3503638.png?uid=R55814283&ga=GA1.1.1328920485.1725346503&semt=ais_hybrid" alt="">Edit Profile</a></li><hr>
-    
-                    <li><a href="#"><img src="https://cdn-icons-png.freepik.com/256/11302/11302228.png?uid=R55814283&ga=GA1.1.1328920485.1725346503&semt=ais_hybrid" alt="">Logout</a></li>
-                  </ul>
-                </nav>
-              </aside>
-
               <main class="dashboard-main">
                 <div class="tabs">
                   <div class="tab1">
-                    <div class="tab" data-plan="plan-1">
+                    <div class="tab" data-plan="plan-1" style="background: linear-gradient(45deg, rgba(116, 0, 0, 0.884) 70%, rgba(116, 0, 0, 0.089) 50%) no-repeat, url('/images/forthypercent.png') center center/cover;"> 
                       <input type="radio" name="plan" id="plan-1-radio" value="plan-1">
-                      <h2>20% RIO AFTER 48 HOURS</h2>
-                      <P class="range">$50 - $99</P> 
+                      <h2>40% RIO AFTER 24 HOURS</h2>
+                      <P class="range">$50</P> 
+                     
                       
                       <!-- <button>Calculate</button>                        -->
                     </div>
-                    <div class="tab" data-plan="plan-2">
+                    <div class="tab" data-plan="plan-2" style="background: linear-gradient(45deg, rgba(116, 0, 0, 0.884) 70%, rgba(116, 0, 0, 0.089) 50%) no-repeat, url('/images/sixthy percent.png') center center/cover;">
                       <input type="radio" name="plan" id="plan-2-radio" value="plan-2">
-                      <h2>50% RIO AFTER 72 HOURS</h2>
-                      <P class="range">$100 - $499</P> 
+                      <h2>60% RIO WEEKLY</h2>
+                      <P class="range">$1000 - $4999</P> 
                       <!-- <button>Calculate</button>                        -->
                     </div>
                   </div>
                   <div class="tab1">
-                    <div class="tab" data-plan="plan-3">
+                    <div class="tab" data-plan="plan-3" style="background: linear-gradient(45deg, rgba(116, 0, 0, 0.884) 70%, rgba(116, 0, 0, 0.089) 50%) no-repeat, url('/images/eighty percent.png') center center/cover;">
                       <input type="radio" name="plan" id="plan-3-radio" value="plan-3">
-                      <h2>100% RIO AFTER 96 HOURS</h2>
-                      <P class="range">$500 - $4,999</P> 
+                      <h2>80% RIO LONG TERM</h2>
+                      <P class="range">$5000 - Unlimited</P> 
                       <!-- <button>Calculate</button>                        -->
                     </div>
-                    <div class="tab" data-plan="plan-4">
+                    <!-- <div class="tab" data-plan="plan-4">
                       <input type="radio" name="plan" id="plan-4-radio" value="plan-4">
                       <h2>200% RIO AFTER 120 HOURS</h2>
                       <P class="range">$5,000 - $10,000</P> 
-                      <!-- <button>Calculate</button>                        -->
-                    </div>
+                     
+                    </div> -->
                   </div>
                 </div>
 
                 <h4>Deposit method</h4>
 
                 
-                  <form action="">
-                    <div class="spend">
-                      <p id="account-balance"></p>
-                      <input type="number" id="deposit-amount" placeholder="$50.00" required>
-                      <div class="deposit-method">
-                        <input type="radio" id="bitcoin" name="deposit-method" value="bitcoin" checked>
-                        <label for="bitcoin">Spend funds from Bitcoin</label> <br>
-                        <input type="radio" name="deposit-method" value="balance">
-                        <label for="deposit-method">
-                          Spend funds from Balance
-                        </label>
-                        <div id="extra-radio"></div>
-                      </div>
-                      <button id="deposit-button" class="spend button">Deposit</button>
-                      <div id="deposit-error" style="color: red;"></div>
-                    </div>
-                  </form>
-                  <!-- <p id="account-balance"></p>
-                  <input type="text" placeholder="$25.00">
-                  <input type="radio" name="" id="">
-                  <label for="radio">Spend funds from bitcoin</label>
-                  <button>Deposit</button> -->
-
-                </div>
+                    <form action="">
+                        <div class="spend">
+                          <p id="account-balance"></p>
+                          <input type="number" id="deposit-amount" placeholder="$50.00" required>
+                          <div class="deposit-method">
+                            <input type="radio" id="bitcoin" name="deposit-method" value="bitcoin" checked>
+                            <label for="bitcoin">Invest with Bitcoin</label> <br>
+                            <input type="radio" name="deposit-method" value="balance">
+                            <label for="deposit-method">
+                              Spend funds from Balance
+                            </label>
+                            <div id="extra-radio"></div>
+                          </div>
+                          <button id="deposit button" class="spend button" style="background: linear-gradient(45deg, rgba(116, 0, 0, 1) 0%, rgba(116, 0, 0, 0.808) 100%); color: white; font-size: 13px; font-weight: bold; width: 50%; padding: 0.6rem; border-style: none; border-radius: 20rem;">Deposit</button>
+                          <div id="deposit-error" style="color: red;"></div>
+                        </div>
+                    </form>
+    
+                  
+                 
               </main>
         </div>
-      </div>
-<!-- Smartsupp Live Chat script -->
-<script type="text/javascript">
-  var _smartsupp = _smartsupp || {};
-  _smartsupp.key = 'e2ef1ba0fdb27cb9a6d1e17fbede4b2d97e23d5d';
-  window.smartsupp||(function(d) {
-    var s,c,o=smartsupp=function(){ o._.push(arguments)};o._=[];
-    s=d.getElementsByTagName('script')[0];c=d.createElement('script');
-    c.type='text/javascript';c.charset='utf-8';c.async=true;
-    c.src='https://www.smartsuppchat.com/loader.js?';s.parentNode.insertBefore(c,s);
-  })(document);
-  </script>
-  <noscript> Powered by <a href=“https://www.smartsupp.com” target=“_blank”>Smartsupp</a></noscript>
-
-      <script>
-        // Add an event listener to the window load event
-window.addEventListener('load', function() {
-  const username = localStorage.getItem('username');
-  fetch(`/users?username=${username}`, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  })
-  .then(response => {
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    return response.json();
-  })
-  .then(data => {
-    if (Array.isArray(data)) {
-      const userData = data[0];
-      document.getElementById('account-balance').innerHTML = `Account Balance: ${userData.balance}`;
-    } else {
-      console.error('Invalid response data');
-    }
-  })
-  .catch(error => {
-    console.error('Error fetching user data:', error);
-  });
-});
-
-
-let selectedPlan = null;
-
-// Add an event listener to the radio buttons
-document.querySelectorAll('input[name="plan"]').forEach((radio) => {
-  radio.addEventListener('change', (event) => {
-    selectedPlan = event.target.value;
-  });
-});
-
-
-// Define the planDetails array
-const planDetails = [
-  {
-    name: '20% RIO AFTER 48 HOURS',
-    profit: '20%',
-    principleReturn: 'Yes',
-    creditAmount: '',
-    depositFee: '0.00%',
-    debitAmount: '',
-    period: '2 days',
-  },
-  {
-    name: '50% RIO AFTER 72 HOURS',
-    profit: '50%',
-    principleReturn: 'Yes',
-    creditAmount: '',
-    depositFee: '0.00%',
-    debitAmount: '',
-    period: '3 days',
-  },
-  {
-    name: '100% RIO AFTER 96 HOURS',
-    profit: '100%',
-    principleReturn: 'Yes',
-    creditAmount: '',
-    depositFee: '0.00%',
-    debitAmount: '',
-    period: '4 days',
-  },
-  {
-    name: '200% RIO AFTER 120 HOURS',
-    profit: '200%',
-    principleReturn: 'Yes',
-    creditAmount: '',
-    depositFee: '0.00%',
-    debitAmount: '',
-    period: '5 days'
-  },
-];
-
-// Add a data-index attribute to each radio button
-document.querySelectorAll('input[name="plan"]').forEach((radio, index) => {
-  radio.setAttribute('data-index', index);
-});
-
-document.querySelector('.spend button').addEventListener('click', (event) => {
-  event.preventDefault();
-
-  const depositAmount = document.querySelector('#deposit-amount').value;
-  const selectedPlanIndex = document.querySelector('input[name="plan"]:checked').dataset.index;
-  const depositMethod = document.querySelector('input[name="deposit-method"]:checked').value;
-
-  if (selectedPlanIndex >= 0 && selectedPlanIndex < planDetails.length) {
-    const selectedPlan = planDetails[selectedPlanIndex];
-    if (selectedPlan) {
-      selectedPlan.creditAmount = depositAmount;
-      selectedPlan.debitAmount = depositAmount;
-
-      // Redirect to confirm.html page
-      const encodedPlan = encodeURIComponent(selectedPlan.name);
-      window.location.href = `confirm.html?plan=${encodedPlan}&deposit-method=${depositMethod}&credit-amount=${depositAmount}`;
-    } else {
-      console.error('Invalid selected plan:', selectedPlanIndex);
-    }
-  } else {
-    console.error('Invalid selected plan index:', selectedPlanIndex);
-  }
-});
-
-
-
-
-
-
-      </script>
+        <script>
+            // Add an event listener to the window load event
+    window.addEventListener('load', function() {
+      const username = localStorage.getItem('username');
+      fetch(`/users?username=${username}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(data => {
+        if (Array.isArray(data)) {
+          const userData = data[0];
+          document.getElementById('account-balance').innerHTML = `Account Balance: ${userData.balance}`;
+        } else {
+          console.error('Invalid response data');
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching user data:', error);
+      });
+    });
+    
+    
+    let selectedPlan = null;
+    
+    // Add an event listener to the radio buttons
+    document.querySelectorAll('input[name="plan"]').forEach((radio) => {
+      radio.addEventListener('change', (event) => {
+        selectedPlan = event.target.value;
+      });
+    });
+    
+    
+    // Define the planDetails array
+    const planDetails = [
+      {
+        name: '20% RIO AFTER 48 HOURS',
+        profit: '20%',
+        principleReturn: 'Yes',
+        creditAmount: '',
+        depositFee: '0.00%',
+        debitAmount: '',
+        period: '2 days',
+      },
+      {
+        name: '50% RIO AFTER 72 HOURS',
+        profit: '50%',
+        principleReturn: 'Yes',
+        creditAmount: '',
+        depositFee: '0.00%',
+        debitAmount: '',
+        period: '3 days',
+      },
+      {
+        name: '100% RIO AFTER 96 HOURS',
+        profit: '100%',
+        principleReturn: 'Yes',
+        creditAmount: '',
+        depositFee: '0.00%',
+        debitAmount: '',
+        period: '4 days',
+      },
+      {
+        name: '200% RIO AFTER 120 HOURS',
+        profit: '200%',
+        principleReturn: 'Yes',
+        creditAmount: '',
+        depositFee: '0.00%',
+        debitAmount: '',
+        period: '5 days'
+      },
+    ];
+    
+    // Add a data-index attribute to each radio button
+    document.querySelectorAll('input[name="plan"]').forEach((radio, index) => {
+      radio.setAttribute('data-index', index);
+    });
+    
+    document.querySelector('.spend button').addEventListener('click', (event) => {
+      event.preventDefault();
+    
+      const depositAmount = document.querySelector('#deposit-amount').value;
+      const selectedPlanIndex = document.querySelector('input[name="plan"]:checked').dataset.index;
+      const depositMethod = document.querySelector('input[name="deposit-method"]:checked').value;
+    
+      if (selectedPlanIndex >= 0 && selectedPlanIndex < planDetails.length) {
+        const selectedPlan = planDetails[selectedPlanIndex];
+        if (selectedPlan) {
+          selectedPlan.creditAmount = depositAmount;
+          selectedPlan.debitAmount = depositAmount;
+    
+          // Redirect to confirm.html page
+          const encodedPlan = encodeURIComponent(selectedPlan.name);
+          window.location.href = `confirm.html?plan=${encodedPlan}&deposit-method=${depositMethod}&credit-amount=${depositAmount}`;
+        } else {
+          console.error('Invalid selected plan:', selectedPlanIndex);
+        }
+      } else {
+        console.error('Invalid selected plan index:', selectedPlanIndex);
+      }
+    });
+    
+    
+    
+    
+    
+    
+          </script>
 </body>
 </html>
