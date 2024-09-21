@@ -899,8 +899,8 @@ app.get('/get-account-details', (req, res) => {
           return res.json({ success: false, message: "Error connecting to the database." });
       }
 
-      // Query user data based on the username
-      const userQuery = `SELECT full_name, username, created_at, balance FROM users WHERE username = ?`;
+      // Query user data based on the username to get user_id
+      const userQuery = `SELECT id, full_name, username, created_at, balance FROM users WHERE username = ?`;
       connection.query(userQuery, [username], (err, userResults) => {
           if (err) {
               connection.release(); // Release connection back to the pool
@@ -913,18 +913,19 @@ app.get('/get-account-details', (req, res) => {
           }
 
           const user = userResults[0];
+          const userId = user.id;
 
-          // Query approved deposits
-          const approvedDepositsQuery = `SELECT amount, date FROM deposits WHERE username = ? AND status = 'approved'`;
-          connection.query(approvedDepositsQuery, [username], (err, approvedDeposits) => {
+          // Query approved deposits using user_id
+          const approvedDepositsQuery = `SELECT amount, date FROM deposits WHERE user_id = ? AND status = 'approved'`;
+          connection.query(approvedDepositsQuery, [userId], (err, approvedDeposits) => {
               if (err) {
                   connection.release(); // Release connection back to the pool
                   return res.json({ success: false, message: "Error fetching approved deposits." });
               }
 
-              // Query pending deposits
-              const pendingDepositsQuery = `SELECT amount, date FROM deposits WHERE username = ? AND status = 'pending'`;
-              connection.query(pendingDepositsQuery, [username], (err, pendingDeposits) => {
+              // Query pending deposits using user_id
+              const pendingDepositsQuery = `SELECT amount, date FROM deposits WHERE user_id = ? AND status = 'pending'`;
+              connection.query(pendingDepositsQuery, [userId], (err, pendingDeposits) => {
                   connection.release(); // Release connection after the last query
 
                   if (err) {

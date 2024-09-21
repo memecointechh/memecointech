@@ -515,7 +515,7 @@ nav ul a li:hover{
   footer{
     background: linear-gradient(45deg, rgb(21, 21, 21) 0%, rgb(4, 0, 24) 100%);
     padding: 2rem;
-    margin-top: 20rem;
+    /* margin-top: 20rem; */
   }
   
   .layer1{
@@ -864,4 +864,33 @@ border-top: none;
 
 .affiliate{
   background: linear-gradient(45deg, rgb(0, 142, 102) 0%, rgb(6, 126, 0) 100%);
+}
+
+
+.account-things{
+  padding: 2rem;
+}
+
+.account-tab{
+  background-color: #ffffff;
+  border-radius: 0.2rem;
+  padding: 1rem;
+  box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.349);
+}
+
+.account-tab p{
+  font-size: 8px;
+  margin-bottom: 5px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgba(48, 0, 103, 1) ;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+
+.account-tab h4{
+  font-size: 9px;
+  margin-bottom: 5px;
+
 }
