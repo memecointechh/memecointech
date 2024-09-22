@@ -817,72 +817,263 @@ app.post('/api/admin/add-penalty', async (req, res) => {
 
 
 
-// Function to add a bonus
-app.post('/api/admin/add-bonus', (req, res) => {
-  const { userId, bonusAmount, bonusType, reason, authPassword } = req.body;
+// Assuming you've already set up your Express app and MySQL connection
 
-  // Validate the input
-  if (!userId || !bonusAmount || !bonusType || !reason || !authPassword) {
-      return res.status(400).json({ success: false, message: 'Missing required fields' });
-  }
+// Route to handle adding bonus or investment
+// app.post('/api/admin/add-bonus-or-investment', (req, res) => {
+//   const { userId, amount, actionType, planId, description, authPassword } = req.body;
 
-  // Convert bonusAmount to a number
-  const amount = parseFloat(bonusAmount);
-  if (isNaN(amount) || amount <= 0) {
-      return res.status(400).json({ success: false, message: 'Invalid bonus amount' });
-  }
+//   // Validate input
+//   if (!userId || !amount || !actionType || !description || !authPassword) {
+//       return res.status(400).json({ success: false, message: 'Missing required fields' });
+//   }
 
-  // Check if the user exists
-  pool.query('SELECT * FROM users WHERE id = ?', [userId], (err, results) => {
-      if (err) {
-          console.error('Error fetching user details:', err);
-          return res.status(500).json({ success: false, message: 'Server error' });
-      }
+//   // Check admin password (you might want to hash and compare this)
+//   if (authPassword !== 'AdMiN') { // Replace with proper password check
+//       return res.status(403).json({ success: false, message: 'Unauthorized' });
+//   }
 
-      if (results.length === 0) {
-          return res.status(404).json({ success: false, message: 'User not found' });
-      }
+//   // Convert amount to a number
+//   const amountFloat = parseFloat(amount);
+//   if (isNaN(amountFloat) || amountFloat <= 0) {
+//       return res.status(400).json({ success: false, message: 'Invalid amount' });
+//   }
 
-      const user = results[0];
-      // Convert user's balance to a number
-      const currentBalance = parseFloat(user.balance);
-      if (isNaN(currentBalance)) {
-          return res.status(500).json({ success: false, message: 'Error with user balance' });
-      }
+//   // Check if the user exists
+//   pool.query('SELECT * FROM users WHERE id = ?', [userId], (err, results) => {
+//       if (err) {
+//           console.error('Error fetching user details:', err);
+//           return res.status(500).json({ success: false, message: 'Server error' });
+//       }
 
-      const newBalance = currentBalance + amount;
+//       if (results.length === 0) {
+//           return res.status(404).json({ success: false, message: 'User not found' });
+//       }
 
-      console.log(`User found: ${JSON.stringify(user)}`);
-      console.log(`Bonus Amount: ${amount}`);
-      console.log(`New balance to be updated: ${newBalance}`);
+//       const user = results[0];
 
-      // Update user's balance
-      pool.query('UPDATE users SET balance = ? WHERE id = ?', [newBalance, userId], (err) => {
-          if (err) {
-              console.error('Error updating user balance:', err);
-              return res.status(500).json({ success: false, message: 'Server error' });
-          }
+//       if (actionType === 'bonus') {
+//           // Update user's balance
+//           const newBalance = parseFloat(user.balance) + amountFloat;
+//           pool.query('UPDATE users SET balance = ? WHERE id = ?', [newBalance, userId], (err) => {
+//               if (err) {
+//                   console.error('Error updating user balance:', err);
+//                   return res.status(500).json({ success: false, message: 'Server error' });
+//               }
 
-          console.log(`User balance updated to: ${newBalance}`);
+//               // Log the bonus
+//               pool.query('INSERT INTO bonuses (user_id, amount, type, reason) VALUES (?, ?, ?, ?)', [
+//                   userId,
+//                   amountFloat,
+//                   'bonus',
+//                   description
+//               ], (err) => {
+//                   if (err) {
+//                       console.error('Error inserting bonus:', err);
+//                       return res.status(500).json({ success: false, message: 'Server error' });
+//                   }
 
-          // Log the bonus in the bonuses table
-          pool.query('INSERT INTO bonuses (user_id, amount, type, reason) VALUES (?, ?, ?, ?)', [
-              userId,
-              amount,
-              bonusType,
-              reason
-          ], (err) => {
-              if (err) {
-                  console.error('Error inserting bonus:', err);
-                  return res.status(500).json({ success: false, message: 'Server error' });
-              }
+//                   // Log the transaction
+//                   pool.query('INSERT INTO transactions (username, plan_credit_amount, deposit_method) VALUES (?, ?, ?)', [
+//                       user.username,
+//                       amountFloat,
+//                       'bonus'
+//                   ], (err) => {
+//                       if (err) {
+//                           console.error('Error logging transaction:', err);
+//                           return res.status(500).json({ success: false, message: 'Server error' });
+//                       }
 
-              // Send success response
-              res.json({ success: true });
-          });
-      });
+//                       res.json({ success: true });
+//                   });
+//               });
+//           });
+//       } else if (actionType === 'investment') {
+//           // Fetch the selected plan details
+//            // Check if planId is provided
+//            if (!planId) return res.status(400).json({ success: false, message: 'Plan ID is required for investment' });
+
+//            // Fetch plan details
+//            pool.query('SELECT * FROM plans WHERE id = ?', [planId], (err, planResults) => {
+//                if (err) return res.status(500).json({ success: false, message: 'Error fetching plan' });
+//                if (planResults.length === 0) return res.status(404).json({ success: false, message: 'Plan not found' });
+
+//                const plan = planResults[0];
+//                const depositData = [
+//                    user.username,
+//                    plan.name,
+//                    plan.credit_amount,
+//                    plan.profit,
+//                    // other fields as needed
+//                ];
+
+//                // Insert into active deposits and log transaction
+//                pool.query('INSERT INTO active_deposits (username, plan_name, plan_credit_amount, plan_profit, ...) VALUES (?, ?, ?, ?, ...)', depositData, (err) => {
+//                    if (err) return res.status(500).json({ success: false, message: 'Error adding investment' });
+
+//                    // Log transaction
+//                    pool.query('INSERT INTO transactions (username, plan_name, plan_credit_amount, deposit_method, transaction_date) VALUES (?, ?, ?, ?, ?)', [user.username, plan.name, plan.credit_amount, 'investment', new Date()], (err) => {
+//                        if (err) return res.status(500).json({ success: false, message: 'Error logging transaction' });
+//                        res.json({ success: true });
+//                    });
+//               });
+//           });
+//       } else {
+//           res.status(400).json({ success: false, message: 'Invalid action type' });
+//       }
+//   });
+// });
+
+
+
+
+async function addBonus(userId, amount, description) {
+  return new Promise((resolve, reject) => {
+    // Fetch username based on userId
+    pool.query('SELECT username FROM users WHERE id = ?', [userId], (err, results) => {
+      if (err) return reject(err);
+      if (!results.length) return reject(new Error('User not found'));
+
+      const username = results[0].username;
+
+      // Update user balance
+      pool.query(
+        'UPDATE users SET balance = balance + ? WHERE id = ?',
+        [amount, userId],
+        (err, results) => {
+          if (err) return reject(err);
+          
+          // Insert into transactions table
+          pool.query(
+            `INSERT INTO transactions (username, plan_name, plan_credit_amount, deposit_method, transaction_date) 
+             VALUES (?, ?, ?, ?, ?)`,
+            [username, null, amount, 'Bonus', new Date()],
+            (err, result) => {
+              if (err) return reject(err);
+              resolve(result);
+            }
+          );
+        }
+      );
+    });
   });
+}
+
+
+
+async function logTransaction(username, planName, amount, description) {
+  const transactionDate = new Date();
+  await pool.promise().query(
+    `INSERT INTO transactions (username, plan_name, plan_credit_amount, deposit_method, transaction_date) 
+     VALUES (?, ?, ?, ?, ?)`,
+    [username, planName, amount, 'Bonus/Investment', transactionDate]
+  );
+}
+
+app.post('/api/admin/add-bonus-or-investment', async (req, res) => {
+  const { userId, amount, actionType, planId, description, authPassword } = req.body;
+
+  try {
+    // Authenticate admin's password before proceeding
+    const adminPassword = process.env.ADMIN_PASSWORD;
+    if (authPassword !== adminPassword) {
+      return res.status(401).json({ message: 'Invalid admin password' });
+    }
+
+    // Fetch username based on userId
+    const [user] = await pool.promise().query('SELECT username FROM users WHERE id = ?', [userId]);
+    if (!user.length) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    const username = user[0].username;
+
+    if (actionType === 'bonus') {
+      // Handle the existing bonus logic
+      await addBonus(userId, amount, description);
+      await logTransaction(username, null, null, description); // Pass username
+      return res.json({ success: true, message: 'Bonus added successfully' });
+    }
+
+    if (actionType === 'investment') {
+      const [plan] = await pool.promise().query('SELECT * FROM plans WHERE id = ?', [planId]);
+      if (!plan.length) {
+        return res.status(404).json({ message: 'Plan not found' });
+      }
+
+      const { duration, profit } = plan[0];
+      const investmentStartDate = new Date();
+      const investmentEndDate = new Date(investmentStartDate.getTime() + duration * 60 * 60 * 1000);
+      const interest = amount * (profit / 100);
+
+      // Debugging: Log userId and other variables
+      console.log('Inserting investment with:', {
+        userId,
+        amount,
+        interest,
+        planName: plan[0].name,  // Fixed reference
+        profit,
+        investmentStartDate,
+        investmentEndDate,
+      });
+
+      // Insert the new investment into the active_deposits table
+      await pool.promise().query(
+        `INSERT INTO active_deposits (user_id, amount, interest, plan_name, profit, investment_start_date, investment_end_date) 
+        VALUES (?, ?, ?, ?, ?, ?, ?)`,
+        [userId, amount, interest, plan[0].name, profit, investmentStartDate, investmentEndDate]
+      );
+
+      // Log the transaction in the transactions table
+      await logTransaction(username, plan[0].name, amount, description); // Use username
+
+      return res.json({ success: true, message: 'Investment added successfully' });
+    }
+
+    res.status(400).json({ message: 'Invalid action type' });
+  } catch (err) {
+    console.error('Error in add-bonus-or-investment:', err);
+    res.status(500).json({ message: 'Error in add-bonus-or-investment' });
+  }
 });
+
+
+
+
+
+
+
+app.get('/api/expiring-deposits', async (req, res) => {
+  try {
+      const [deposits] = await pool.promise().query(`
+          SELECT *, DATEDIFF(investment_end_date, NOW()) AS days_left
+          FROM active_deposits
+          WHERE investment_end_date > NOW()
+      `);
+      res.json(deposits);
+  } catch (err) {
+      console.error('Error fetching expiring deposits:', err);
+      res.status(500).json({ message: 'Error fetching expiring deposits' });
+  }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -949,7 +1140,32 @@ app.get('/get-account-details', (req, res) => {
 });
 
 
+app.get('/get-withdrawal-history', (req, res) => {
+  const username = req.query.username;
 
+  if (!username) {
+      return res.json({ success: false, message: "Username is required." });
+  }
+
+  pool.getConnection((err, connection) => {
+      if (err) {
+          return res.json({ success: false, message: "Error connecting to the database." });
+      }
+
+      // Fetch all withdrawals (both pending and approved)
+      const withdrawalQuery = `SELECT amount, status, request_date, approved_date FROM pending_withdrawals WHERE username = ?`;
+
+      connection.query(withdrawalQuery, [username], (err, results) => {
+          connection.release(); // Release connection back to the pool
+          
+          if (err) {
+              return res.json({ success: false, message: "Error fetching withdrawal history." });
+          }
+
+          res.json({ success: true, withdrawals: results });
+      });
+  });
+});
 
 
 
