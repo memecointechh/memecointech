@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>Memecointech Dashboard</title>
+    <meta name="theme-color" content=" #3e059b">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="Your Website">
+    <meta name="apple-mobile-web-app-status-bar-style" content=" #3e059b">
+    <link rel="stylesheet" href="./css/admindash.css">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;1,100&display=swap" rel="stylesheet">
+
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+    
+</head>
+</head>
+<body>
+
+  <div class="body">
+    <div class="menu">
+      <center> <table width="1280" border="0" cellpadding="0" cellspacing="0" > <tr> <td valign=top> <table cellspacing=0 cellpadding=0 border=0 width=100%> <tr> <td background="images/ver.gif" bgcolor=#FF8D00><img src="images/top.gif" border="0" align=left></td> <td background="images/ver.gif" bgcolor=#FF8D00 valign=bottom align=right> <span style="font-family: verdana; font-size: 12px; color: white"> <b> 
+        <div id="google_translate_element"></div> <a href="admindash.html" class=toplink>Home</a> &middot;  <a href="signin.html" class=toplink>Logout</a></b></span>&nbsp; &nbsp; </td> </tr> </table> </td> </tr> <tr> <td valign=top> <table cellspacing=0 cellpadding=1 border=0 width=100% bgcolor=#ff8d00> <tr> <td> <table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0"> <tr bgcolor="#FFFFFF" valign="top">  <td width="500" align=center>  <ul class="nav" style="width:220px">   <li class="nav-item dropdown"> <div class="nav-link dropdown-toggle">Plans</div> <div class="dropdown-menu">  <a class="dropdown-item" href="?a=programs"><i class="fa fa-signal"></i> Investment Programs</a>  <a class="dropdown-item" href="?a=expiring_deposits"><i class="fa fa-hourglass-end"></i> Expiring Deposits</a>  </div> </li>    <li class="nav-item dropdown"> <div class="nav-link dropdown-toggle">Users </div> <div class="dropdown-menu">  <a onclick="window.location.href='users.html'" class="dropdown-item" ><i class="fa fa-user"></i> Users <span class="badge sticker badge-success"><span id="totalUsersCount">0</span></span></a>  <a class="dropdown-item" href="?a=ext_accounts_blacklist"><i class="fa fa-times-circle"></i> Accounts Blacklist</a>  <a class="dropdown-item" href="?a=top_referral_earnings"><i class="fa fa-trophy"></i> Top Referral Earnings</a>  </div> </li>    <li class="nav-item dropdown"> <div class="nav-link dropdown-toggle">Transactions</div> <div class="dropdown-menu">  <a class="dropdown-item" href="?a=transactions"><i class="fa fa-book"></i> Transactions</a>  <a class="dropdown-item" onclick="viewPendingWithdrawals()"><i class="fa fa-hand-paper-o"></i> Withdrawal Requests</a>  <a class="dropdown-item" href="?a=transactions&ttype=add_funds"><i class="fa fa-list"></i> Add Funds</a>  <a class="dropdown-item" href="?a=transactions&ttype=deposit"><i class="fa fa-list"></i> Deposits</a>  <a class="dropdown-item" href="?a=transactions&ttype=withdrawal"><i class="fa fa-list"></i> Withdrawals</a>  <a class="dropdown-item" href="?a=transactions&ttype=earning"><i class="fa fa-list"></i> Earnings</a>  <a class="dropdown-item" href="?a=transactions&ttype=commissions"><i class="fa fa-list"></i> Referral</a>  <a class="dropdown-item" href="?a=transactions&ttype=exchange"><i class="fa fa-list"></i> Exchange</a>  <a class="dropdown-item" href="/pending-deposit"><i class="fa fa-compress"></i> Pending Deposits <span class="badge sticker badge-success"></span></a>  <a class="dropdown-item" href="?a=add_transactions"><i class="fa fa-plus-circle"></i> Add Bonus</a>  </div> </li>    <li class="nav-item dropdown"> <div class="nav-link dropdown-toggle">Settings</div>  </li>    <li class="nav-item"> <a class="nav-link" href="?a=logout">Logout</a> </li> </ul>  </td> <td bgcolor="#ff8d00" valign="top" width=1><img src=images/q.gif width=1 height=1></td>  <td bgcolor="#FFFFFF" valign="top" width=99%>
+
+    </div>
+    <h2>Pending Deposits</h2>
+
+  <table id="pending-deposits-table">
+    <thead>
+      <tr>
+        <td>ID</td>
+        <td>User ID</td>
+        <td>Amount</td>
+        <td>Status</td>
+        <td>Date</td>
+        <td>Actions</td> <!-- New column for actions -->
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Rows will be inserted here -->
+    </tbody>
+  </table>
+  </div>
+  
+  <script>
+
+document.addEventListener("DOMContentLoaded", () => {
+    fetch('/api/pending-withdrawals-count')
+        .then(response => response.json())
+        .then(data => {
+            // Update the count of pending withdrawals
+            document.getElementById('pendingWithdrawalsCount').innerText = `${data.count}`;
+        })
+        .catch(error => console.error('Error fetching pending withdrawals count:', error));
+});
+
+// Redirect to pending-withdrawals.html
+function viewPendingWithdrawals() {
+    window.location.href = '/pending-withdrawals.html';
+}
+
+
+
+fetch('/api/admin/pending-deposits/count')
+    .then(response => response.json())
+    .then(data => {
+        // Display the pending deposits count
+        document.getElementById('pending-deposits').textContent = data.pending_deposits;
+    })
+    .catch(error => console.error('Error fetching pending deposits count:', error));
+
+ 
+    document.addEventListener('DOMContentLoaded', function() {
+        fetch('/api/admin/total-users')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('totalUsersCount').textContent = data.total_users;
+            })
+            .catch(error => console.error('Error fetching total users:', error));
+    });
+
+
+
+
+   function handleAction(depositId, action) {
+  fetch(`/api/admin/pending-deposits/${action}/${depositId}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+  .then(response => response.json())
+  .then(result => {
+    alert(result.message);
+    location.reload(); // Refresh the page to update the list
+  })
+  .catch(error => console.error('Error:', error));
+}
+
+fetch('/api/admin/pending-deposits')
+  .then(response => response.json())
+  .then(deposits => {
+    const tableBody = document.querySelector('#pending-deposits-table tbody');
+    deposits.forEach(deposit => {
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td>${deposit.id}</td>
+        <td>${deposit.user_id}</td>
+        <td>$${deposit.amount}</td>
+        <td>${deposit.plan_name}</td> <!-- Display the plan name here -->
+        <td>${deposit.status}</td>
+        <td>${new Date(deposit.date).toLocaleString()}</td>
+        <td>
+          <button onclick="approveDeposit(${deposit.id})" style="width:2.4rem;  background-color: #4CAF50; color: white; font-weight: bold; padding: 10px; width: 100%; border-style: none; border-radius: 1px; margin-bottom: 5px;">Approve</button>
+          <button onclick="rejectDeposit(${deposit.id})" style="width:2.4rem;  background-color: red; color: white; font-weight: bold; padding: 10px; border-style: none; border-radius: 1px; width: 100%;">Reject</button>
+        </td>
+      `;
+      tableBody.appendChild(row);
+    });
+  })
+  .catch(error => console.error('Error fetching pending deposits:', error));
+
+// Function to approve a deposit
+function approveDeposit(depositId) {
+  fetch('/api/admin/approve-deposit', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ depositId })
+  })
+  .then(response => response.json())
+  .then(data => {
+    alert(data.message);
+    location.reload(); // Reload page to reflect changes
+  })
+  .catch(error => console.error('Error:', error));
+}
+
+// Function to reject a deposit
+function rejectDeposit(depositId) {
+  fetch('/api/admin/reject-deposit', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ depositId })
+  })
+  .then(response => response.json())
+  .then(data => {
+    alert(data.message);
+    location.reload(); // Reload page to reflect changes
+  })
+  .catch(error => console.error('Error:', error));
+}
+
+  </script>
+
+</body>
+</html>

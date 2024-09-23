@@ -1,0 +1,65 @@
+*{
+    padding: 0;
+    margin: 0;
+    font-family: "Roboto", sans-serif;
+    font-weight: bold;
+}
+
+.roboto-thin {
+  font-family: "Roboto", sans-serif;
+  font-weight: 100;
+  font-style: normal;
+}
+
+.roboto-thin-italic {
+  font-family: "Roboto", sans-serif;
+  font-weight: 100;
+  font-style: italic;
+}
+
+
+body{
+    background-color: #ffffff;
+    font-family: "Roboto", sans-serif;
+    
+    width: auto;
+  margin: 0 auto;
+  overflow-x: hidden;
+} 
+
+
+
+@media (min-width: 900px) {
+    /* Styles for devices with a viewport wider than 768px */
+    body {
+      max-width: 700px; /* Or any width you want for mobile display */
+      margin: 0 auto;
+      overflow-x: hidden; /* Prevent horizontal scrolling */
+      
+    }
+  }
+
+h1{
+  font-size: 10px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  table, th, td {
+    border: 1px solid black;
+    font-size: 8px;
+    font-weight: bold;
+  }
+  th, td {
+    padding: 3px;
+    text-align: left;
+    font-size: 8px;
+    font-weight: bold;
+  }
+  th {
+    background-color: #4CAF50;
+    color: white;
+    font-weight: bold;
+    font-size: 10px;
+  }

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pending Withdrawals</title>
+    <link rel="stylesheet" href="./css/admindash.css">
+</head>
+<body>
+
+    <div class="body">
+        <div class="menu">
+            <center> <table width="1280" border="0" cellpadding="0" cellspacing="0" > <tr> <td valign=top> <table cellspacing=0 cellpadding=0 border=0 width=100%> <tr> <td background="images/ver.gif" bgcolor=#FF8D00><img src="images/top.gif" border="0" align=left></td> <td background="images/ver.gif" bgcolor=#FF8D00 valign=bottom align=right> <span style="font-family: verdana; font-size: 12px; color: white"> <b> 
+                <div id="google_translate_element"></div> <a href="admindash.html" class=toplink>Home</a> &middot;  <a href="signin.html" class=toplink>Logout</a></b></span>&nbsp; &nbsp; </td> </tr> </table> </td> </tr> <tr> <td valign=top> <table cellspacing=0 cellpadding=1 border=0 width=100% bgcolor=#ff8d00> <tr> <td> <table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0"> <tr bgcolor="#FFFFFF" valign="top">  <td width="500" align=center>  <ul class="nav" style="width:220px">   <li class="nav-item dropdown"> <div class="nav-link dropdown-toggle">Plans</div> <div class="dropdown-menu">  <a class="dropdown-item" href="?a=programs"><i class="fa fa-signal"></i> Investment Programs</a>  <a class="dropdown-item" href="?a=expiring_deposits"><i class="fa fa-hourglass-end"></i> Expiring Deposits</a>  </div> </li>    <li class="nav-item dropdown"> <div class="nav-link dropdown-toggle">Users </div> <div class="dropdown-menu">  <a onclick="window.location.href='users.html'" class="dropdown-item" ><i class="fa fa-user"></i> Users <span class="badge sticker badge-success"><span id="totalUsersCount">0</span></span></a>  <a class="dropdown-item" href="?a=ext_accounts_blacklist"><i class="fa fa-times-circle"></i> Accounts Blacklist</a>  <a class="dropdown-item" href="?a=top_referral_earnings"><i class="fa fa-trophy"></i> Top Referral Earnings</a>  </div> </li>    <li class="nav-item dropdown"> <div class="nav-link dropdown-toggle">Transactions</div> <div class="dropdown-menu">  <a class="dropdown-item" href="?a=transactions"><i class="fa fa-book"></i> Transactions</a>  <a class="dropdown-item" onclick="viewPendingWithdrawals()"><i class="fa fa-hand-paper-o"></i> Withdrawal Requests</a>  <a class="dropdown-item" href="?a=transactions&ttype=add_funds"><i class="fa fa-list"></i> Add Funds</a>  <a class="dropdown-item" href="?a=transactions&ttype=deposit"><i class="fa fa-list"></i> Deposits</a>  <a class="dropdown-item" href="?a=transactions&ttype=withdrawal"><i class="fa fa-list"></i> Withdrawals</a>  <a class="dropdown-item" href="?a=transactions&ttype=earning"><i class="fa fa-list"></i> Earnings</a>  <a class="dropdown-item" href="?a=transactions&ttype=commissions"><i class="fa fa-list"></i> Referral</a>  <a class="dropdown-item" href="?a=transactions&ttype=exchange"><i class="fa fa-list"></i> Exchange</a>  <a class="dropdown-item" href="/pending-deposit"><i class="fa fa-compress"></i> Pending Deposits <span class="badge sticker badge-success"></span></a>  <a class="dropdown-item" href="?a=add_transactions"><i class="fa fa-plus-circle"></i> Add Bonus</a>  </div> </li>    <li class="nav-item dropdown"> <div class="nav-link dropdown-toggle">Settings</div>  </li>    <li class="nav-item"> <a class="nav-link" href="?a=logout">Logout</a> </li> </ul>  </td> <td bgcolor="#ff8d00" valign="top" width=1><img src=images/q.gif width=1 height=1></td>  <td bgcolor="#FFFFFF" valign="top" width=99%>
+        </div>
+    </div>
+    <h2>Pending Withdrawals</h2>
+    <table id="withdrawals-list">
+        <thead>
+            <tr>
+                <td>Username</td>
+                <td>Amount</td>
+                <td>Requested At</td>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Pending withdrawals will be inserted here -->
+        </tbody>
+    </table>
+
+   <script>
+document.addEventListener("DOMContentLoaded", () => {
+    fetch('/api/pending-withdrawals-count')
+        .then(response => response.json())
+        .then(data => {
+            // Update the count of pending withdrawals
+            document.getElementById('pendingWithdrawalsCount').innerText = `${data.count}`;
+        })
+        .catch(error => console.error('Error fetching pending withdrawals count:', error));
+});
+
+// Redirect to pending-withdrawals.html
+function viewPendingWithdrawals() {
+    window.location.href = '/pending-withdrawals.html';
+}
+
+
+
+fetch('/api/admin/pending-deposits/count')
+    .then(response => response.json())
+    .then(data => {
+        // Display the pending deposits count
+        document.getElementById('pending-deposits').textContent = data.pending_deposits;
+    })
+    .catch(error => console.error('Error fetching pending deposits count:', error));
+
+ 
+    document.addEventListener('DOMContentLoaded', function() {
+        fetch('/api/admin/total-users')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('totalUsersCount').textContent = data.total_users;
+            })
+            .catch(error => console.error('Error fetching total users:', error));
+    });
+
+
+// Fetch pending withdrawals
+fetch('/api/admin/pending-withdrawals')
+    .then(response => response.json())
+    .then(data => {
+        const withdrawalsContainer = document.getElementById('withdrawals-list');
+        data.forEach(withdrawal => {
+            const withdrawalItem = document.createElement('div');
+            withdrawalItem.innerHTML = `
+            <thead style="padding: 10px;">
+                <p style="padding: 10px; font-weight: bold;">Username: ${withdrawal.username}</p>
+                <p style="padding: 10px; font-weight: bold;">Amount: ${withdrawal.amount}</p>
+                <button style="padding: 10px; font-weight: bold; background-color: green; color: white; border-style: none;" onclick="approveWithdrawal(${withdrawal.id}, '${withdrawal.username}', ${withdrawal.amount})">Approve</button>
+                <button style="padding: 10px; font-weight: bold; background-color: red; color: white; border-style: none;" onclick="rejectWithdrawal(${withdrawal.id}, '${withdrawal.username}', ${withdrawal.amount})">Reject</button> <br><br> <hr> <br>
+            `;
+            withdrawalsContainer.appendChild(withdrawalItem);
+        });
+    });
+
+// Approve withdrawal
+function approveWithdrawal(id, username, amount) {
+    fetch('/api/admin/approve-withdrawal', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ id, username, amount }),
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert(data.message);
+        location.reload();
+    });
+}
+
+function rejectWithdrawal(id, username, amount) {
+    fetch('/api/admin/reject-withdrawal', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ id, username, amount }),  // Include username and amount
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert(data.message);
+        location.reload();
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
+
+</script>
+</body>
+</html>
