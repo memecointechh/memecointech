@@ -73,11 +73,11 @@ fetch('/api/admin/pending-withdrawals')
         data.forEach(withdrawal => {
             const withdrawalItem = document.createElement('div');
             withdrawalItem.innerHTML = `
-            <thead>
-                <p>User: ${withdrawal.username}</p>
-                <p>Amount: ${withdrawal.amount}</p>
-                <button onclick="approveWithdrawal(${withdrawal.id}, '${withdrawal.username}', ${withdrawal.amount})">Approve</button>
-                <button onclick="rejectWithdrawal(${withdrawal.id}, '${withdrawal.username}', ${withdrawal.amount})">Reject</button>
+            <thead style="padding: 10px;">
+                <p style="padding: 10px; font-weight: bold;">Username: ${withdrawal.username}</p>
+                <p style="padding: 10px; font-weight: bold;">Amount: ${withdrawal.amount}</p>
+                <button style="padding: 10px; font-weight: bold; background-color: green; color: white; border-style: none;" onclick="approveWithdrawal(${withdrawal.id}, '${withdrawal.username}', ${withdrawal.amount})">Approve</button>
+                <button style="padding: 10px; font-weight: bold; background-color: red; color: white; border-style: none;" onclick="rejectWithdrawal(${withdrawal.id}, '${withdrawal.username}', ${withdrawal.amount})">Reject</button> <br><br> <hr> <br>
             `;
             withdrawalsContainer.appendChild(withdrawalItem);
         });
