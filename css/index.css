@@ -614,20 +614,7 @@ section {
     }
   }
 
-/* Parallax Section */
-/* .parallax-section {
-  background-image: url('https://img.freepik.com/free-photo/bitcoin-top-keyboard-with-plant_23-2148285307.jpg?uid=R55814283&ga=GA1.1.1328920485.1725346503&semt=ais_hybrid');
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed; 
-  
- display: grid;
-  justify-content: center;
-  align-items: center;
-  color: #fff;
-  text-align: center;
-  background-color: rgb(62, 5, 155);
-} */
+
 .parallax-section {
   position: relative;
   overflow: hidden;

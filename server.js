@@ -322,7 +322,7 @@ app.post('/api/auth/login', (req, res) => {
             </tr>
             <tr>
               <td style="background-color: #f4f4f4; padding: 10px; text-align: center;">
-                <p style="font-size: 12px; color: #666;">&copy; 2023 Your Investment Platform. All rights reserved.</p>
+                <p style="font-size: 12px; color: #3e059b;">&copy; 2024 Memecointech. All rights reserved.</p>
               </td>
             </tr>
           </table>
@@ -682,7 +682,7 @@ app.post('/api/withdraw', (req, res) => {
                   </tr>
                   <tr>
                     <td style="background-color: #f4f4f4; padding: 10px; text-align: center;">
-                      <p style="font-size: 12px; color: #666;">&copy; 2023 Your Investment Platform. All rights reserved.</p>
+                      <p style="font-size: 12px; color: #3e059b;">&copy; 2024 Memecointech. All rights reserved.</p>
                     </td>
                   </tr>
                 </table>
