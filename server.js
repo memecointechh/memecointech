@@ -9,6 +9,15 @@ require('dotenv').config();
 
 const app = express();
 
+
+let transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: process.env.GMAIL_USER, // Your Gmail address
+    pass: process.env.GMAIL_PASS, // Your App Password
+  },
+});
+
 const pool = mysql.createPool({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
@@ -26,15 +35,22 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static(__dirname));
 
-const transporter = nodemailer.createTransport({
-    host: 'smtp-mail.outlook.com',
-    port: 587,
-    secure: false, // use SSL
-    auth: {
-      user: 'memecointech@hotmail.com',
-      pass: 'Samuelfelicia@2002'
-    }
-});
+// Function to send email
+const sendEmail = async (to, subject, htmlContent) => {
+  try {
+    await transporter.sendMail({
+      from: `"MemecoinTech" <${process.env.GMAIL_USER}>`,
+      to: to,
+      subject: subject,
+      html: htmlContent,
+    });
+    console.log('Email sent successfully');
+  } catch (error) {
+    console.error('Error sending email:', error);
+  }
+};
+
+
 
 app.post('/api/auth/register', (req, res) => {
   const { full_name, email, username, password, secret_question, secret_answer, bitcoin_address, referral_code } = req.body;
@@ -82,6 +98,52 @@ app.post('/api/auth/register', (req, res) => {
           console.error('Error inserting user into the database:', error);
           return res.status(500).json({ message: 'Error registering user.' });
         }
+
+         // Send welcome email
+         sendEmail(
+          email,
+          'Welcome to MemecoinTech',
+          `
+          <div style="font-family: Arial, sans-serif; margin: 0; padding: 20px; background-color: #f4f4f4;">
+      <table width="100%" style="max-width: 600px; margin: auto; border-collapse: collapse;">
+        <tr>
+          <td style="text-align: center; padding: 20px;">
+            <img src="https://github.com/memecointechh/memecointech/blob/main/images/memecoin%20logo.png?raw=true" alt="Company Logo" style="max-width: 100%; height: auto;"/>
+          </td>
+        </tr>
+        <tr>
+          <td style="background-color: #3e059b; padding: 20px; text-align: center; color: white;">
+            <h1 style="margin: 0;">Welcome, ${username}!</h1>
+          </td>
+        </tr>
+        <tr>
+          <td style="background-color: white; padding: 20px;">
+            <p style="font-size: 16px; line-height: 1.5;">Your account has been successfully created. We're excited to have you on board!</p>
+            <p style="font-size: 16px; line-height: 1.5;">We offer the following investment plans:</p>
+            <ul style="list-style-type: none; padding: 0;">
+              <li style="margin: 10px 0;">
+                <a href="https://memecointech-fvh8.onrender.com/signin.html" style="display: inline-block; background-color: #3e059b; color: white; padding: 10px 15px; text-decoration: none; border-radius: 5px;">Buy Plan 1</a>
+              </li>
+              <li style="margin: 10px 0;">
+                <a href="https://memecointech-fvh8.onrender.com/signin.html" style="display: inline-block; background-color: #3e059b; color: white; padding: 10px 15px; text-decoration: none; border-radius: 5px;">Buy Plan 2</a>
+              </li>
+              <li style="margin: 10px 0;">
+                <a href="https://memecointech-fvh8.onrender.com/signin.html" style="display: inline-block; background-color: #3e059b; color: white; padding: 10px 15px; text-decoration: none; border-radius: 5px;">Buy Plan 3</a>
+              </li>
+            </ul>
+            <p style="font-size: 16px; line-height: 1.5;">Click on any of the above plans to log in and start investing!</p>
+          </td>
+        </tr>
+        <tr>
+          <td style="background-color: #f4f4f4; padding: 10px; text-align: center;">
+            <p style="font-size: 12px; color: #666;">&copy; 2023 Your Investment Platform. All rights reserved.</p>
+          </td>
+        </tr>
+      </table>
+    </div>
+          
+          `
+        );
 
         // Redirect to login page
         res.redirect('/signin.html');
@@ -167,6 +229,12 @@ app.post('/api/auth/login', (req, res) => {
   });
 
 
+
+
+
+
+
+
   app.post('/api/deposit', async (req, res) => {
     try {
       const { 
@@ -230,13 +298,46 @@ app.post('/api/auth/login', (req, res) => {
         [username, depositAmount, investmentStartDate, investmentEndDate, planName, planPrincipleReturn, planCreditAmount, planDepositFee, planDebitAmount, depositMethod]
       );
   
-      res.json({ success: true, message: 'Deposit successful' });
+      // Send confirmation email
+      const emailContent = `
+        <div style="font-family: Arial, sans-serif; margin: 0; padding: 20px; background-color: #f4f4f4;">
+          <table width="100%" style="max-width: 600px; margin: auto; border-collapse: collapse;">
+            <tr>
+              <td style="text-align: center; padding: 20px;">
+                <img src="https://github.com/memecointechh/memecointech/blob/main/images/memecoin%20logo.png?raw=true" alt="Company Logo" style="max-width: 100%; height: auto;" />
+              </td>
+            </tr>
+            <tr>
+              <td style="background-color: #3e059b; padding: 20px; text-align: center; color: white;">
+                <h1 style="margin: 0;">Deposit Successful!</h1>
+              </td>
+            </tr>
+            <tr>
+              <td style="background-color: white; padding: 20px;">
+                <p style="font-size: 16px; line-height: 1.5;">Dear ${username},</p>
+                <p style="font-size: 16px; line-height: 1.5;">Your deposit of $${depositAmount} has been successfully submitted. The deposit will be reflected in the "Active Deposits" tab once confirmed by the admin after blockchain verification.</p>
+                <p style="font-size: 16px; line-height: 1.5;">Thank you for investing with us!</p>
+                <a href="https://memecointech-fvh8.onrender.com/signin.html" style="display: inline-block; background-color: #3e059b; color: white; padding: 10px 15px; text-decoration: none; border-radius: 5px;">Return to Dashboard</a>
+              </td>
+            </tr>
+            <tr>
+              <td style="background-color: #f4f4f4; padding: 10px; text-align: center;">
+                <p style="font-size: 12px; color: #666;">&copy; 2023 Your Investment Platform. All rights reserved.</p>
+              </td>
+            </tr>
+          </table>
+        </div>
+      `;
+  
+      // Call sendEmail to notify the user
+      sendEmail(user.email, 'Deposit Confirmation', emailContent);
+  
+      res.json({ success: true, message: 'Deposit successful. Confirmation email sent.' });
     } catch (err) {
       console.error('Error processing deposit:', err); // Enhanced error logging
       res.status(500).json({ message: 'Error processing deposit' });
     }
   });
-  
 
 
   
@@ -326,82 +427,132 @@ app.get('/api/admin/pending-deposits', (req, res) => {
   });
 });
 
-/// Approve a deposit
-app.post('/api/admin/approve-deposit', async (req, res) => {
+
+
+// Approve a deposit
+app.post('/api/admin/approve-deposit', (req, res) => {
   const { depositId } = req.body;
 
-  try {
-    // Get the deposit details including the plan name
-    const [deposit] = await pool.promise().query('SELECT * FROM deposits WHERE id = ?', [depositId]);
-
-    if (!deposit.length) {
+  // Fetch deposit and plan details, perform necessary operations
+  pool.query('SELECT * FROM deposits WHERE id = ?', [depositId], (error, depositResult) => {
+    if (error || depositResult.length === 0) {
+      console.error('Error fetching deposit details:', error);
       return res.status(404).json({ message: 'Deposit not found' });
     }
 
-    const { user_id, amount, plan_name, investment_start_date } = deposit[0];
+    const { user_id, amount, plan_name, investment_start_date } = depositResult[0];
 
-    // Get the corresponding plan details (duration and profit) from the plans table
-    const [plan] = await pool.promise().query('SELECT duration, profit FROM plans WHERE name = ?', [plan_name]);
+    pool.query('SELECT duration, profit FROM plans WHERE name = ?', [plan_name], (error, planResult) => {
+      if (error || planResult.length === 0) {
+        console.error('Error fetching plan details:', error);
+        return res.status(404).json({ message: 'Plan not found' });
+      }
 
-    if (!plan.length) {
-      return res.status(404).json({ message: 'Plan not found' });
-    }
+      const { duration, profit } = planResult[0];
 
-    const { duration, profit } = plan[0];
+      // Calculate dates and profit
+      const startDate = new Date(investment_start_date);
+      const endDate = new Date(startDate.getTime() + duration * 60 * 60 * 1000);
+      const interest = amount * (profit / 100);
 
-    // Calculate the investment end date based on the plan's duration
-    const startDate = new Date(investment_start_date);
-    const endDate = new Date(startDate.getTime() + duration * 60 * 60 * 1000);
+      // Approve deposit and insert into active_deposits table
+      pool.query(
+        'UPDATE deposits SET status = ? WHERE id = ?',
+        ['approved', depositId],
+        (error) => {
+          if (error) {
+            console.error('Error approving deposit:', error);
+            return res.status(500).json({ message: 'Error approving deposit' });
+          }
 
-    // Calculate the profit based on the interest percentage
-    const interest = amount * (profit / 100);
+          pool.query(
+            `INSERT INTO active_deposits (user_id, amount, interest, plan_name, profit, investment_start_date, investment_end_date) 
+             VALUES (?, ?, ?, ?, ?, ?, ?)`,
+            [user_id, amount, interest, plan_name, profit, startDate, endDate],
+            (error) => {
+              if (error) {
+                console.error('Error inserting into active_deposits:', error);
+                return res.status(500).json({ message: 'Error processing active deposit' });
+              }
 
-    // Update the deposit status to "approved"
-    await pool.promise().query('UPDATE deposits SET status = ? WHERE id = ?', ['approved', depositId]);
+              // Fetch user email to notify them
+              pool.query('SELECT email FROM users WHERE id = ?', [user_id], (err, result) => {
+                if (err || !result.length) {
+                  console.error('Error fetching user email:', err);
+                } else {
+                  const userEmail = result[0].email;
+                  const emailContent = `Your deposit of ${amount} has been approved under the ${plan_name} plan.`;
 
-    // Insert the details into the active_deposits table, including the calculated profit
-    await pool.promise().query(
-      `INSERT INTO active_deposits (user_id, amount, interest, plan_name, profit, investment_start_date, investment_end_date) 
-       VALUES (?, ?, ?, ?, ?, ?, ?)`,
-      [user_id, amount, interest, plan_name, profit, startDate, endDate]
-    );
+                  // Send email notification
+                  sendEmail(userEmail, 'Deposit Approved', emailContent, (err, info) => {
+                    if (err) {
+                      console.error('Error sending approval email:', err);
+                    }
+                  });
+                }
+              });
 
-    res.json({ message: 'Deposit approved and moved to active deposits successfully' });
-  } catch (err) {
-    console.error('Error approving deposit:', err);
-    res.status(500).json({ message: 'Error approving deposit' });
-  }
+              res.json({ message: 'Deposit approved and moved to active deposits successfully.' });
+            }
+          );
+        }
+      );
+    });
+  });
 });
-
-
-
 
 // Reject a deposit
 app.post('/api/admin/reject-deposit', (req, res) => {
   const { depositId } = req.body;
 
-  // Move deposit to rejected_deposits
   pool.query(
     'INSERT INTO rejected_deposits (id, user_id, amount, status, date) SELECT id, user_id, amount, status, date FROM deposits WHERE id = ?',
     [depositId],
-    (err) => {
-      if (err) {
-        console.error('Error moving deposit to rejected_deposits:', err);
+    (error, results) => {
+      if (error) {
+        console.error('Error moving deposit to rejected_deposits:', error);
         return res.status(500).json({ message: 'Error moving deposit to rejected_deposits' });
       }
 
+      const user_id = results.insertId;
+
       // Remove the deposit from the deposits table
-      pool.query('DELETE FROM deposits WHERE id = ?', [depositId], (err) => {
-        if (err) {
-          console.error('Error deleting deposit from deposits table:', err);
-          return res.status(500).json({ message: 'Error deleting deposit from deposits table' });
+      pool.query('DELETE FROM deposits WHERE id = ?', [depositId], (error) => {
+        if (error) {
+          console.error('Error deleting deposit:', error);
+          return res.status(500).json({ message: 'Error deleting deposit' });
         }
 
-        res.json({ message: 'Deposit rejected successfully' });
+        // Fetch user email to notify them
+        pool.query('SELECT email FROM users WHERE id = ?', [user_id], (err, result) => {
+          if (err || !result.length) {
+            console.error('Error fetching user email:', err);
+          } else {
+            const userEmail = result[0].email;
+            const emailContent = `Your deposit has been rejected. Please contact support for more details.`;
+
+            // Send email notification
+            sendEmail(userEmail, 'Deposit Rejected', emailContent, (err, info) => {
+              if (err) {
+                console.error('Error sending rejection email:', err);
+              }
+            });
+          }
+        });
+
+        res.json({ message: 'Deposit rejected successfully.' });
       });
     }
   );
 });
+
+
+
+
+
+
+
+
 
 
 // Route to get the total amount withdrawn by all users
@@ -479,27 +630,73 @@ app.post('/api/withdraw', (req, res) => {
 
   // Step 1: Insert withdrawal request into pending_withdrawals table
   pool.query(
-      'INSERT INTO pending_withdrawals (username, amount) VALUES (?, ?)',
-      [username, amount],
-      (error, results) => {
+    'INSERT INTO pending_withdrawals (username, amount) VALUES (?, ?)',
+    [username, amount],
+    (error, results) => {
+      if (error) {
+        console.error('Error inserting withdrawal request:', error);
+        return res.status(500).json({ message: 'Error processing withdrawal.' });
+      }
+
+      // Step 2: Subtract the withdrawn amount from the user's balance
+      pool.query(
+        'UPDATE users SET balance = balance - ? WHERE username = ?',
+        [amount, username],
+        (error, results) => {
           if (error) {
-              console.error('Error inserting withdrawal request:', error);
-              return res.status(500).json({ message: 'Error processing withdrawal.' });
+            console.error('Error updating balance:', error);
+            return res.status(500).json({ message: 'Error updating balance.' });
           }
 
-          // Step 2: Subtract the withdrawn amount from the user's balance
-          pool.query(
-              'UPDATE users SET balance = balance - ? WHERE username = ?',
-              [amount, username],
-              (error, results) => {
-                  if (error) {
-                      console.error('Error updating balance:', error);
-                      return res.status(500).json({ message: 'Error updating balance.' });
-                  }
-                  res.json({ message: 'Withdrawal request submitted successfully. Your is still pending until Admin confirms statistics' });
-              }
-          );
-      }
+          // Fetch user email for notification
+          pool.query('SELECT email FROM users WHERE username = ?', [username], (error, results) => {
+            if (error || results.length === 0) {
+              console.error('Error fetching user email:', error);
+              return res.status(500).json({ message: 'Error fetching user email.' });
+            }
+
+            const userEmail = results[0].email;
+
+            // Send withdrawal confirmation email
+            const emailContent = `
+              <div style="font-family: Arial, sans-serif; margin: 0; padding: 20px; background-color: #f4f4f4;">
+                <table width="100%" style="max-width: 600px; margin: auto; border-collapse: collapse;">
+                  <tr>
+                    <td style="text-align: center; padding: 20px;">
+                      <img src="https://github.com/memecointechh/memecointech/blob/main/images/memecoin%20logo.png?raw=true" alt="Company Logo" style="max-width: 100%; height: auto;" />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="background-color: #3e059b; padding: 20px; text-align: center; color: white;">
+                      <h1 style="margin: 0;">Withdrawal Request Submitted</h1>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="background-color: white; padding: 20px;">
+                      <p style="font-size: 16px; line-height: 1.5;">Dear ${username},</p>
+                      <p style="font-size: 16px; line-height: 1.5;">We have received your withdrawal request of $${amount}.</p>
+                      <p style="font-size: 16px; line-height: 1.5;">Your request is currently pending and will be processed once approved by the admin after the necessary blockchain verification.</p>
+                      <p style="font-size: 16px; line-height: 1.5;">Thank you for using our platform!</p>
+                      <a href="https://memecointech-fvh8.onrender.com/signin.html" style="display: inline-block; background-color: #3e059b; color: white; padding: 10px 15px; text-decoration: none; border-radius: 5px;">Return to Dashboard</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="background-color: #f4f4f4; padding: 10px; text-align: center;">
+                      <p style="font-size: 12px; color: #666;">&copy; 2023 Your Investment Platform. All rights reserved.</p>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            `;
+
+            sendEmail(userEmail, 'Withdrawal Request Submitted', emailContent);
+
+            // Respond with success message
+            res.json({ message: 'Withdrawal request submitted successfully. Your withdrawal is still pending until Admin confirms statistics.' });
+          });
+        }
+      );
+    }
   );
 });
 
@@ -815,114 +1012,6 @@ app.post('/api/admin/add-penalty', async (req, res) => {
   }
 });
 
-
-
-// Assuming you've already set up your Express app and MySQL connection
-
-// Route to handle adding bonus or investment
-// app.post('/api/admin/add-bonus-or-investment', (req, res) => {
-//   const { userId, amount, actionType, planId, description, authPassword } = req.body;
-
-//   // Validate input
-//   if (!userId || !amount || !actionType || !description || !authPassword) {
-//       return res.status(400).json({ success: false, message: 'Missing required fields' });
-//   }
-
-//   // Check admin password (you might want to hash and compare this)
-//   if (authPassword !== 'AdMiN') { // Replace with proper password check
-//       return res.status(403).json({ success: false, message: 'Unauthorized' });
-//   }
-
-//   // Convert amount to a number
-//   const amountFloat = parseFloat(amount);
-//   if (isNaN(amountFloat) || amountFloat <= 0) {
-//       return res.status(400).json({ success: false, message: 'Invalid amount' });
-//   }
-
-//   // Check if the user exists
-//   pool.query('SELECT * FROM users WHERE id = ?', [userId], (err, results) => {
-//       if (err) {
-//           console.error('Error fetching user details:', err);
-//           return res.status(500).json({ success: false, message: 'Server error' });
-//       }
-
-//       if (results.length === 0) {
-//           return res.status(404).json({ success: false, message: 'User not found' });
-//       }
-
-//       const user = results[0];
-
-//       if (actionType === 'bonus') {
-//           // Update user's balance
-//           const newBalance = parseFloat(user.balance) + amountFloat;
-//           pool.query('UPDATE users SET balance = ? WHERE id = ?', [newBalance, userId], (err) => {
-//               if (err) {
-//                   console.error('Error updating user balance:', err);
-//                   return res.status(500).json({ success: false, message: 'Server error' });
-//               }
-
-//               // Log the bonus
-//               pool.query('INSERT INTO bonuses (user_id, amount, type, reason) VALUES (?, ?, ?, ?)', [
-//                   userId,
-//                   amountFloat,
-//                   'bonus',
-//                   description
-//               ], (err) => {
-//                   if (err) {
-//                       console.error('Error inserting bonus:', err);
-//                       return res.status(500).json({ success: false, message: 'Server error' });
-//                   }
-
-//                   // Log the transaction
-//                   pool.query('INSERT INTO transactions (username, plan_credit_amount, deposit_method) VALUES (?, ?, ?)', [
-//                       user.username,
-//                       amountFloat,
-//                       'bonus'
-//                   ], (err) => {
-//                       if (err) {
-//                           console.error('Error logging transaction:', err);
-//                           return res.status(500).json({ success: false, message: 'Server error' });
-//                       }
-
-//                       res.json({ success: true });
-//                   });
-//               });
-//           });
-//       } else if (actionType === 'investment') {
-//           // Fetch the selected plan details
-//            // Check if planId is provided
-//            if (!planId) return res.status(400).json({ success: false, message: 'Plan ID is required for investment' });
-
-//            // Fetch plan details
-//            pool.query('SELECT * FROM plans WHERE id = ?', [planId], (err, planResults) => {
-//                if (err) return res.status(500).json({ success: false, message: 'Error fetching plan' });
-//                if (planResults.length === 0) return res.status(404).json({ success: false, message: 'Plan not found' });
-
-//                const plan = planResults[0];
-//                const depositData = [
-//                    user.username,
-//                    plan.name,
-//                    plan.credit_amount,
-//                    plan.profit,
-//                    // other fields as needed
-//                ];
-
-//                // Insert into active deposits and log transaction
-//                pool.query('INSERT INTO active_deposits (username, plan_name, plan_credit_amount, plan_profit, ...) VALUES (?, ?, ?, ?, ...)', depositData, (err) => {
-//                    if (err) return res.status(500).json({ success: false, message: 'Error adding investment' });
-
-//                    // Log transaction
-//                    pool.query('INSERT INTO transactions (username, plan_name, plan_credit_amount, deposit_method, transaction_date) VALUES (?, ?, ?, ?, ?)', [user.username, plan.name, plan.credit_amount, 'investment', new Date()], (err) => {
-//                        if (err) return res.status(500).json({ success: false, message: 'Error logging transaction' });
-//                        res.json({ success: true });
-//                    });
-//               });
-//           });
-//       } else {
-//           res.status(400).json({ success: false, message: 'Invalid action type' });
-//       }
-//   });
-// });
 
 
 
