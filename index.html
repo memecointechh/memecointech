@@ -439,62 +439,14 @@
 
 
     <div class="activity-section">
-      <div class="scroll-section">
-        <div class="scroll-container">
-            <div class="scroll-item">
-                <h4>Recent Investments</h4>
-                <ul id="recent-investments">
-                    <!-- Hardcoded investment data -->
-                    <li>JohnDoe invested $5,000 in Bitcoin</li>
-                    <li>JaneSmith invested $3,200 in Bitcoin</li>
-                    <li>Samuel invested $1,500 in Bitcoin</li>
-                    <li>Alice invested $7,800 in Bitcoin</li>
-                    <li>Michael invested $2,500 in Bitcoin</li>
-                    <li>Olivia invested $4,500 in Bitcoin</li>
-                    <li>Lucas invested $6,200 in Bitcoin</li>
-                    <li>Emma invested $8,000 in PBitcoin</li>
-                    <li>Ethan invested $9,500 in Bitcoin</li>
-                    <li>Linda invested $2,000 in Bitcoin</li>
-                    <li>David invested $6,700 in Bitcoin</li>
-                    <li>MiaFinance invested $3,000 in Bitcoin</li>
-                    <li>Chris invested $4,100 in Bitcoin</li>
-                    <li>Sophia invested $5,600 in Bitcoin</li>
-                    <li>Daniel invested $1,800 in Bitcoin</li>
-                    <li>Isabella invested $7,200 in Bitcoin</li>
-                    <li>James invested $2,900 in Bitcoin</li>
-                    <li>Charlotte invested $6,300 Bitcoin</li>
-                    <li>Henryinvested $5,100 in Bitcoin</li>
-                    <li>Amelia invested $7,600 in Bitcoin</li>
-                </ul>
-            </div>
-            <div class="scroll-item">
-                <h4>Recent Withdrawals</h4>
-                <ul id="recent-withdrawals">
-                    <!-- Hardcoded withdrawal data -->
-                    <li>Andrew withdrew $2,000</li>
-                    <li>Smith withdrew $1,200</li>
-                    <li>McGregor Invests withdrew $500</li>
-                    <li>Monica withdrew $3,800</li>
-                    <li>Wealth withdrew $1,500</li>
-                    <li>Gold withdrew $2,500</li>
-                    <li>Aben withdrew $4,200</li>
-                    <li>Lolla withdrew $5,000</li>
-                    <li>Richie withdrew $6,000</li>
-                    <li>Anabelle withdrew $1,200</li>
-                    <li>Brandy withdrew $3,500</li>
-                    <li>Mathew withdrew $2,000</li>
-                    <li>Dunamis withdrew $3,100</li>
-                    <li>Fortune withdrew $2,500</li>
-                    <li>Oliver withdrew $900</li>
-                    <li>Ngono withdrew $3,200</li>
-                    <li>Lima withdrew $1,700</li>
-                    <li>Emmanuel withdrew $3,300</li>
-                    <li>Angela withdrew $2,100</li>
-                    <li>Emelda withdrew $4,600</li>
-                </ul>
-            </div>
-        </div>
-    </div>
+      <div class="investment-side">
+        <h2>Recent Investments</h2>
+        <ul id="investment-list"></ul>
+      </div>
+      <div class="withdrawal-side">
+        <h2>Recent Withdrawals</h2>
+        <ul id="withdrawal-list"></ul>
+      </div>
     </div>
     
     
@@ -576,7 +528,7 @@
 <!-- Smartsupp Live Chat script -->
 <script type="text/javascript">
   var _smartsupp = _smartsupp || {};
-  _smartsupp.key = 'd3d4602ea9c6fb136c538e7455d7a309b5a770aa';
+  _smartsupp.key = 'e2ef1ba0fdb27cb9a6d1e17fbede4b2d97e23d5d';
   window.smartsupp||(function(d) {
     var s,c,o=smartsupp=function(){ o._.push(arguments)};o._=[];
     s=d.getElementsByTagName('script')[0];c=d.createElement('script');
@@ -585,8 +537,11 @@
   })(document);
   </script>
   <noscript> Powered by <a href=“https://www.smartsupp.com” target=“_blank”>Smartsupp</a></noscript>
-    
+
+
    <script>
+    
+   
 // Intersection Observer for Rectangle Animation
 document.addEventListener("DOMContentLoaded", () => {
   const rectangle = document.querySelector(".rectangle");
@@ -655,7 +610,6 @@ counters.forEach(counter => {
 
 function scrollActivity() {
   const investmentList = document.getElementById("investment-list");
-  
   const withdrawalList = document.getElementById("withdrawal-list");
 
   populateActivity(investmentList, investments);
