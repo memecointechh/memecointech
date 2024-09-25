@@ -250,6 +250,20 @@ nav ul a li:hover{
 }
 
 
+.flags{
+  display: flex;
+  gap: 0.8rem;
+  position: absolute;
+  right: 10px;
+}
+
+.flags img{
+  width: 1rem;
+}
+
+
+
+
 .hero-text{
     /* margin-bottom: -15rem; */
     
