@@ -415,17 +415,36 @@ app.get('/api/admin/pending-deposits/count', (req, res) => {
 
 
 app.get('/api/admin/pending-deposits', (req, res) => {
-  const query = 'SELECT id, user_id, amount, plan_name, status, date FROM deposits WHERE status = ?';
-  
+  const query = `
+    SELECT d.id, u.username, d.amount, d.plan_name, d.status, d.date 
+    FROM deposits d 
+    JOIN users u ON d.user_id = u.id 
+    WHERE d.status = ?`;
+
   pool.query(query, ['pending'], (err, results) => {
       if (err) {
           console.error('Error querying the database:', err);
           return res.status(500).json({ message: 'Error fetching pending deposits' });
       }
-      
+
       res.json(results);
   });
 });
+
+
+
+// app.get('/api/admin/pending-deposits', (req, res) => {
+//   const query = 'SELECT id, user_id, amount, plan_name, status, date FROM deposits WHERE status = ?';
+  
+//   pool.query(query, ['pending'], (err, results) => {
+//       if (err) {
+//           console.error('Error querying the database:', err);
+//           return res.status(500).json({ message: 'Error fetching pending deposits' });
+//       }
+      
+//       res.json(results);
+//   });
+// });
 
 
 
