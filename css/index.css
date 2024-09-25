@@ -17,6 +17,11 @@
   font-style: italic;
 }
 
+.protest-guerrilla-regular {
+  font-family: "Protest Guerrilla", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
 
 body{
     background-color: #3e059b;
@@ -221,12 +226,13 @@ nav ul a li:hover{
 }
 
 
+
 .hero {
   padding: 1.5rem 2rem;
   margin-top: 3rem;
-  background: linear-gradient(45deg, rgba(62, 5, 155, 1) 0%, rgba(87, 2, 183, 1) 50%, rgba(146, 51, 187, 1) 100%);
-  background-size: 300% 300%; /* Ensures smooth gradient transition */
-  animation: gradientAnimation 10s ease infinite;
+  background: linear-gradient(45deg, rgba(10, 10, 40, 0.507) 50%, rgba(87, 2, 183, 0.199) 50%) no-repeat, url('/images/peoploe.jpg') center center/cover;
+  z-index: -1;
+  backdrop-filter: blur(17px);
   color: #fff; /* Ensure text is visible against the background */
   margin-top: -1px;
 }
@@ -260,12 +266,13 @@ nav ul a li:hover{
     font-size: 14px;
     text-align: left;
     margin-bottom: 10px;
+    font-family: "Protest Guerrilla", sans-serif;
 }
 
 .hero-text p{
-    color:  rgb(215, 180, 255);
+    color:  rgb(255, 255, 255);
     width: 50%;
-    font-size: 10px;
+    font-size: 8px;
 }
 
 .hero-image{
@@ -586,6 +593,14 @@ section {
   }
 
 
+  .anywhere{
+    background: linear-gradient(45deg, rgba(10, 10, 40, 0.644) 50%, rgba(87, 2, 183, 0.199) 50%) no-repeat, url('/images/memecoins.jpg') center center/cover;
+    z-index: -1;
+    backdrop-filter: blur(17px);
+    
+  }
+
+
 
   .beaming-circle {
     width: 50px;
@@ -827,7 +842,7 @@ section {
     transition: opacity 0.6s ease-out, transform 0.6s ease-out;
     padding: 5px;
     margin: 20px 10px;
-    background-color: rgba(87, 2, 183, 0.389); /* Your primary color */
+    background-color: rgba(87, 2, 183, 0.096); /* Your primary color */
     color: #fff;
     border-radius: 1px;
     text-align: center;
@@ -885,7 +900,7 @@ section {
   }
 
   .the-flow{
-    background-color:rgb(41, 0, 87);
+    background-color:rgba(41, 0, 87, 0);
     display: flex;
     justify-content: center;
    
@@ -897,7 +912,7 @@ section {
   justify-content: center;
   align-items: center;
    /* Adjust height as needed */
-  background:rgb(41, 0, 87); /* Futuristic dark background color */
+  background:rgba(41, 0, 87, 0.178); /* Futuristic dark background color */
 }
 
 /* Style for the large gear */
@@ -1326,35 +1341,6 @@ li span.amount {
   
 }
 
-
-/* Loading Overlay */
-/* .loading-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  display: none; 
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-} */
-
-/* Spinner Animation */
-/* .spinner {
-  border: 8px solid rgba(255, 255, 255, 0.3);
-  border-radius: 50%;
-  border-top: 8px solid #ffffff;
-  width: 60px;
-  height: 60px;
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-} */
 
 
 #loading-overlay {
