@@ -70,8 +70,11 @@
                         <p>Please send payment to the bitcoin address bellow</p>
                         <p>Make sure to only send exact amount in BTC</p>
                         <p>Kindly note that your deposit will automatically be confirmed after 2 blockchain verifications</p>
-                        <div class="btc-address">bc1qx35fshkjv3jyrr0xgta36z09lrlqaznj080k8d</div>
-                        <button class="confirm-button">COPY WALLET ADDRESS</button>
+                        <div class="crypto-address">
+                          <p id="btc-address">Bitcoin Address: <br><br><span class="btc-address">bc1qx35fshkjv3jyrr0xgta36z09lrlqaznj080k8d</span></p>
+                          <button class="confirm-button" onclick="copyToClipboard('btc-address')">Copy Bitcoin Address</button>
+                        </div>
+                        <!-- <button class="confirm-button">COPY WALLET ADDRESS</button> -->
                     </div>
                 <div class="container">
                     <div class="header">
@@ -126,6 +129,30 @@
   <noscript> Powered by <a href=“https://www.smartsupp.com” target=“_blank”>Smartsupp</a></noscript>
     
       <script>
+
+function copyToClipboard(elementId) {
+  // Get the text from the span inside the p element
+  var copyText = document.querySelector(`#${elementId} span`).textContent;
+  
+  // Create a temporary textarea element
+  var tempInput = document.createElement("textarea");
+  tempInput.value = copyText;
+  document.body.appendChild(tempInput);
+  
+  // Select the text and execute the copy command
+  tempInput.select();
+  tempInput.setSelectionRange(0, 99999); // For mobile devices
+  
+  // Copy the text
+  document.execCommand("copy");
+  
+  // Remove the temporary element
+  document.body.removeChild(tempInput);
+  
+  // Optional: Alert the user that the text has been copied
+  alert("Copied the address: " + copyText);
+}
+
 
       // Define the planDetails object
   const planDetails = [
