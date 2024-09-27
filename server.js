@@ -1278,6 +1278,62 @@ app.get('/get-withdrawal-history', (req, res) => {
 
 
 
+app.get('/api/admin/users/:userId', (req, res) => {
+  const userId = req.params.userId;
+  
+  pool.query('SELECT * FROM users WHERE id = ?', [userId], (error, results) => {
+      if (error) {
+          console.error('Error fetching user:', error);
+          return res.status(500).json({ error: 'Internal server error' });
+      }
+
+      if (results.length === 0) {
+          return res.status(404).json({ error: 'User not found' });
+      }
+
+      res.json(results[0]); // Return the user details
+  });
+});
+
+
+
+app.put('/api/admin/users/:userId', (req, res) => {
+  const userId = req.params.userId;
+  const { full_name, email, username, bitcoin_address, referral_code, balance, password } = req.body;
+
+  pool.query(
+      'UPDATE users SET full_name = ?, email = ?, username = ?, bitcoin_address = ?, referral_code = ?, balance = ?, password = ? WHERE id = ?',
+      [full_name, email, username, bitcoin_address, referral_code, balance, password, userId],
+      (error, results) => {
+          if (error) {
+              console.error('Error updating user:', error);
+              return res.status(500).json({ error: 'Internal server error' });
+          }
+
+          res.json({ message: 'User updated successfully' });
+      }
+  );
+});
+
+
+app.delete('/api/admin/users/:userId', (req, res) => {
+  const userId = req.params.userId;
+
+  pool.query('DELETE FROM users WHERE id = ?', [userId], (error, results) => {
+      if (error) {
+          console.error('Error deleting user:', error);
+          return res.status(500).json({ error: 'Internal server error' });
+      }
+
+      res.json({ message: 'User deleted successfully' });
+  });
+});
+
+
+
+
+
+
 
 
 // Serve the main HTML file
