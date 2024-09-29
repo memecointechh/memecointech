@@ -13,8 +13,8 @@ const app = express();
 let transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: process.env.GMAIL_USER, // Your Gmail address
-    pass: process.env.GMAIL_PASS, // Your App Password
+    user: 'memecointechspprt@gmail.com', // Your Gmail address
+    pass: 'uvebzqpgwbbhsfdt',    // Your App Password (generate this from Google App Passwords)
   },
 });
 
@@ -35,11 +35,12 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static(__dirname));
 
-// Function to send email
+
+
 const sendEmail = async (to, subject, htmlContent) => {
   try {
     await transporter.sendMail({
-      from: `"MemecoinTech" <${process.env.GMAIL_USER}>`,
+      from: `"MemecoinTech" <memecointechspprt@gmail.com>`, // Your Gmail address here as well
       to: to,
       subject: subject,
       html: htmlContent,
@@ -126,6 +127,9 @@ app.post('/api/auth/register', (req, res) => {
               </li>
               <li style="margin: 10px 0;">
                 <a href="https://memecointech-fvh8.onrender.com/signin.html" style="display: inline-block; background-color: #3e059b; color: white; padding: 10px 15px; text-decoration: none; border-radius: 5px;">Buy Plan 2</a>
+              </li>
+              <li style="margin: 10px 0;">
+                <a href="https://memecointech-fvh8.onrender.com/signin.html" style="display: inline-block; background-color: #3e059b; color: white; padding: 10px 15px; text-decoration: none; border-radius: 5px;">Buy Plan 3</a>
               </li>
               <li style="margin: 10px 0;">
                 <a href="https://memecointech-fvh8.onrender.com/signin.html" style="display: inline-block; background-color: #3e059b; color: white; padding: 10px 15px; text-decoration: none; border-radius: 5px;">Buy Plan 3</a>
