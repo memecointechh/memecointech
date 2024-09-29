@@ -11,10 +11,12 @@ const app = express();
 
 
 let transporter = nodemailer.createTransport({
-  service: 'gmail',
+  host: 'smtp.hostinger.com', // Hostinger SMTP server
+  port: 465, // Port for SSL (you can use 587 for TLS)
+  secure: true, // Use true for 465 (SSL) and false for 587 (TLS)
   auth: {
-    user: 'memecointechspprt@gmail.com', // Your Gmail address
-    pass: 'uvebzqpgwbbhsfdt',    // Your App Password (generate this from Google App Passwords)
+    user: 'support@memecointech.com', // Your business email address from Hostinger
+    pass: 'Memecointech@2024', // Your email password
   },
 });
 
@@ -37,13 +39,16 @@ app.use(express.static(__dirname));
 
 
 
+
+
+// Function to send email
 const sendEmail = async (to, subject, htmlContent) => {
   try {
     await transporter.sendMail({
-      from: `"MemecoinTech" <memecointechspprt@gmail.com>`, // Your Gmail address here as well
-      to: to,
-      subject: subject,
-      html: htmlContent,
+      from: '"Memecointech" <support@memecointech.com>', // Sender address
+      to: to, // Recipient address
+      subject: subject, // Subject line
+      html: htmlContent, // HTML body content
     });
     console.log('Email sent successfully');
   } catch (error) {
