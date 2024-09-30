@@ -439,20 +439,6 @@ app.get('/api/admin/pending-deposits', (req, res) => {
 
 
 
-// app.get('/api/admin/pending-deposits', (req, res) => {
-//   const query = 'SELECT id, user_id, amount, plan_name, status, date FROM deposits WHERE status = ?';
-  
-//   pool.query(query, ['pending'], (err, results) => {
-//       if (err) {
-//           console.error('Error querying the database:', err);
-//           return res.status(500).json({ message: 'Error fetching pending deposits' });
-//       }
-      
-//       res.json(results);
-//   });
-// });
-
-
 
 // Approve a deposit
 app.post('/api/admin/approve-deposit', (req, res) => {
@@ -967,6 +953,7 @@ app.get('/api/user-dashboard', async (req, res) => {
     res.status(500).json({ message: 'Error fetching user dashboard data' });
   }
 });
+
 
 
 // Endpoint to get user details
