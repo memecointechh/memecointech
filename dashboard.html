@@ -216,9 +216,11 @@
 
             <div class="tab">
               <img src="https://cdn-icons-png.freepik.com/256/10000/10000987.png?uid=R55814283&ga=GA1.2.1328920485.1725346503&semt=ais_hybrid" alt="">
-              <span id="mostRecentActiveDeposit">0</span></p><hr style="border-style: solid; border-color: rgba(62, 5, 155, 0.587);">
+              <span id="mostRecentActiveDeposit">0</span>
+              <hr style="border-style: solid; border-color: rgba(62, 5, 155, 0.587);">
               <h3>ACTIVE DEPOSIT</h3>
             </div>
+            
 
           </div>
               
@@ -226,42 +228,7 @@
             <br><br><br><b></b>
             
             
-              <!-- <div class="dashboard-item">
-                <label>Most Recent Active Deposit:</label>
-                <span id="mostRecentActiveDeposit">0</span>
-              </div> -->
-            
-              <!-- <div class="dashboard-item">
-                <label>Total Pending Withdrawals:</label>
-                <span id="totalPendingWithdrawals">0</span>
-              </div> -->
-            
-              <!-- <div class="dashboard-item">
-                <label>Total Withdrawn Amount:</label>
-                <span id="totalWithdrawn">0</span>
-              </div> -->
-            
-              <!-- <div class="dashboard-item">
-                <label>Total Earned Amount:</label>
-                <span id="totalEarned">0</span>
-              </div> -->
-            
-              <!-- <div class="dashboard-item">
-                <label>Last Deposit:</label>
-                <span id="lastDeposit">0</span>
-              </div> -->
-            
-              <!-- <div class="dashboard-item">
-                <label>Total Deposits:</label>
-                <span id="totalDeposits">0</span>
-              </div> -->
-            
-              <!-- <div class="dashboard-item">
-                <label>Last Withdrawal:</label>
-                <span id="lastWithdrawal">0</span>
-              </div>
-            </div> -->
-            
+             
 
             
             <table class="bottom-table" cellspacing="0" cellpadding="2" border="0">
@@ -279,11 +246,6 @@
               <td>Last Deposit:</td>
               <td class="text-right">$<span id="lastDeposit">0</span></td>
              </tr>
-           
-             <!-- <tr>
-              <td>Total Approved Deposit:</td>
-              <td class="text-right">$<span id="totalDeposits">0</span></td>
-             </tr> -->
            
               
              <tr>
@@ -453,9 +415,11 @@ const investmentChart = new Chart(ctx, {
 
 
 // Function to load user dashboard data
-async function loadUserDashboard() {
-  const username = localStorage.getItem('username'); // Assuming username is stored in localStorage
+// Client-side JavaScript code
 
+
+// Function to load user dashboard data
+async function loadUserDashboard() {
   if (!username) {
     console.error('Username not found in localStorage');
     return;
@@ -467,7 +431,7 @@ async function loadUserDashboard() {
 
     if (response.ok) {
       // Update the DOM with the returned data
-      document.getElementById('mostRecentActiveDeposit').textContent = data.mostRecentActiveDeposit || 0;
+      document.getElementById('mostRecentActiveDeposit').textContent = data.totalActiveDeposits || 0; // Total active deposits
       document.getElementById('totalPendingWithdrawals').textContent = data.totalPendingWithdrawals || 0;
       document.getElementById('totalWithdrawn').textContent = data.totalWithdrawn || 0;
       document.getElementById('totalEarned').textContent = data.totalEarned || 0;
@@ -484,8 +448,6 @@ async function loadUserDashboard() {
 
 // Call the function when the page loads
 window.onload = loadUserDashboard;
-
-
   </script>
 </body>
 </html>

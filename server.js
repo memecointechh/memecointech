@@ -895,13 +895,14 @@ app.get('/api/user-dashboard', async (req, res) => {
       return res.status(400).json({ message: "Username is required" });
     }
 
-    // Fetch data from all relevant tables
-    const [activeDepositResult] = await pool.promise().query(
-      'SELECT amount FROM active_deposits WHERE user_id = (SELECT id FROM users WHERE username = ?) ORDER BY investment_end_date DESC LIMIT 1',
+    // Fetch total amount of all active deposits
+    const [totalActiveDepositsResult] = await pool.promise().query(
+      'SELECT SUM(amount) AS totalActiveDeposits FROM active_deposits WHERE user_id = (SELECT id FROM users WHERE username = ?)',
       [username]
     );
-    const mostRecentActiveDeposit = activeDepositResult.length > 0 ? activeDepositResult[0].amount : 0;
+    const totalActiveDeposits = totalActiveDepositsResult[0].totalActiveDeposits || 0;
 
+    // Fetch data for the dashboard
     const [pendingWithdrawalsResult] = await pool.promise().query(
       'SELECT SUM(amount) AS totalPendingWithdrawals FROM pending_withdrawals WHERE username = ? AND status = "pending"',
       [username]
@@ -938,9 +939,9 @@ app.get('/api/user-dashboard', async (req, res) => {
     );
     const lastWithdrawal = lastWithdrawalResult.length > 0 ? lastWithdrawalResult[0].amount : 0;
 
-    // Send the response with all the data
+    // Send the response with all the data, including total active deposits
     res.json({
-      mostRecentActiveDeposit,
+      totalActiveDeposits, // This should reflect the total of all active deposits
       totalPendingWithdrawals,
       totalWithdrawn,
       totalEarned,
@@ -953,6 +954,8 @@ app.get('/api/user-dashboard', async (req, res) => {
     res.status(500).json({ message: 'Error fetching user dashboard data' });
   }
 });
+
+
 
 
 
