@@ -1463,13 +1463,14 @@ footer{
 .scrolls-section {
   display: flex;
   width: 100%;
+  justify-content: center;
 }
 
 .scrolls-container {
   overflow: hidden;
   display: flex;
   justify-content: center;
-  gap: 10%;
+  gap: 20%;
 }
 
 .scrolls-item {
@@ -1482,7 +1483,8 @@ footer{
   background-color: #000000;
   color: rgb(0, 0, 0);
   font-weight: bold;
-  padding: 1rem;
+  padding: 2px;
+  width: 100%;
 }
 
 ul {
@@ -1494,6 +1496,7 @@ ul {
 li {
   margin-bottom: 10px;
   color: white;
+  font-size: 10px;
 }
 
 @keyframes scroll-up {
