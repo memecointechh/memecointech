@@ -265,7 +265,7 @@ nav ul a li:hover{
 
 
 .hero-text{
-    /* margin-bottom: -15rem; */
+   
     
 }
 
@@ -1225,64 +1225,6 @@ section {
 
 
 
-.activity-section li {
-  font-size: 10px;
-  margin-bottom: 10px;
-  padding: 6px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 5px;
-  position: relative;
-  animation: scrollText 20s linear infinite;
-  color: rgb(194, 207, 255);
-  /* box-shadow: 0 0 10px rgba(30, 113, 255, 0.5), 0 0 20px rgba(253, 203, 133, 0.4); */
-}
-
-li::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  /* background: rgba(30, 113, 255, 0.1); */
-  filter: blur(4px);
-  z-index: -1;
-}
-
-@keyframes scrollText {
-  0% {
-    transform: translateY(0);
-  }
-  100% {
-    transform: translateY(-100%);
-  }
-}
-
-.investment-side ul, .withdrawal-side ul {
-  height: 200px;
-  overflow: hidden;
-}
-
-.investment-side li, .withdrawal-side li {
-  animation: slide 20s linear infinite;
-}
-
-@keyframes slide {
-  0% {
-    transform: translateY(100%);
-  }
-  100% {
-    transform: translateY(-100%);
-  }
-}
-
-li span.currency {
-  color: #fdcb85;
-}
-
-li span.amount {
-  
-}
 
 
 
@@ -1513,5 +1455,53 @@ footer{
   
 }  
 
+.activity-section {
+  display: flex;
+  justify-content: center;
+}
 
+.scrolls-section {
+  display: flex;
+  width: 100%;
+}
+
+.scrolls-container {
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  gap: 10%;
+}
+
+.scrolls-item {
+  overflow: hidden;
+  height: 200px;
+  
+}
+
+.scrolls-item h4{
+  background-color: #000000;
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+  padding: 1rem;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  animation: scroll-up 40s linear infinite;
+}
+
+li {
+  margin-bottom: 10px;
+  color: white;
+}
+
+@keyframes scroll-up {
+  0% {
+    transform: translateY(0%);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
+}
 
