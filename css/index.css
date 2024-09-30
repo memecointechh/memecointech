@@ -1487,13 +1487,13 @@ footer{
   width: 100%;
 }
 
-ul {
+ul .len {
   list-style-type: none;
   padding: 0;
   animation: scroll-up 40s linear infinite;
 }
 
-li {
+.len {
   margin-bottom: 10px;
   color: white;
   font-size: 10px;
