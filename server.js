@@ -58,108 +58,78 @@ const sendEmail = async (to, subject, htmlContent) => {
 
 
 
-app.post('/api/auth/register', (req, res) => {
-  const { full_name, email, username, password, secret_question, secret_answer, bitcoin_address, referral_code } = req.body;
-
-  // Validate input
-  if (!full_name || !email || !username || !password || !secret_question || !secret_answer) {
-    return res.status(400).json({ message: 'Please fill in all required fields.' });
-  }
-
-  // Check if referral code exists
-  let referrerId = null;
-  if (referral_code) {
-    pool.query('SELECT id FROM users WHERE referral_code = ?', [referral_code], (error, results) => {
-      if (error) {
-        console.error('Error checking referral code:', error);
-        return res.status(500).json({ message: 'Error registering user.' });
-      }
-
-      if (results.length > 0) {
-        referrerId = results[0].id;
-      }
-
-      // Insert user into database
-      pool.query(
-        'INSERT INTO users (full_name, email, username, password, secret_question, secret_answer, bitcoin_address, referral_code) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
-        [full_name, email, username, password, secret_question, secret_answer, bitcoin_address, referral_code],
-        (error, results) => {
-          if (error) {
-            console.error('Error inserting user into the database:', error);
-            return res.status(500).json({ message: 'Error registering user.' });
-          }
-
-          // Redirect to login page
-          res.redirect('/signin.html');
-        }
-      );
-    });
-  } else {
-    // Insert user into database without referral
+  app.post('/api/auth/register', (req, res) => {
+    const { full_name, email, username, password, secret_question, secret_answer, bitcoin_address, referral_code } = req.body;
+  
+    // Validate input
+    if (!full_name || !email || !username || !password || !secret_question || !secret_answer) {
+      return res.status(400).json({ message: 'Please fill in all required fields.' });
+    }
+  
+    // Insert user into database (with or without referral code)
     pool.query(
-      'INSERT INTO users (full_name, email, username, password, secret_question, secret_answer, bitcoin_address) VALUES (?, ?, ?, ?, ?, ?, ?)',
-      [full_name, email, username, password, secret_question, secret_answer, bitcoin_address],
+      'INSERT INTO users (full_name, email, username, password, secret_question, secret_answer, bitcoin_address, referral_code) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+      [full_name, email, username, password, secret_question, secret_answer, bitcoin_address, referral_code || null], // Use null if referral_code is not provided
       (error, results) => {
         if (error) {
           console.error('Error inserting user into the database:', error);
           return res.status(500).json({ message: 'Error registering user.' });
         }
-
-         // Send welcome email
-         sendEmail(
+  
+        // Send welcome email
+        sendEmail(
           email,
           'Welcome to MemecoinTech',
           `
           <div style="font-family: Arial, sans-serif; margin: 0; padding: 20px; background-color: #f4f4f4;">
-      <table width="100%" style="max-width: 600px; margin: auto; border-collapse: collapse;">
-        <tr>
-          <td style="text-align: center; padding: 20px;">
-            <img src="https://github.com/memecointechh/memecointech/blob/main/images/memecoin%20logo.png?raw=true" alt="Company Logo" style="max-width: 100%; height: auto;"/>
-          </td>
-        </tr>
-        <tr>
-          <td style="background-color: #3e059b; padding: 20px; text-align: center; color: white;">
-            <h1 style="margin: 0;">Welcome, ${username}!</h1>
-          </td>
-        </tr>
-        <tr>
-          <td style="background-color: white; padding: 20px;">
-            <p style="font-size: 16px; line-height: 1.5;">Your account has been successfully created. We're excited to have you on board!</p>
-            <p style="font-size: 16px; line-height: 1.5;">We offer the following investment plans:</p>
-            <ul style="list-style-type: none; padding: 0;">
-              <li style="margin: 10px 0;">
-                <a href="https://memecointech-fvh8.onrender.com/signin.html" style="display: inline-block; background-color: #3e059b; color: white; padding: 10px 15px; text-decoration: none; border-radius: 5px;">Buy Plan 1</a>
-              </li>
-              <li style="margin: 10px 0;">
-                <a href="https://memecointech-fvh8.onrender.com/signin.html" style="display: inline-block; background-color: #3e059b; color: white; padding: 10px 15px; text-decoration: none; border-radius: 5px;">Buy Plan 2</a>
-              </li>
-              <li style="margin: 10px 0;">
-                <a href="https://memecointech-fvh8.onrender.com/signin.html" style="display: inline-block; background-color: #3e059b; color: white; padding: 10px 15px; text-decoration: none; border-radius: 5px;">Buy Plan 3</a>
-              </li>
-              <li style="margin: 10px 0;">
-                <a href="https://memecointech-fvh8.onrender.com/signin.html" style="display: inline-block; background-color: #3e059b; color: white; padding: 10px 15px; text-decoration: none; border-radius: 5px;">Buy Plan 3</a>
-              </li>
-            </ul>
-            <p style="font-size: 16px; line-height: 1.5;">Click on any of the above plans to log in and start investing!</p>
-          </td>
-        </tr>
-        <tr>
-          <td style="background-color: #f4f4f4; padding: 10px; text-align: center;">
-            <p style="font-size: 12px; color: #666;">&copy; 2023 Your Investment Platform. All rights reserved.</p>
-          </td>
-        </tr>
-      </table>
-    </div>
-          
+            <table width="100%" style="max-width: 600px; margin: auto; border-collapse: collapse;">
+              <tr>
+                <td style="text-align: center; padding: 20px;">
+                  <img src="https://github.com/memecointechh/memecointech/blob/main/images/memecoin%20logo.png?raw=true" alt="Company Logo" style="max-width: 100%; height: auto;"/>
+                </td>
+              </tr>
+              <tr>
+                <td style="background-color: #3e059b; padding: 20px; text-align: center; color: white;">
+                  <h1 style="margin: 0;">Welcome, ${username}!</h1>
+                </td>
+              </tr>
+              <tr>
+                <td style="background-color: white; padding: 20px;">
+                  <p style="font-size: 16px; line-height: 1.5;">Your account has been successfully created. We're excited to have you on board!</p>
+                  <p style="font-size: 16px; line-height: 1.5;">We offer the following investment plans:</p>
+                  <ul style="list-style-type: none; padding: 0;">
+                    <li style="margin: 10px 0;">
+                      <a href="https://www.memecointech.com/signin.html" style="display: inline-block; background-color: #3e059b; color: white; padding: 10px 15px; text-decoration: none; border-radius: 5px;">Buy Plan 1</a>
+                    </li>
+                    <li style="margin: 10px 0;">
+                      <a href="https://www.memecointech.com/signin.html" style="display: inline-block; background-color: #3e059b; color: white; padding: 10px 15px; text-decoration: none; border-radius: 5px;">Buy Plan 2</a>
+                    </li>
+                    <li style="margin: 10px 0;">
+                      <a href="https://www.memecointech.com/signin.html" style="display: inline-block; background-color: #3e059b; color: white; padding: 10px 15px; text-decoration: none; border-radius: 5px;">Buy Plan 3</a>
+                    </li>
+                    <li style="margin: 10px 0;">
+                    <a href="https://www.memecointech.com/signin.html" style="display: inline-block; background-color: #3e059b; color: white; padding: 10px 15px; text-decoration: none; border-radius: 5px;">Buy Plan 4</a>
+                  </li>
+                  </ul>
+                  <p style="font-size: 16px; line-height: 1.5;">Click on any of the above plans to log in and start investing!</p>
+                </td>
+              </tr>
+              <tr>
+                <td style="background-color: #f4f4f4; padding: 10px; text-align: center;">
+                  <p style="font-size: 12px; color: #666;">&copy; 2023 Your Investment Platform. All rights reserved.</p>
+                </td>
+              </tr>
+            </table>
+          </div>
           `
         );
-
-        // Redirect to login page
+  
+        // Redirect to login page after successful registration and email sending
         res.redirect('/signin.html');
       }
     );
-  }
-});
+  });
+  
 
 
 
