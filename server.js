@@ -11,12 +11,12 @@ const app = express();
 
 
 let transporter = nodemailer.createTransport({
-  host: 'smtp.hostinger.com', // Hostinger SMTP server
+  host: 'smtppro.zoho.com', // Hostinger SMTP server
   port: 465, // Port for SSL (you can use 587 for TLS)
   secure: true, // Use true for 465 (SSL) and false for 587 (TLS)
   auth: {
     user: 'support@memecointech.com', // Your business email address from Hostinger
-    pass: 'Memecointech@2024', // Your email password
+    pass: 'Samuelfelicia@2002', // Your email password
   },
 });
 const pool = mysql.createPool({
@@ -791,192 +791,49 @@ app.get('/api/admin/users', (req, res) => {
 });
 
 
-
 // Route to approve a pending withdrawal
 app.post('/api/admin/approve-withdrawal', (req, res) => {
   const { id, username, amount } = req.body;
 
-  // Fetch the user's email from the database
-  pool.query('SELECT email FROM users WHERE username = ?', [username], (error, results) => {
-      if (error || results.length === 0) {
-          console.error('Error fetching user email:', error);
-          return res.status(500).json({ message: 'Error fetching user email' });
+  // Update status to 'approved' in the pending_withdrawals table
+  pool.query('UPDATE pending_withdrawals SET status = ? WHERE id = ?', ['approved', id], (error, result) => {
+      if (error) {
+          console.error('Error approving withdrawal:', error);
+          return res.status(500).json({ message: 'Error approving withdrawal' });
       }
 
-      const userEmail = results[0].email; // Assuming the user's email is stored in the "email" column
-
-      // Update status to 'approved' in the pending_withdrawals table
-      pool.query('UPDATE pending_withdrawals SET status = ? WHERE id = ?', ['approved', id], (error, result) => {
-          if (error) {
-              console.error('Error approving withdrawal:', error);
-              return res.status(500).json({ message: 'Error approving withdrawal' });
+      // Subtract amount from user's balance
+      pool.query('UPDATE users SET balance = balance - ? WHERE username = ?', [amount, username], (err, updateResult) => {
+          if (err) {
+              console.error('Error updating user balance:', err);
+              return res.status(500).json({ message: 'Error updating user balance' });
           }
-
-          // Subtract amount from user's balance
-          pool.query('UPDATE users SET balance = balance - ? WHERE username = ?', [amount, username], (err, updateResult) => {
-              if (err) {
-                  console.error('Error updating user balance:', err);
-                  return res.status(500).json({ message: 'Error updating user balance' });
-              }
-
-              // Email sending after successful approval
-              const emailContent = `
-                <div style="font-family: Arial, sans-serif; margin: 0; padding: 20px; background-color: #f4f4f4;">
-                  <table width="100%" style="max-width: 600px; margin: auto; border-collapse: collapse;">
-                    <tr>
-                      <td style="text-align: center; padding: 20px;">
-                        <img src="https://github.com/memecointechh/memecointech/blob/main/images/memecoin%20logo.png?raw=true" alt="Company Logo" style="max-width: 100%; height: auto;" />
-                      </td>
-                    </tr>
-                    <tr>
-                      <td style="background-color: #3e059b; padding: 20px; text-align: center; color: white;">
-                        <h1 style="margin: 0;">Withdrawal Approved!</h1>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td style="background-color: white; padding: 20px;">
-                        <p style="font-size: 16px; line-height: 1.5;">Dear ${username},</p>
-                        <p style="font-size: 16px; line-height: 1.5;">Your withdrawal request of $${amount} has been successfully approved. The funds have been transferred to your account.</p>
-                        <p style="font-size: 16px; line-height: 1.5;">Thank you for trusting us with your investment!</p>
-                        <a href="https://memecointech-fvh8.onrender.com/signin.html" style="display: inline-block; background-color: #3e059b; color: white; padding: 10px 15px; text-decoration: none; border-radius: 5px;">Return to Dashboard</a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td style="background-color: #f4f4f4; padding: 10px; text-align: center;">
-                        <p style="font-size: 12px; color: #3e059b;">&copy; 2024 Memecointech. All rights reserved.</p>
-                      </td>
-                    </tr>
-                  </table>
-                </div>`;
-
-              // Send the email using the correct recipient email
-              sendEmail(userEmail, 'Withdrawal Approved', emailContent)
-                .then(() => res.json({ message: 'Withdrawal approved and email sent successfully!' }))
-                .catch((emailError) => {
-                  console.error('Error sending email:', emailError);
-                  res.status(500).json({ message: 'Withdrawal approved, but error sending email.' });
-                });
-          });
+          res.json({ message: 'Withdrawal approved successfully!' });
       });
   });
 });
-
 
 // Route to reject a pending withdrawal
 app.post('/api/admin/reject-withdrawal', (req, res) => {
   const { id, username, amount } = req.body;
 
-  // Fetch the user's email from the database
-  pool.query('SELECT email FROM users WHERE username = ?', [username], (error, results) => {
-      if (error || results.length === 0) {
-          console.error('Error fetching user email:', error);
-          return res.status(500).json({ message: 'Error fetching user email' });
+  // Update status to 'rejected'
+  pool.query('UPDATE pending_withdrawals SET status = ? WHERE id = ?', ['rejected', id], (error, result) => {
+      if (error) {
+          console.error('Error rejecting withdrawal:', error);
+          return res.status(500).json({ message: 'Error rejecting withdrawal' });
       }
 
-      const userEmail = results[0].email; // Assuming the user's email is stored in the "email" column
-
-      // Update status to 'rejected' in the pending_withdrawals table
-      pool.query('UPDATE pending_withdrawals SET status = ? WHERE id = ?', ['rejected', id], (error, result) => {
-          if (error) {
-              console.error('Error rejecting withdrawal:', error);
-              return res.status(500).json({ message: 'Error rejecting withdrawal' });
+      // Refund the amount back to the user's balance
+      pool.query('UPDATE users SET balance = balance + ? WHERE username = ?', [amount, username], (err, updateResult) => {
+          if (err) {
+              console.error('Error updating user balance:', err);
+              return res.status(500).json({ message: 'Error updating user balance' });
           }
-
-          // Refund the amount back to the user's balance
-          pool.query('UPDATE users SET balance = balance + ? WHERE username = ?', [amount, username], (err, updateResult) => {
-              if (err) {
-                  console.error('Error updating user balance:', err);
-                  return res.status(500).json({ message: 'Error updating user balance' });
-              }
-
-              // Email sending after rejection
-              const emailContent = `
-                <div style="font-family: Arial, sans-serif; margin: 0; padding: 20px; background-color: #f4f4f4;">
-                  <table width="100%" style="max-width: 600px; margin: auto; border-collapse: collapse;">
-                    <tr>
-                      <td style="text-align: center; padding: 20px;">
-                        <img src="https://github.com/memecointechh/memecointech/blob/main/images/memecoin%20logo.png?raw=true" alt="Company Logo" style="max-width: 100%; height: auto;" />
-                      </td>
-                    </tr>
-                    <tr>
-                      <td style="background-color: #3e059b; padding: 20px; text-align: center; color: white;">
-                        <h1 style="margin: 0;">Withdrawal Rejected</h1>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td style="background-color: white; padding: 20px;">
-                        <p style="font-size: 16px; line-height: 1.5;">Dear ${username},</p>
-                        <p style="font-size: 16px; line-height: 1.5;">Your withdrawal request of $${amount} has been rejected. The funds have been refunded back to your balance.</p>
-                        <p style="font-size: 16px; line-height: 1.5;">If you have any questions, please contact support.</p>
-                        <a href="https://memecointech-fvh8.onrender.com/signin.html" style="display: inline-block; background-color: #3e059b; color: white; padding: 10px 15px; text-decoration: none; border-radius: 5px;">Return to Dashboard</a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td style="background-color: #f4f4f4; padding: 10px; text-align: center;">
-                        <p style="font-size: 12px; color: #3e059b;">&copy; 2024 Memecointech. All rights reserved.</p>
-                      </td>
-                    </tr>
-                  </table>
-                </div>`;
-
-              // Send the email using the correct recipient email
-              sendEmail(userEmail, 'Withdrawal Rejected', emailContent)
-                .then(() => res.json({ message: 'Withdrawal rejected and email sent successfully!' }))
-                .catch((emailError) => {
-                  console.error('Error sending email:', emailError);
-                  res.status(500).json({ message: 'Withdrawal rejected, but error sending email.' });
-                });
-          });
+          res.json({ message: 'Withdrawal rejected and amount refunded successfully!' });
       });
   });
 });
-
-
-
-
-// // Route to approve a pending withdrawal
-// app.post('/api/admin/approve-withdrawal', (req, res) => {
-//   const { id, username, amount } = req.body;
-
-//   // Update status to 'approved' in the pending_withdrawals table
-//   pool.query('UPDATE pending_withdrawals SET status = ? WHERE id = ?', ['approved', id], (error, result) => {
-//       if (error) {
-//           console.error('Error approving withdrawal:', error);
-//           return res.status(500).json({ message: 'Error approving withdrawal' });
-//       }
-
-//       // Subtract amount from user's balance
-//       pool.query('UPDATE users SET balance = balance - ? WHERE username = ?', [amount, username], (err, updateResult) => {
-//           if (err) {
-//               console.error('Error updating user balance:', err);
-//               return res.status(500).json({ message: 'Error updating user balance' });
-//           }
-//           res.json({ message: 'Withdrawal approved successfully!' });
-//       });
-//   });
-// });
-
-// // Route to reject a pending withdrawal
-// app.post('/api/admin/reject-withdrawal', (req, res) => {
-//   const { id, username, amount } = req.body;
-
-//   // Update status to 'rejected'
-//   pool.query('UPDATE pending_withdrawals SET status = ? WHERE id = ?', ['rejected', id], (error, result) => {
-//       if (error) {
-//           console.error('Error rejecting withdrawal:', error);
-//           return res.status(500).json({ message: 'Error rejecting withdrawal' });
-//       }
-
-//       // Refund the amount back to the user's balance
-//       pool.query('UPDATE users SET balance = balance + ? WHERE username = ?', [amount, username], (err, updateResult) => {
-//           if (err) {
-//               console.error('Error updating user balance:', err);
-//               return res.status(500).json({ message: 'Error updating user balance' });
-//           }
-//           res.json({ message: 'Withdrawal rejected and amount refunded successfully!' });
-//       });
-//   });
-// });
 
 
 
