@@ -444,7 +444,7 @@ app.get('/api/admin/pending-deposits', (req, res) => {
 app.post('/api/admin/approve-deposit', (req, res) => {
   const { depositId } = req.body;
 
-  // Fetch deposit and plan details, perform necessary operations
+  // Fetch deposit and plan details
   pool.query('SELECT * FROM deposits WHERE id = ?', [depositId], (error, depositResult) => {
     if (error || depositResult.length === 0) {
       console.error('Error fetching deposit details:', error);
@@ -490,20 +490,21 @@ app.post('/api/admin/approve-deposit', (req, res) => {
               pool.query('SELECT email FROM users WHERE id = ?', [user_id], (err, result) => {
                 if (err || !result.length) {
                   console.error('Error fetching user email:', err);
-                } else {
-                  const userEmail = result[0].email;
-                  const emailContent = `Your deposit of ${amount} has been approved under the ${plan_name} plan.`;
-
-                  // Send email notification
-                  sendEmail(userEmail, 'Deposit Approved', emailContent, (err, info) => {
-                    if (err) {
-                      console.error('Error sending approval email:', err);
-                    }
-                  });
+                  return res.status(500).json({ message: 'Error fetching user email' });
                 }
-              });
 
-              res.json({ message: 'Deposit approved and moved to active deposits successfully.' });
+                const userEmail = result[0].email;
+                const emailContent = `Your deposit of ${amount} has been approved under the ${plan_name} plan.`;
+
+                // Send email notification (using your existing sendEmail function)
+                sendEmail(userEmail, 'Deposit Approved', emailContent, (err, info) => {
+                  if (err) {
+                    console.error('Error sending approval email:', err);
+                  }
+                });
+
+                res.json({ message: 'Deposit approved and moved to active deposits successfully.' });
+              });
             }
           );
         }
@@ -511,6 +512,8 @@ app.post('/api/admin/approve-deposit', (req, res) => {
     });
   });
 });
+
+
 
 // Reject a deposit
 app.post('/api/admin/reject-deposit', (req, res) => {
@@ -538,24 +541,26 @@ app.post('/api/admin/reject-deposit', (req, res) => {
         pool.query('SELECT email FROM users WHERE id = ?', [user_id], (err, result) => {
           if (err || !result.length) {
             console.error('Error fetching user email:', err);
-          } else {
-            const userEmail = result[0].email;
-            const emailContent = `Your deposit has been rejected. Please contact support for more details.`;
-
-            // Send email notification
-            sendEmail(userEmail, 'Deposit Rejected', emailContent, (err, info) => {
-              if (err) {
-                console.error('Error sending rejection email:', err);
-              }
-            });
+            return res.status(500).json({ message: 'Error fetching user email' });
           }
-        });
 
-        res.json({ message: 'Deposit rejected successfully.' });
+          const userEmail = result[0].email;
+          const emailContent = `Your deposit has been rejected. Please contact support for more details.`;
+
+          // Send email notification (using your existing sendEmail function)
+          sendEmail(userEmail, 'Deposit Rejected', emailContent, (err, info) => {
+            if (err) {
+              console.error('Error sending rejection email:', err);
+            }
+          });
+
+          res.json({ message: 'Deposit rejected successfully.' });
+        });
       });
     }
   );
 });
+
 
 
 
