@@ -826,9 +826,36 @@ app.post('/api/admin/approve-withdrawal', (req, res) => {
               // Send email notification
               const subject = 'Withdrawal Approved';
               const htmlContent = `
-                  <p>Dear ${username},</p>
-                  <p>Your withdrawal request of <b>$${amount}</b> has been approved successfully.</p>
+                  
+                 
+                   <div style="font-family: Arial, sans-serif; margin: 0; padding: 20px; background-color: #f4f4f4;">
+                <table width="100%" style="max-width: 600px; margin: auto; border-collapse: collapse;">
+                  <tr>
+                    <td style="text-align: center; padding: 20px;">
+                      <img src="https://github.com/memecointechh/memecointech/blob/main/images/memecoin%20logo.png?raw=true" alt="Company Logo" style="max-width: 100%; height: auto;" />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="background-color: #3e059b; padding: 20px; text-align: center; color: white;">
+                      <h1 style="margin: 0;">Withdrawal Approved!</h1>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="background-color: white; padding: 20px;">
+                      <p style="font-size: 16px; line-height: 1.5;">Dear ${username},</p>
+                       <p>Your withdrawal request of <b>$${amount}</b> has been approved successfully.</p>
                   <p>Thank you for using our services!</p>
+                     
+                      <a href="https://memecointech-fvh8.onrender.com/signin.html" style="display: inline-block; background-color: #3e059b; color: white; padding: 10px 15px; text-decoration: none; border-radius: 5px;">Return to Dashboard</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="background-color: #f4f4f4; padding: 10px; text-align: center;">
+                      <p style="font-size: 12px; color: #3e059b;">&copy; 2024 Memecointech. All rights reserved.</p>
+                    </td>
+                  </tr>
+                </table>
+              </div>
               `;
 
               sendEmail(userEmail, subject, htmlContent);
@@ -869,9 +896,36 @@ app.post('/api/admin/reject-withdrawal', (req, res) => {
               // Send email notification
               const subject = 'Withdrawal Rejected';
               const htmlContent = `
-                  <p>Dear ${username},</p>
-                  <p>Your withdrawal request of <b>$${amount}</b> has been rejected. The amount has been refunded to your balance.</p>
                   <p>Thank you for using our services!</p>
+                   <div style="font-family: Arial, sans-serif; margin: 0; padding: 20px; background-color: #f4f4f4;">
+                <table width="100%" style="max-width: 600px; margin: auto; border-collapse: collapse;">
+                  <tr>
+                    <td style="text-align: center; padding: 20px;">
+                      <img src="https://github.com/memecointechh/memecointech/blob/main/images/memecoin%20logo.png?raw=true" alt="Company Logo" style="max-width: 100%; height: auto;" />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="background-color: #3e059b; padding: 20px; text-align: center; color: white;">
+                      <h1 style="margin: 0;">Withdrawal Approved!</h1>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="background-color: white; padding: 20px;">
+                      <p style="font-size: 16px; line-height: 1.5;">Dear ${username},</p>
+                      <p>Your withdrawal request of <b>$${amount}</b> has been rejected. The amount has been refunded to your balance.</p>
+                      
+                  <p>Thank you for using our services!</p>
+                      
+                      <a href="https://memecointech-fvh8.onrender.com/signin.html" style="display: inline-block; background-color: #3e059b; color: white; padding: 10px 15px; text-decoration: none; border-radius: 5px;">Return to Dashboard</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="background-color: #f4f4f4; padding: 10px; text-align: center;">
+                      <p style="font-size: 12px; color: #3e059b;">&copy; 2024 Memecointech. All rights reserved.</p>
+                    </td>
+                  </tr>
+                </table>
+              </div>
               `;
 
               sendEmail(userEmail, subject, htmlContent);
