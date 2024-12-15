@@ -800,20 +800,41 @@ app.get('/api/admin/users', (req, res) => {
 app.post('/api/admin/approve-withdrawal', (req, res) => {
   const { id, username, amount } = req.body;
 
-  // Update status to 'approved' in the pending_withdrawals table
-  pool.query('UPDATE pending_withdrawals SET status = ? WHERE id = ?', ['approved', id], (error, result) => {
-      if (error) {
-          console.error('Error approving withdrawal:', error);
-          return res.status(500).json({ message: 'Error approving withdrawal' });
+  // Fetch user's email for notification
+  pool.query('SELECT email FROM users WHERE username = ?', [username], (error, results) => {
+      if (error || results.length === 0) {
+          console.error('Error fetching user email:', error);
+          return res.status(500).json({ message: 'Error fetching user details' });
       }
 
-      // Subtract amount from user's balance
-      pool.query('UPDATE users SET balance = balance - ? WHERE username = ?', [amount, username], (err, updateResult) => {
-          if (err) {
-              console.error('Error updating user balance:', err);
-              return res.status(500).json({ message: 'Error updating user balance' });
+      const userEmail = results[0].email;
+
+      // Update status to 'approved' in the pending_withdrawals table
+      pool.query('UPDATE pending_withdrawals SET status = ? WHERE id = ?', ['approved', id], (error, result) => {
+          if (error) {
+              console.error('Error approving withdrawal:', error);
+              return res.status(500).json({ message: 'Error approving withdrawal' });
           }
-          res.json({ message: 'Withdrawal approved successfully!' });
+
+          // Subtract amount from user's balance
+          pool.query('UPDATE users SET balance = balance - ? WHERE username = ?', [amount, username], (err, updateResult) => {
+              if (err) {
+                  console.error('Error updating user balance:', err);
+                  return res.status(500).json({ message: 'Error updating user balance' });
+              }
+
+              // Send email notification
+              const subject = 'Withdrawal Approved';
+              const htmlContent = `
+                  <p>Dear ${username},</p>
+                  <p>Your withdrawal request of <b>$${amount}</b> has been approved successfully.</p>
+                  <p>Thank you for using our services!</p>
+              `;
+
+              sendEmail(userEmail, subject, htmlContent);
+
+              res.json({ message: 'Withdrawal approved successfully!' });
+          });
       });
   });
 });
@@ -822,23 +843,45 @@ app.post('/api/admin/approve-withdrawal', (req, res) => {
 app.post('/api/admin/reject-withdrawal', (req, res) => {
   const { id, username, amount } = req.body;
 
-  // Update status to 'rejected'
-  pool.query('UPDATE pending_withdrawals SET status = ? WHERE id = ?', ['rejected', id], (error, result) => {
-      if (error) {
-          console.error('Error rejecting withdrawal:', error);
-          return res.status(500).json({ message: 'Error rejecting withdrawal' });
+  // Fetch user's email for notification
+  pool.query('SELECT email FROM users WHERE username = ?', [username], (error, results) => {
+      if (error || results.length === 0) {
+          console.error('Error fetching user email:', error);
+          return res.status(500).json({ message: 'Error fetching user details' });
       }
 
-      // Refund the amount back to the user's balance
-      pool.query('UPDATE users SET balance = balance + ? WHERE username = ?', [amount, username], (err, updateResult) => {
-          if (err) {
-              console.error('Error updating user balance:', err);
-              return res.status(500).json({ message: 'Error updating user balance' });
+      const userEmail = results[0].email;
+
+      // Update status to 'rejected'
+      pool.query('UPDATE pending_withdrawals SET status = ? WHERE id = ?', ['rejected', id], (error, result) => {
+          if (error) {
+              console.error('Error rejecting withdrawal:', error);
+              return res.status(500).json({ message: 'Error rejecting withdrawal' });
           }
-          res.json({ message: 'Withdrawal rejected and amount refunded successfully!' });
+
+          // Refund the amount back to the user's balance
+          pool.query('UPDATE users SET balance = balance + ? WHERE username = ?', [amount, username], (err, updateResult) => {
+              if (err) {
+                  console.error('Error updating user balance:', err);
+                  return res.status(500).json({ message: 'Error updating user balance' });
+              }
+
+              // Send email notification
+              const subject = 'Withdrawal Rejected';
+              const htmlContent = `
+                  <p>Dear ${username},</p>
+                  <p>Your withdrawal request of <b>$${amount}</b> has been rejected. The amount has been refunded to your balance.</p>
+                  <p>Thank you for using our services!</p>
+              `;
+
+              sendEmail(userEmail, subject, htmlContent);
+
+              res.json({ message: 'Withdrawal rejected and amount refunded successfully!' });
+          });
       });
   });
 });
+
 
 
 
