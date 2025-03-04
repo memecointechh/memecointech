@@ -347,40 +347,67 @@ app.post('/api/auth/login', (req, res) => {
 
 
   
-  const checkInvestmentEnd = async () => {
-    try {
+// ✅ Function to check and process completed investments
+const checkCompletedInvestments = async () => {
+  try {
+      console.log('Checking for completed investments...');
       const now = new Date();
-  
-      // Find deposits where the end date has passed
-      const [deposits] = await pool.promise().query(
-        `SELECT * FROM deposits 
-         WHERE investment_end_date <= ? AND status = 'pending'`,
-        [now]
+
+      // Fetch investments that have ended
+      const [activeDeposits] = await pool.promise().query(
+          `SELECT id, user_id, amount, interest, plan_name, investment_start_date, investment_end_date 
+           FROM active_deposits 
+           WHERE investment_end_date <= NOW()`
       );
-  
-      for (const deposit of deposits) {
-        // Update user's balance
-        await pool.promise().query(
-          `UPDATE users 
-           SET balance = balance + ?, total_deposits = total_deposits + ? 
-           WHERE id = ?`,
-          [deposit.amount, deposit.amount, deposit.user_id]
-        );
-  
-        // Update deposit status to 'completed'
-        await pool.promise().query(
-          `UPDATE deposits 
-           SET status = 'completed' 
-           WHERE id = ?`,
-          [deposit.id]
-        );
+
+      if (activeDeposits.length === 0) {
+          console.log('No completed investments found.');
+          return;
       }
-  
-      console.log('Investment end check completed.');
-    } catch (err) {
-      console.error('Error checking investments:', err);
-    }
-  };
+
+      for (const deposit of activeDeposits) {
+          const { id, user_id, amount, interest, plan_name, investment_start_date, investment_end_date } = deposit;
+
+          const amountAsNumber = parseFloat(amount);
+          const interestAsNumber = parseFloat(interest);
+
+          // Fetch user's balance
+          const [user] = await pool.promise().query(`SELECT balance FROM users WHERE id = ?`, [user_id]);
+          if (user.length === 0) {
+              console.error(`User with ID ${user_id} not found.`);
+              continue;
+          }
+
+          const oldBalance = parseFloat(user[0].balance);
+          const newBalance = (oldBalance + amountAsNumber + interestAsNumber).toFixed(2);
+
+          console.log(`Updating balance for user ${user_id}: Old = ${oldBalance}, New = ${newBalance}`);
+
+          // Update balance
+          await pool.promise().query(`UPDATE users SET balance = ? WHERE id = ?`, [newBalance, user_id]);
+
+          // Move to completed deposits
+          await pool.promise().query(
+              `INSERT INTO completed_deposits (user_id, amount, interest, plan_name, investment_start_date, investment_end_date, date_completed)
+               VALUES (?, ?, ?, ?, ?, ?, NOW())`,
+              [user_id, amountAsNumber, interestAsNumber, plan_name, investment_start_date, investment_end_date]
+          );
+
+          // Delete from active deposits
+          await pool.promise().query(`DELETE FROM active_deposits WHERE id = ?`, [id]);
+
+          console.log(`Investment ${id} processed successfully.`);
+      }
+  } catch (err) {
+      console.error('Error processing completed investments:', err);
+  }
+};
+
+// ✅ Schedule cron job after function is defined
+cron.schedule('*/2 * * * *', () => {
+  console.log('Running scheduled task to check completed investments...');
+  checkCompletedInvestments();
+});
 
 
 // Route to get the number of recent investment packages
@@ -942,51 +969,51 @@ app.post('/api/admin/reject-withdrawal', (req, res) => {
 
 
 
-// Function to check for completed investments
-async function checkCompletedInvestments() {
-  try {
-    // Get the current date
-    const currentDate = new Date();
+// // Function to check for completed investments
+// async function checkCompletedInvestments() {
+//   try {
+//     // Get the current date
+//     const currentDate = new Date();
     
-    // Query for completed investments
-    const [completedDeposits] = await pool.promise().query(
-      'SELECT * FROM active_deposits WHERE investment_end_date <= ?',
-      [currentDate]
-    );
+//     // Query for completed investments
+//     const [completedDeposits] = await pool.promise().query(
+//       'SELECT * FROM active_deposits WHERE investment_end_date <= ?',
+//       [currentDate]
+//     );
 
-    for (const deposit of completedDeposits) {
-      const { user_id, amount, interest, plan_name, investment_end_date } = deposit;
+//     for (const deposit of completedDeposits) {
+//       const { user_id, amount, interest, plan_name, investment_end_date } = deposit;
 
-      // Update the user's balance
-      await pool.promise().query(
-        'UPDATE users SET balance = balance + ? WHERE id = ?',
-        [amount + interest, user_id]
-      );
+//       // Update the user's balance
+//       await pool.promise().query(
+//         'UPDATE users SET balance = balance + ? WHERE id = ?',
+//         [amount + interest, user_id]
+//       );
 
-      // Archive the completed deposit
-      await pool.promise().query(
-        'INSERT INTO completed_deposits (user_id, amount, interest, plan_name, investment_start_date, investment_end_date) VALUES (?, ?, ?, ?, ?, ?)',
-        [user_id, amount, interest, plan_name, deposit.investment_start_date, investment_end_date]
-      );
+//       // Archive the completed deposit
+//       await pool.promise().query(
+//         'INSERT INTO completed_deposits (user_id, amount, interest, plan_name, investment_start_date, investment_end_date) VALUES (?, ?, ?, ?, ?, ?)',
+//         [user_id, amount, interest, plan_name, deposit.investment_start_date, investment_end_date]
+//       );
 
-      // Delete the deposit from active_deposits
-      await pool.promise().query(
-        'DELETE FROM active_deposits WHERE id = ?',
-        [deposit.id]
-      );
-    }
+//       // Delete the deposit from active_deposits
+//       await pool.promise().query(
+//         'DELETE FROM active_deposits WHERE id = ?',
+//         [deposit.id]
+//       );
+//     }
 
-    console.log('Completed investments processed successfully');
-  } catch (err) {
-    console.error('Error processing completed investments:', err);
-  }
-}
+//     console.log('Completed investments processed successfully');
+//   } catch (err) {
+//     console.error('Error processing completed investments:', err);
+//   }
+// }
 
-// Schedule the cron job to run every hour
-cron.schedule('0 * * * *', () => {
-  console.log('Running scheduled task to check completed investments');
-  checkCompletedInvestments();
-});
+// // Schedule the cron job to run every hour
+// cron.schedule('0 * * * *', () => {
+//   console.log('Running scheduled task to check completed investments');
+//   checkCompletedInvestments();
+// });
 
 
 app.get('/api/user-dashboard', async (req, res) => {
