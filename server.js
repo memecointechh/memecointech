@@ -125,16 +125,16 @@ app.post('/api/auth/register', (req, res) => {
                 <p style="font-size: 16px; line-height: 1.5;">We offer the following investment plans:</p>
                 <ul style="list-style-type: none; padding: 0;">
                   <li style="margin: 10px 0;">
-                    <a href="https://www.memecointech.com/signin.html" style="display: inline-block; background-color: #3e059b; color: white; padding: 10px 15px; text-decoration: none; border-radius: 5px;">Buy Plan 1</a>
+                    <a href="https://memecointechh.com/signin.html" style="display: inline-block; background-color: #3e059b; color: white; padding: 10px 15px; text-decoration: none; border-radius: 5px;">Buy Plan 1</a>
                   </li>
                   <li style="margin: 10px 0;">
-                    <a href="https://www.memecointech.com/signin.html" style="display: inline-block; background-color: #3e059b; color: white; padding: 10px 15px; text-decoration: none; border-radius: 5px;">Buy Plan 2</a>
+                    <a href="https://memecointechh.com/signin.html" style="display: inline-block; background-color: #3e059b; color: white; padding: 10px 15px; text-decoration: none; border-radius: 5px;">Buy Plan 2</a>
                   </li>
                   <li style="margin: 10px 0;">
-                    <a href="https://www.memecointech.com/signin.html" style="display: inline-block; background-color: #3e059b; color: white; padding: 10px 15px; text-decoration: none; border-radius: 5px;">Buy Plan 3</a>
+                    <a href="https://memecointechh.com/signin.html" style="display: inline-block; background-color: #3e059b; color: white; padding: 10px 15px; text-decoration: none; border-radius: 5px;">Buy Plan 3</a>
                   </li>
                   <li style="margin: 10px 0;">
-                  <a href="https://www.memecointech.com/signin.html" style="display: inline-block; background-color: #3e059b; color: white; padding: 10px 15px; text-decoration: none; border-radius: 5px;">Buy Plan 4</a>
+                  <a href="https://memecointechh.com/signin.html" style="display: inline-block; background-color: #3e059b; color: white; padding: 10px 15px; text-decoration: none; border-radius: 5px;">Buy Plan 4</a>
                 </li>
                 </ul>
                 <p style="font-size: 16px; line-height: 1.5;">Click on any of the above plans to log in and start investing!</p>
@@ -323,7 +323,7 @@ app.post('/api/auth/login', (req, res) => {
                 <p style="font-size: 16px; line-height: 1.5;">Dear ${username},</p>
                 <p style="font-size: 16px; line-height: 1.5;">Your deposit of $${depositAmount} has been successfully submitted. The deposit will be reflected in the "Active Deposits" tab once confirmed by the admin after blockchain verification.</p>
                 <p style="font-size: 16px; line-height: 1.5;">Thank you for investing with us!</p>
-                <a href="https://memecointech-fvh8.onrender.com/signin.html" style="display: inline-block; background-color: #3e059b; color: white; padding: 10px 15px; text-decoration: none; border-radius: 5px;">Return to Dashboard</a>
+                <a href="https://memecointechh.com/signin.html" style="display: inline-block; background-color: #3e059b; color: white; padding: 10px 15px; text-decoration: none; border-radius: 5px;">Return to Dashboard</a>
               </td>
             </tr>
             <tr>
@@ -720,7 +720,7 @@ app.post('/api/withdraw', (req, res) => {
                       <p style="font-size: 16px; line-height: 1.5;">We have received your withdrawal request of $${amount}.</p>
                       <p style="font-size: 16px; line-height: 1.5;">Your request is currently pending and will be processed once approved by the admin after the necessary blockchain verification.</p>
                       <p style="font-size: 16px; line-height: 1.5;">Thank you for using our platform!</p>
-                      <a href="https://memecointech-fvh8.onrender.com/signin.html" style="display: inline-block; background-color: #3e059b; color: white; padding: 10px 15px; text-decoration: none; border-radius: 5px;">Return to Dashboard</a>
+                      <a href="https://memecointechh.com/signin.html" style="display: inline-block; background-color: #3e059b; color: white; padding: 10px 15px; text-decoration: none; border-radius: 5px;">Return to Dashboard</a>
                     </td>
                   </tr>
                   <tr>
@@ -873,7 +873,7 @@ app.post('/api/admin/approve-withdrawal', (req, res) => {
                        <p>Your withdrawal request of <b>$${amount}</b> has been approved successfully.</p>
                   <p>Thank you for using our services!</p>
                      
-                      <a href="https://memecointech-fvh8.onrender.com/signin.html" style="display: inline-block; background-color: #3e059b; color: white; padding: 10px 15px; text-decoration: none; border-radius: 5px;">Return to Dashboard</a>
+                      <a href="https://memecointechh.com/signin.html" style="display: inline-block; background-color: #3e059b; color: white; padding: 10px 15px; text-decoration: none; border-radius: 5px;">Return to Dashboard</a>
                     </td>
                   </tr>
                   <tr>
@@ -943,7 +943,7 @@ app.post('/api/admin/reject-withdrawal', (req, res) => {
                       
                   <p>Thank you for using our services!</p>
                       
-                      <a href="https://memecointech-fvh8.onrender.com/signin.html" style="display: inline-block; background-color: #3e059b; color: white; padding: 10px 15px; text-decoration: none; border-radius: 5px;">Return to Dashboard</a>
+                      <a href="https://memecointechh.com/signin.html" style="display: inline-block; background-color: #3e059b; color: white; padding: 10px 15px; text-decoration: none; border-radius: 5px;">Return to Dashboard</a>
                     </td>
                   </tr>
                   <tr>
